@@ -8,15 +8,28 @@
 }
 
 html, body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   height: 100%;
   padding: 0px;
   margin: 0px;
 }
 
+h1{
+  height: 30px;
+  margin: 0px;
+  padding: 0px;
+}
 .logo {
+  @include flex-row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 0px;
   width: 400px;
   height: 60px;
+  color:white
 }
 
 .navigation-container {
@@ -38,6 +51,14 @@ html, body {
 
 header {
   @include flex-row;
-  justify-content: space-between;
-  background: rgb(0, 34, 155)
+  justify-content: space-around;
+  align-items: flex-end;
+  background: rgb(0, 34, 155);
+  width: 100%;
+  height: 150px
+}
+
+.new-trip-form {
+  height: 30%;
+  width: 60%;
 }

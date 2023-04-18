@@ -3,15 +3,30 @@
 }
 
 html, body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   height: 100%;
   padding: 0px;
   margin: 0px;
 }
 
+h1 {
+  height: 30px;
+  margin: 0px;
+  padding: 0px;
+}
+
 .logo {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 0px;
   width: 400px;
   height: 60px;
+  color: white;
 }
 
 .navigation-container {
@@ -36,6 +51,14 @@ html, body {
 header {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
+  align-items: flex-end;
   background: rgb(0, 34, 155);
+  width: 100%;
+  height: 150px;
+}
+
+.new-trip-form {
+  height: 30%;
+  width: 60%;
 }/*# sourceMappingURL=styles.css.map */
