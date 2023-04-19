@@ -14,9 +14,9 @@ class Trip {
   }
 
   calculatePrice () {
-    let x = this.duration * this.destination.estimatedLodgingCostPerDay
+    let totalLogdging = this.duration * this.destination.estimatedLodgingCostPerDay
     let flightCost = this.destination.estimatedFlightCostPerPerson * this.travelers
-    let total = (x * flightCost) * 1.10
+    let total = (totalLogdging + flightCost) * 1.10
 
     return total
   }

@@ -13,52 +13,77 @@
 }
 
 html, body {
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
   // justify-content: space-evenly;
-  align-items: center;
   width: 100%;
   height: 100%;
   padding: 0px;
   margin: 0px;
 }
 
-//header 
-.new-trip-form {
-  min-height: 300px;
-  max-width: 60%;
+button:hover {
+  cursor: pointer;
 }
 
-h2 {
-  // margin-top: 250px;
-  // position: absolute;
-  // top: 0px;
+//header 
+.new-trip-form {
+  @include flex-column;
+  justify-content: space-evenly;
+  max-height: 200px;
+  width: 60%;
 }
+
+.user-info {
+  max-height: 200px;
+  max-width: 100%;
+}
+
+form {
+  @include flex-row;
+  justify-content: space-evenly;
+  align-items: center;
+  max-height: 200px;
+  width: 100%;
+}
+
+.destination-input {
+  height: 30px;
+  width: 200px;
+}
+
+.new-trip-btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+// .new-trip-btn-box{
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// }
 
 main{
   // padding: 250px;
   width: 100%;
   height: 300px;
-  display: flex;
-  flex-direction: column;
+  @include flex-column;
   justify-content: center;
-  align-items: center;
-  background-image: linear-gradient(to bottom,
-    #0d74b7 0%,
-    #439fdf 20%,
-    #3cb0df 40%,
-    #65d1e9 50%,
-    #c3f6f5 70%,
-    white 100%
-  );
+  // background-image: linear-gradient(to bottom,
+  //   #0d74b7 0%,
+  //   #439fdf 20%,
+  //   #3cb0df 40%,
+  //   #65d1e9 50%,
+  //   #c3f6f5 70%,
+  //   white 100%
+  // );
   color: white;
   position: relative;
 }
 
 .card-container {
   position: absolute;
-  display: flex;
-  flex-direction: row;
+  @include flex-row;
   justify-content: space-around;
   width: 60%;
   height: 700px;
