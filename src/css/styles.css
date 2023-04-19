@@ -1,5 +1,7 @@
 * {
-  border: solid 1px rgb(213, 12, 12);
+  border: solid 1px rgb(0, 255, 0);
+  font-family: "Amatic SC", cursive;
+  font-family: "Open Sans", sans-serif;
 }
 
 html, body {
@@ -14,8 +16,10 @@ html, body {
 
 h1 {
   height: 30px;
-  margin: 0px;
+  margin: 25px;
   padding: 0px;
+  font-family: "Nanum Myeongjo", serif;
+  font-size: 64px;
 }
 
 .logo {
@@ -32,6 +36,7 @@ h1 {
 .navigation-container {
   display: flex;
   flex-direction: row;
+  justify-content: flex-end;
   width: 400px;
   height: 60px;
 }
@@ -46,6 +51,9 @@ h1 {
 .nav-btn {
   width: 100px;
   height: 30px;
+  color: white;
+  background-color: rgb(213, 12, 12);
+  font-size: 16px;
 }
 
 header {
@@ -53,12 +61,36 @@ header {
   flex-direction: row;
   justify-content: space-around;
   align-items: flex-end;
-  background: rgb(0, 34, 155);
+  background: rgb(213, 12, 12);
   width: 100%;
   height: 150px;
 }
 
-.new-trip-form {
-  height: 30%;
+.header-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  color: white;
   width: 60%;
+}
+
+.new-trip-form {
+  height: 200px;
+  width: 60%;
+}
+
+main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: linear-gradient(to bottom, #0d74b7 0%, #439fdf 20%, #3cb0df 40%, #65d1e9 50%, #c3f6f5 70%, white 100%);
+}
+
+.card-container {
+  width: 60%;
+  height: 500px;
+  color: white;
 }/*# sourceMappingURL=styles.css.map */

@@ -1,47 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="src/styles/styles.css">
-    <title>My Web App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Open+Sans:wght@300;400&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Open+Sans:wght@300;400&display=swap"
+        rel="stylesheet">
+    <title>Travel Tracker</title>
 </head>
 <body>
     <header>
-        <section class="logo">
+        <section class="header-box">
             <h1>wander</h1>
+            <nav class="navigation-container">
+                <div class="nav-btn-box" id="">
+                    <img src="" alt="">
+                    <button class="nav-btn">test</button>
+                </div>
+                <div class="nav-btn-box" id="">
+                    <img src="" alt="">
+                    <button class="nav-btn">test</button>
+                </div>
+                <div class="nav-btn-box" id="">
+                    <img src="" alt="">
+                    <button class="nav-btn">test</button>
+                </div>
         </section>
-        <nav class="navigation-container">
-            <div class="nav-btn-box" id="">
-                <img src="" alt="">
-                <button class="nav-btn">test</button>
-            </div>
-            <div class="nav-btn-box" id="">
-                <img src="" alt="">
-                <button class="nav-btn">test</button>
-            </div>
-            <div class="nav-btn-box" id="">
-                <img src="" alt="">
-                <button class="nav-btn">test</button>
-            </div>
         </nav>
     </header>
     <form class="new-trip-form">
         <section>
             <h2>Choose your destination</h2>
-            <select name="destinations" id="destinations">
+            <!-- <select name="destinations" id="destinations">
                 <option value="test">test</option>
                 <option value="country">country</option>
                 <option value="place">place</option>
-                <option value="otherPlace">otherPlace</option>
-    
-            </section>
-
+                <option value="otherPlace">otherPlace</option> -->
+        </section>
     </form>
     <main>
-        <!-- Add main content here -->
+        <section class="card-container">
+            <h2>Card Container</h2>
+            <p>This is where the cards for the selected destination will be displayed.</p>
+        </section>
     </main>
     <script src="bundle.js"></script>
 </body>
+
 </html>
