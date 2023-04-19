@@ -1,22 +1,37 @@
-* {
-  border: solid 1px rgb(0, 255, 0);
-  font-family: "Amatic SC", cursive;
-  font-family: "Open Sans", sans-serif;
-}
-
-html, body {
+.trip-card {
+  background-color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  height: 100%;
-  padding: 0px;
-  margin: 0px;
+  justify-content: space-around;
+  padding-top: 15px;
+  width: 310px;
+  height: 400px;
+  border-radius: 30px;
+  color: black;
+  margin-top: 30px;
+}
+.trip-card img {
+  border-radius: 20px;
+  width: 85%;
+  height: 40%;
+}
+.trip-card p {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.trip-card h3, .trip-card p, .trip-card time, .trip-card h5 {
+  width: 85%;
 }
 
 h1 {
+  margin: 0px;
+}
+
+.page-title {
   height: 30px;
-  margin: 25px;
+  margin: 24px;
   padding: 0px;
   font-family: "Nanum Myeongjo", serif;
   font-size: 64px;
@@ -52,6 +67,7 @@ h1 {
   width: 100px;
   height: 30px;
   color: white;
+  border-style: none;
   background-color: rgb(213, 12, 12);
   font-size: 16px;
 }
@@ -75,22 +91,54 @@ header {
   width: 60%;
 }
 
+* {
+  border: solid 1px rgb(0, 255, 0);
+  font-family: "Amatic SC", cursive;
+  font-family: "Open Sans", sans-serif;
+}
+
+html, body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+
 .new-trip-form {
-  height: 200px;
-  width: 60%;
+  min-height: 300px;
+  max-width: 60%;
 }
 
 main {
   width: 100%;
+  height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   background-image: linear-gradient(to bottom, #0d74b7 0%, #439fdf 20%, #3cb0df 40%, #65d1e9 50%, #c3f6f5 70%, white 100%);
+  color: white;
+  position: relative;
 }
 
 .card-container {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
   width: 60%;
-  height: 500px;
+  height: 700px;
   color: white;
+  overflow: visible;
+  flex-wrap: wrap;
+  width: 60%;
+  max-height: 300px;
+}
+
+.user-info {
+  max-width: 60%;
+  width: 60%;
 }/*# sourceMappingURL=styles.css.map */
