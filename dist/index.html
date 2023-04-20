@@ -14,6 +14,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Open+Sans:wght@300;400&display=swap"
         rel="stylesheet">
+    <!-- <link rel="stylesheet" href="datepicker.min.css"> -->
     <title>Wander</title>
 </head>
 
@@ -54,16 +55,16 @@
             <section class="travel-date input-box">
             <h3 tabindex="0"> Select Dates <span>*</span> </h3>
             <div>
-                <input placeholder="Start Date">
-                <input placeholder="End Date">
+                <input type="date" placeholder="Start Date" id="js-start-date">
+                <input type="date" placeholder="End Date" id="js-end-date">
             </div>
             </section>
             <section class="num-travlers input-box">
             <h3 tabindex="0"> Number of Travelers <span>*</span> </h3>
+                <div>
                 <input placeholder="Number of Travelers">
-                <!-- <div class="new-trip-btn-box">
-                    <button id="new-trip-btn" class="new-trip-btn"></button>
-                </div> -->
+                <button id="new-trip-btn" class="new-trip-btn">Let's Wander</button>
+                </div>
             </section>
         </form>
     </section>
@@ -72,6 +73,7 @@
         <section id='js-card-container' class="card-container">
         </section>
     </main>
+    <!-- <script src="datepicker.min.js"></script> -->
     <script src="bundle.js"></script>
 </body>
 

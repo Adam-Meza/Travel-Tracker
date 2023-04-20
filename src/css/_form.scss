@@ -12,13 +12,15 @@
   padding: 10px;
 
     h3{
-      margin: 0px 12px;
+      margin: 0px 10px;
       font-size: 12px;
     }
 
     div {
       @include flex-row;
-      justify-content: space-evenly;
+      width: 100%;
+      justify-content: flex-start;
+      align-items: center;
     }
 }
 
@@ -42,13 +44,17 @@
     input {
       height: 30px;
       margin: 0px 5px;
+      text-indent: 5px;
     }
 }
 
 .new-trip-btn {
-  width: 60px;
-  height: 60px;
-  border-radius: 10px;
+  width: 120px;
+  height: 35px;
+  background-color: $red;
+  color: white;
+  border: none;
+  margin: 0px 20px;
 }
 
 span {

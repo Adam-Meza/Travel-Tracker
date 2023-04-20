@@ -3,6 +3,8 @@ import { fetchGetAll } from './fetches';
 import './css/styles.css';
 import User from './clasess/User.js'
 import Trip from './clasess/Trip'
+import datepicker from '../node_modules/js-datepicker';
+import dayjs from 'dayjs';
 
 // Query Selectors 
 
@@ -11,8 +13,9 @@ const userName = document.getElementById('user-name'),
       cardContainer = document.getElementById('js-card-container'),
       destinationList = document.getElementById('destinationList'),
       userTotal = document.getElementById('js-user-total'),
-      formBackground = document.getElementById('form-background')
-
+      formBackground = document.getElementById('form-background'),
+      startDate = document.getElementById('js-start-date'),
+      endDate = document.getElementById('js-end-date')
 
 window.addEventListener('load', () => {
   fetchGetAll()
@@ -41,12 +44,14 @@ let getAllTrips = (user, data) => {
 }
 
 let displayTripCards = (trips) => {
+
+  
   trips.forEach((trip) => {
       cardContainer.innerHTML += `
       <div class="trip-card js-trip-card" tabindex="0">
         <img class="trip-img js-trip-img" tabindex="0" src="${trip.destination.image}"alt="${trip.destination.alt}" >
           <h3 tabindex="0">${trip.destination.destination}</h3>
-          <time tabindex="0">${trip.startDate}</time>
+          <time tabindex="0" name="travel-dates" >${dayjs(trip.startDate).format('MM/DD/YYYY')} - ${dayjs(trip.startDate).add(trip.duration, "days").format('MM/DD/YYYY')}</time>
           <h5 tabindex="0">${trip.status}</h5>
       </div> `
   })
@@ -67,7 +72,13 @@ let populateDestinationList = (destinations) => {
 
 let displayRandomDestination = (data) => {
   let randomIndex = Math.floor(Math.random() * 50)
-  let x = data.find(destination => destination.id === randomIndex)
+  let x = data[randomIndex]
   console.log(x.id)
   formBackground.style.backgroundImage = `url(${x.image})`
 }
+
+const today = dayjs().format('YYYY-MM-DD');
+startDate.setAttribute('min', today);
+endDate.setAttribute('min', today);
+
+
