@@ -8,10 +8,10 @@ class User {
 
   totalSpentOnTrips () {
     return this.trips.reduce((acc, currentTrip) => {
-      console.log(currentTrip.totalPrice)
       return acc += currentTrip.totalPrice
     }, 0)
   }
+  
 }
 
 

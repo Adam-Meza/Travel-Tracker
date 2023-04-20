@@ -21,12 +21,12 @@
   align-items: center;
   align-items: flex-start;
 }
-.trip-card h3, .trip-card p, .trip-card time, .trip-card h5 {
+.trip-card h3, .trip-card p, .trip-card time, .trip-card h4 {
   margin: 2px 0px;
   width: 85%;
 }
 
-header {
+.main-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -500,4 +500,9 @@ main {
 .user-info {
   max-width: 60%;
   width: 60%;
+}
+
+h2 {
+  color: black;
+  margin: 0px;
 }/*# sourceMappingURL=styles.css.map */
