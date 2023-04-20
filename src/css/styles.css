@@ -1,22 +1,79 @@
-* {
-  border: solid 1px rgb(213, 12, 12);
+.trip-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: white;
+  color: black;
+  width: 250px;
+  height: 300px;
+  border-radius: 30px;
+  margin-top: 30px;
+  padding: 0px;
+}
+.trip-card img {
+  border-radius: 20px;
+  width: 100%;
+  height: 60%;
+}
+.trip-card h3, .trip-card p, .trip-card time, .trip-card h4 {
+  margin: 2px 0px;
+  width: 85%;
+}
+.trip-card .pending {
+  background-color: orange;
+  color: white;
+  width: 70px;
+}
+.trip-card .approved {
+  background-color: green;
+  color: white;
+  width: 75px;
 }
 
-html, body {
+.main-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
   width: 100%;
-  height: 100%;
+  height: 100px;
+}
+
+.header-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  color: rgb(213, 12, 12);
+  width: 60%;
+}
+
+.page-title {
+  height: 30px;
+  margin: 24px;
   padding: 0px;
-  margin: 0px;
+  font-family: "Nanum Myeongjo", serif;
+  font-size: 50px;
+  margin-left: 100px;
 }
 
 .logo {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 0px;
   width: 400px;
   height: 60px;
+  color: rgb(213, 12, 12);
 }
 
 .navigation-container {
   display: flex;
   flex-direction: row;
+  justify-content: flex-end;
   width: 400px;
   height: 60px;
 }
@@ -31,11 +88,430 @@ html, body {
 .nav-btn {
   width: 100px;
   height: 30px;
+  color: rgb(213, 12, 12);
+  border-style: none;
+  background-color: white;
+  font-size: 16px;
 }
 
-header {
+.new-trip-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  height: 250px;
+  width: 60%;
+  max-width: 400px;
+  background-color: white;
+  padding: 10px;
+}
+.new-trip-form h3 {
+  margin: 0px 10px;
+  font-size: 12px;
+}
+.new-trip-form div {
   display: flex;
   flex-direction: row;
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.user-info {
+  max-height: 200px;
+  max-width: 100%;
+}
+
+.destination-input {
+  height: 30px;
+  width: 200px;
+}
+
+.input-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  width: 100%;
+  margin: 2px;
+}
+.input-box input {
+  height: 30px;
+  margin: 0px 5px;
+  text-indent: 5px;
+}
+
+.new-trip-btn {
+  width: 120px;
+  height: 35px;
+  background-color: rgb(213, 12, 12);
+  color: white;
+  border: none;
+  margin: 0px 20px;
+}
+
+span {
+  color: rgb(213, 12, 12);
+}
+
+.form-background {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 300px;
+  background-position-x: center;
+  background-position-y: center;
+}
+
+/*
+  All a user has to do to change the calendar size is
+  change the font-size on the container and everything
+  magically resizes accordingly. Relative units ftw!
+*/
+.qs-datepicker-container {
+  font-size: 1rem;
+  font-family: sans-serif;
+  color: black;
+  position: absolute;
+  width: 15.625em;
+  display: flex;
+  flex-direction: column;
+  z-index: 9001;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  border: 1px solid gray;
+  border-radius: 0.263921875em;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 1.25em 1.25em -0.9375em rgba(0, 0, 0, 0.3);
+}
+.qs-datepicker-container * {
+  box-sizing: border-box;
+}
+
+.qs-centered {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.qs-hidden {
+  display: none;
+}
+
+.qs-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  width: 100%;
+  height: 100%;
+  padding: 0.5em;
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+.qs-overlay.qs-hidden {
+  opacity: 0;
+  z-index: -1;
+}
+.qs-overlay .qs-overlay-year {
+  border: none;
+  background: transparent;
+  border-bottom: 1px solid white;
+  border-radius: 0;
+  color: white;
+  font-size: 0.875em;
+  padding: 0.25em 0;
+  width: 80%;
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+}
+.qs-overlay .qs-overlay-year::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+.qs-overlay .qs-close {
+  padding: 0.5em;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.qs-overlay .qs-submit {
+  border: 1px solid white;
+  border-radius: 0.263921875em;
+  padding: 0.5em;
+  margin: 0 auto auto;
+  cursor: pointer;
+  background: rgba(128, 128, 128, 0.4);
+}
+.qs-overlay .qs-submit.qs-disabled {
+  color: gray;
+  border-color: gray;
+  cursor: not-allowed;
+}
+.qs-overlay .qs-overlay-month-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+}
+.qs-overlay .qs-overlay-month {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: calc(100% / 3);
+  cursor: pointer;
+  opacity: 0.5;
+  transition: opacity 0.15s;
+}
+.qs-overlay .qs-overlay-month.active, .qs-overlay .qs-overlay-month:hover {
+  opacity: 1;
+}
+
+.qs-controls {
+  width: 100%;
+  display: flex;
   justify-content: space-between;
-  background: rgb(0, 34, 155);
+  align-items: center;
+  flex-grow: 1;
+  flex-shrink: 0;
+  background: lightgray;
+  filter: blur(0px);
+  transition: filter 0.3s;
+}
+.qs-controls.qs-blur {
+  filter: blur(5px);
+}
+
+.qs-arrow {
+  height: 1.5625em;
+  width: 1.5625em;
+  position: relative;
+  cursor: pointer;
+  border-radius: 0.263921875em;
+  transition: background 0.15s;
+}
+.qs-arrow:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+.qs-arrow:hover.qs-left:after {
+  border-right-color: black;
+}
+.qs-arrow:hover.qs-right:after {
+  border-left-color: black;
+}
+.qs-arrow:after {
+  content: "";
+  border: 0.390625em solid transparent;
+  position: absolute;
+  top: 50%;
+  transition: border 0.2s;
+}
+.qs-arrow.qs-left:after {
+  border-right-color: gray;
+  right: 50%;
+  transform: translate(25%, -50%);
+}
+.qs-arrow.qs-right:after {
+  border-left-color: gray;
+  left: 50%;
+  transform: translate(-25%, -50%);
+}
+
+.qs-month-year {
+  font-weight: bold;
+  transition: border 0.2s;
+  border-bottom: 1px solid transparent;
+}
+.qs-month-year:not(.qs-disabled-year-overlay) {
+  cursor: pointer;
+}
+.qs-month-year:not(.qs-disabled-year-overlay):hover {
+  border-bottom: 1px solid gray;
+}
+.qs-month-year:focus, .qs-month-year:active:focus {
+  outline: none;
+}
+
+.qs-month {
+  padding-right: 0.5ex;
+}
+
+.qs-year {
+  padding-left: 0.5ex;
+}
+
+.qs-squares {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.3125em;
+  filter: blur(0px);
+  transition: filter 0.3s;
+}
+.qs-squares.qs-blur {
+  filter: blur(5px);
+}
+
+.qs-square {
+  width: calc(100% / 7);
+  height: 1.5625em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.1s;
+  border-radius: 0.263921875em;
+}
+.qs-square:not(.qs-empty):not(.qs-disabled):not(.qs-day):not(.qs-active):hover {
+  background: orange;
+}
+
+.qs-current {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+/*
+  3 possibilities:
+    1. Single, active date.
+    2. Daterange start selection.
+    3. Daterange end selection.
+*/
+.qs-active,
+.qs-range-start,
+.qs-range-end {
+  background: lightblue;
+}
+
+.qs-range-start:not(.qs-range-6) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.qs-range-middle {
+  background: #d4ebf2;
+}
+.qs-range-middle:not(.qs-range-0):not(.qs-range-6) {
+  border-radius: 0;
+}
+.qs-range-middle.qs-range-0 {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.qs-range-middle.qs-range-6 {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.qs-range-end:not(.qs-range-0) {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.qs-disabled,
+.qs-outside-current-month {
+  opacity: 0.2;
+}
+
+.qs-disabled {
+  cursor: not-allowed;
+}
+
+.qs-empty {
+  cursor: default;
+}
+
+.qs-day {
+  cursor: default;
+  font-weight: bold;
+  color: gray;
+}
+
+.qs-event {
+  position: relative;
+}
+.qs-event:after {
+  content: "";
+  position: absolute;
+  width: 0.46875em;
+  height: 0.46875em;
+  border-radius: 50%;
+  background: #07f;
+  bottom: 0;
+  right: 0;
+}
+
+* {
+  font-family: "Amatic SC", cursive;
+  font-family: "Open Sans", sans-serif;
+}
+*:focus {
+  border: solid 1px #085da8;
+}
+
+html, body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+
+h1 {
+  margin: 0px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+main {
+  width: 100%;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  position: relative;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  position: absolute;
+  width: 60%;
+  height: 700px;
+  color: white;
+  overflow: visible;
+  flex-wrap: wrap;
+  width: 60%;
+  max-height: 300px;
+}
+
+.user-info {
+  max-width: 60%;
+  width: 60%;
+}
+
+h2 {
+  color: black;
+  margin: 0px;
+}
+
+[hidden] {
+  display: none;
 }/*# sourceMappingURL=styles.css.map */

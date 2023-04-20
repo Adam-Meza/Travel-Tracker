@@ -30,7 +30,9 @@
     "lint": "./node_modules/.bin/eslint 'src/**.js' 'test/**.js'"
   },
   "dependencies": {
+    "datepicker.js": "^0.0.1-beta1",
     "dayjs": "^1.11.7",
+    "js-datepicker": "^5.18.2",
     "serpapi": "^1.1.1"
   }
 }

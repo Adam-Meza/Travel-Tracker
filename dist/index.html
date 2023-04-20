@@ -1,38 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="src/styles/styles.css">
-    <title>My Web App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Open+Sans:wght@300;400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/datepickerjs/dist/datepicker.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Open+Sans:wght@300;400&display=swap"
+        rel="stylesheet">
+    <title>Wander</title>
 </head>
+
 <body>
-    <header>
-        <section class="logo">
-            <!-- Add your logo here -->
+    <header class="main-header">
+        <section class="header-box">
+            <h1><em class="page-title" tabindex="0">wander</em></h1>
+            <nav class="navigation-container">
+                <!-- <div class="nav-btn-box" id="">
+                    <img src="" alt="">
+                    <button class="nav-btn" tabindex="0">Account</button>
+                </div>
+                <div class="nav-btn-box" id="">
+                    <img src="" alt="">
+                    <button class="nav-btn" tabindex="0">Search</button>
+                </div>
+                <div class="nav-btn-box" id="">
+                    <img src="" alt="">
+                    <button class="nav-btn" tabindex="0" >Explore</button>
+                </div> -->
+            </nav>
         </section>
-        <nav class="navigation-container">
-            <div class="nav-btn-box" id="">
-                <img src="" alt="">
-                <button class="nav-btn">test</button>
-            </div>
-            <div class="nav-btn-box" id="">
-                <img src="" alt="">
-                <button class="nav-btn">test</button>
-            </div>
-            <div class="nav-btn-box" id="">
-                <img src="" alt="">
-                <button class="nav-btn">test</button>
-            </div>
-        </nav>
     </header>
-    <form class="new-trip-form">
-        <!-- Add form elements here -->
-    </form>
-    <main>
-        <!-- Add main content here -->
+    <section class="user-info">
+        <h2 id="user-name" tabindex="0"></h2>
+        <h3 id="js-user-total" tabindex="0"></h3>
+    </section>
+    <section id="form-background" class="form-background">
+        <form class="new-trip-form">
+            <section class="destination input-box">
+                <h3> Where to? <span>*</span> </h3>
+                <input type="text" class="destination-input" id="js-destination-input" list="destinationList"
+                    placeholder="Choose destination...">
+                <datalist id="destinationList">
+                </datalist>
+            </section>
+            <section class="travel-date input-box">
+                <h3> Select Dates <span>*</span> </h3>
+                <div>
+                    <input type="date" placeholder="Start Date" id="js-start-date">
+                    <input type="date" placeholder="End Date" id="js-end-date" disabled>
+                </div>
+            </section>
+            <section class="num-travlers input-box">
+                <h3> Number of Travelers <span>*</span> </h3>
+                <div>
+                    <input id="js-num-travelers-input" placeholder="Number of Travelers">
+                    <button id="new-trip-btn" class="new-trip-btn">Let's Wander</button>
+                </div>
+            </section>
+            <div>
+                <h2 id="js-input-display" hidden></h2>
+            </div>
+        </form>
+    </section>
+    <main class="main">
+        <section id='js-card-container' class="card-container">
+        </section>
     </main>
     <script src="bundle.js"></script>
 </body>
+
 </html>

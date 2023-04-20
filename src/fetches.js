@@ -1,15 +1,20 @@
-// all users
-// http://localhost:3001/api/v1/travelers	
- 
 //just one
 //http://localhost:3001/api/v1/travelers/[x]
 // where x is a number 1-50
 
-//get all trips
-// 	http://localhost:3001/api/v1/trips
-// ids artart at 204 - get it by the user id - also has destination id
-
-//get all destinations
-// http://localhost:3001/api/v1/destinations
-
 // MODIFY A SINGLE TRIP 
+
+const fetchGet = (url) => {
+  return fetch(url)
+    .then(data => data.json())
+}
+
+const fetchGetAll = () => {
+  return Promise.all([
+    fetchGet("http://localhost:3001/api/v1/travelers"),
+    fetchGet("http://localhost:3001/api/v1/trips"),
+    fetchGet("http://localhost:3001/api/v1/destinations"),
+  ])
+}
+
+export { fetchGetAll }
