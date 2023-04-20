@@ -7,24 +7,18 @@ class Trip {
     this.duration = tripObj.duration,
     this.status = tripObj.status,
     this.suggestedActivities = tripObj.suggestedActivities
-    this.destination = destination
     this.travelers = tripObj.travelers
-    this.totalPrice = this.calculatePrice()
+    this.destination = destination
     this.image = this.destination.image
+    this.totalPrice = this.calculatePrice()
   }
 
   calculatePrice () {
     let totalLogdging = this.duration * this.destination.estimatedLodgingCostPerDay
     let flightCost = this.destination.estimatedFlightCostPerPerson * this.travelers
     let total = (totalLogdging + flightCost) * 1.10
-
     return total
   }
-
-  // getDestination(destinationData) {
-  //   return destinationData.find(dest => dest.id === this.destinationID)
-  // }
-
 }
 
 

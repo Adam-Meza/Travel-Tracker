@@ -20,39 +20,52 @@
 <body>
     <header>
         <section class="header-box">
-            <h1><em class="page-title">wander</em></h1>
+            <h1><em class="page-title" tabindex="0">wander</em></h1>
             <nav class="navigation-container">
                 <!-- <div class="nav-btn-box" id="">
                     <img src="" alt="">
-                    <button class="nav-btn">Account</button>
+                    <button class="nav-btn tabindex="0"">Account</button>
                 </div>
                 <div class="nav-btn-box" id="">
                     <img src="" alt="">
-                    <button class="nav-btn">Search</button>
+                    <button class="nav-btn" tabindex="0">Search</button>
                 </div>
                 <div class="nav-btn-box" id="">
                     <img src="" alt="">
-                    <button class="nav-btn">Explore</button>
+                    <button class="nav-btn" tabindex="0" >Explore</button>
                 </div> -->
             </nav>
         </section>
     </header>
-    <section class="new-trip-form">
-        <section class="user-info">
-            <h2 id="user-name"></h2>
-            <h3 id="js-user-total"></h3>
-        </section>
-        <form>
-            <h2> Where to?</h2>
-            <input type="text" class="destination-input" name="destination-input" list="destinationList"
-                placeholder="Choose destination...">
-            <datalist id="destinationList">
-            </datalist>
-            <div class="new-trip-btn-box" >
-                <button id="new-trip-btn" class="new-trip-btn"></button>
-            </div>
-        </form>
 
+    <!-- <section class="user-info">
+            <h2 id="user-name" tabindex="0"></h2>
+            <h3 id="js-user-total" tabindex="0"></h3>
+        </section> -->
+    <section id="form-background" class="form-background">
+        <form class="new-trip-form">
+            <section class="destination input-box">
+            <h3 tabindex="0"> Where to? <span>*</span> </h3>
+                <input type="text" class="destination-input" name="destination-input" list="destinationList"
+                    placeholder="Choose destination...">
+                <datalist id="destinationList">
+                </datalist>
+            </section>
+            <section class="travel-date input-box">
+            <h3 tabindex="0"> Select Dates <span>*</span> </h3>
+            <div>
+                <input placeholder="Start Date">
+                <input placeholder="End Date">
+            </div>
+            </section>
+            <section class="num-travlers input-box">
+            <h3 tabindex="0"> Number of Travelers <span>*</span> </h3>
+                <input placeholder="Number of Travelers">
+                <!-- <div class="new-trip-btn-box">
+                    <button id="new-trip-btn" class="new-trip-btn"></button>
+                </div> -->
+            </section>
+        </form>
     </section>
     <main class="main">
         <!-- <h2>Your Trips</h2> -->

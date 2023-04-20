@@ -7,29 +7,31 @@ import Trip from './clasess/Trip'
 // Query Selectors 
 
 const userName = document.getElementById('user-name'),
-      userInfo =document.getElementById('user-info'),
+      // userInfo =document.getElementById('user-info'),
       cardContainer = document.getElementById('js-card-container'),
       destinationList = document.getElementById('destinationList'),
-      userTotal = document.getElementById('js-user-total')
+      userTotal = document.getElementById('js-user-total'),
+      formBackground = document.getElementById('form-background')
 
 
 window.addEventListener('load', () => {
   fetchGetAll()
     .then((data) => {
       console.log(data)
+      let randomIndex = Math.floor(Math.random() * 50)
       let destinations = data[2].destinations
       let trips = data[1].trips
-        .filter(trip => trip.userID === 1)
+        .filter(trip => trip.userID === randomIndex)
         .map(trip => {
           let destination = destinations.find(dest => dest.id === trip.destinationID)
           return new Trip(trip, destination)})
 
-      let user = new User(data[0].travelers.find(traveler => traveler.id === 1), trips)
+      let user = new User(data[0].travelers.find(traveler => traveler.id === randomIndex), trips)
 
-      displayUserData(user)
+      // displayUserData(user)
       displayTripCards(trips)
       populateDestinationList(destinations)
-      console.log(user.totalSpentOnTrips())
+      displayRandomDestination(destinations)
       })
 })
 
@@ -41,11 +43,11 @@ let getAllTrips = (user, data) => {
 let displayTripCards = (trips) => {
   trips.forEach((trip) => {
       cardContainer.innerHTML += `
-      <div class="trip-card js-trip-card">
-        <img class="trip-img js-trip-img" src="${trip.destination.image}"alt="${trip.destination.alt}" >
-          <h3>${trip.destination.destination}</h3>
-          <time>${trip.startDate}</time>
-          <h5>${trip.status}</h5>
+      <div class="trip-card js-trip-card" tabindex="0">
+        <img class="trip-img js-trip-img" tabindex="0" src="${trip.destination.image}"alt="${trip.destination.alt}" >
+          <h3 tabindex="0">${trip.destination.destination}</h3>
+          <time tabindex="0">${trip.startDate}</time>
+          <h5 tabindex="0">${trip.status}</h5>
       </div> `
   })
 }
@@ -61,4 +63,11 @@ let populateDestinationList = (destinations) => {
       <option value="${destination.destination}">
       `
   })
+}
+
+let displayRandomDestination = (data) => {
+  let randomIndex = Math.floor(Math.random() * 50)
+  let x = data.find(destination => destination.id === randomIndex)
+  console.log(x.id)
+  formBackground.style.backgroundImage = `url(${x.image})`
 }
