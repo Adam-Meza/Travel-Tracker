@@ -10,11 +10,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Open+Sans:wght@300;400&display=swap"
         rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/datepickerjs/dist/datepicker.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Open+Sans:wght@300;400&display=swap"
         rel="stylesheet">
-    <!-- <link rel="stylesheet" href="datepicker.min.css"> -->
     <title>Wander</title>
 </head>
 
@@ -45,28 +43,28 @@
     <section id="form-background" class="form-background">
         <form class="new-trip-form">
             <section class="destination input-box">
-                <h3 tabindex="0"> Where to? <span>*</span> </h3>
+                <h3> Where to? <span>*</span> </h3>
                 <input type="text" class="destination-input" id="js-destination-input" list="destinationList"
                     placeholder="Choose destination...">
                 <datalist id="destinationList">
                 </datalist>
             </section>
             <section class="travel-date input-box">
-                <h3 tabindex="0"> Select Dates <span>*</span> </h3>
+                <h3> Select Dates <span>*</span> </h3>
                 <div>
                     <input type="date" placeholder="Start Date" id="js-start-date">
                     <input type="date" placeholder="End Date" id="js-end-date" disabled>
                 </div>
             </section>
             <section class="num-travlers input-box">
-                <h3 tabindex="0"> Number of Travelers <span>*</span> </h3>
+                <h3> Number of Travelers <span>*</span> </h3>
                 <div>
                     <input id="js-num-travelers-input" placeholder="Number of Travelers">
                     <button id="new-trip-btn" class="new-trip-btn">Let's Wander</button>
                 </div>
             </section>
             <div>
-                <h2 id="js-input-display"></h2>
+                <h2 id="js-input-display" hidden></h2>
             </div>
         </form>
     </section>
@@ -74,7 +72,6 @@
         <section id='js-card-container' class="card-container">
         </section>
     </main>
-    <!-- <script src="datepicker.min.js"></script> -->
     <script src="bundle.js"></script>
 </body>
 

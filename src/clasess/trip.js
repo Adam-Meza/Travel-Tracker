@@ -10,7 +10,7 @@ class Trip {
     this.travelers = tripObj.travelers
     this.destination = destination
     this.image = this.destination.image
-    this.totalPrice = this.calculatePrice()
+    this.totalPrice = Math.floor(this.calculatePrice())
   }
 
   calculatePrice () {

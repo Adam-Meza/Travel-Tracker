@@ -8,23 +8,30 @@
   color: black;
   width: 250px;
   height: 300px;
-  // border: solid 1px grey;
   border-radius: 30px;
   margin-top: 30px;
+  padding: 0px;
 
     img{
       border-radius: 20px;
       width: 100%;
       height: 60%;
     }
-    
-    p {
-      @include flex-column;
-      align-items: flex-start;
-    }
 
     h3, p, time, h4 {
       margin: 2px 0px;
       width: 85%;
+    }
+
+    .pending {
+      background-color: orange;
+      color: white;
+      width: 70px;
+    }
+
+    .approved {
+      background-color: green;
+      color: white;
+      width: 75px;
     }
 }
