@@ -4,9 +4,6 @@
 @import './event';
 @import './header';
 @import './form';
-@import '~js-datepicker/src/datepicker';
-
-// wide ranging 
 
 * {
   // border: solid 1px rgb(0, 255, 0);
@@ -30,25 +27,22 @@ h1 {
   margin: 0px;
 }
 
+h2 {
+  color: black;
+  margin: 0px
+}
+
 button:hover {
   cursor: pointer;
 }
 
-main{
-  width: 100%;
-  height: 300px;
+main {
   @include flex-column;
   justify-content: center;
-  // background-image: linear-gradient(to bottom,
-  //   #0d74b7 0%,
-  //   #439fdf 20%,
-  //   #3cb0df 40%,
-  //   #65d1e9 50%,
-  //   #c3f6f5 70%,
-  //   white 100%
-  // );
+  width: 100%;
+  height: 300px;
   color: white;
-  position: relative;
+  // position: relative;
 }
 
 .card-container {
@@ -62,16 +56,6 @@ main{
   flex-wrap: wrap;
   width: 60%;
   max-height: 300px;
-}
-
-.user-info {
-  max-width: 60%;
-  width: 60%;
-}
-
-h2{
-  color: black;
-  margin: 0px
 }
 
 [hidden] {

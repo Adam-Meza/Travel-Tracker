@@ -25,8 +25,8 @@ const userName = document.getElementById('user-name'),
       endDateInput = document.getElementById('js-end-date'),
       destinationList = document.getElementById('destinationList'),
       cardContainer = document.getElementById('js-card-container'),
-      userTotal = document.getElementById('js-user-total'),
-      testInput = document.getElementById('test')
+      userTotal = document.getElementById('js-user-total');
+
 
 // Atomic Functions
 
@@ -38,7 +38,7 @@ let makeNewTrip = () => {
     destinationID: newDestination.id,
     duration: dayjs(endDateInput.value).diff(dayjs(startDateInput.value), "days"),
     travelers: numTravelersInput.value,
-    status: "Pending",
+    status: "pending",
     suggestedActivites: [],
     date: startDateInput.value
   }, newDestination);
@@ -55,11 +55,13 @@ let makeTripArray = (data, userID) => {
 
 let checkIfInputsAreValid = () => {
   let dateRegEx = /^(20[0-3][0-9]|2040)-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/
-  
+  let numRegEx = /^([1-9]|[1-9][0-9]|[1-2][0-9]{2}|3[0-5][0-9]|36[0-5])$/
+ 
   return inputs.every(input => input.value)
   && destinations.find(dest => dest.destination === destinationInput.value)
   && dateRegEx.test(`${startDateInput.value}`)
-  && dateRegEx.test(`${endDateInput.value}`) ?
+  && dateRegEx.test(`${endDateInput.value}`) 
+  && numRegEx.test(`${numTravelersInput.value}`) ?
   true : false;
 };
 
@@ -108,14 +110,9 @@ startDateInput.setAttribute('min', today);
 endDateInput.setAttribute('min', today);
 
 startDateInput.addEventListener('change', () => {
-
   endDateInput.disabled = false; 
   endDateInput.setAttribute('min', startDateInput.value);
 });
-
-// endDateInput.addEventListener('change', () => {
-//   startDateInput.setAttribute('max', startDateInput.value);
-// });
 
 
 inputs.forEach(input => input.addEventListener('submit', () => {
@@ -131,10 +128,10 @@ inputs.forEach(input => input.addEventListener('change', () => {
 }));
 
 newTripBtn.addEventListener('click', () => {
-  event.preventDefault()
+  event.preventDefault();
   if (checkIfInputsAreValid()) {
-    currentUser.trips.push(makeNewTrip())
-    updateInputDOM()
+    currentUser.trips.push(makeNewTrip());
+    updateInputDOM();
   } else {
     inputDisplay.toggleAttribute('hidden')
     inputDisplay.innerText = "Please fill out all the inputs"
@@ -150,7 +147,6 @@ window.addEventListener('load', () => {
 
       currentUser = new User(data[0].travelers.find(traveler => traveler.id === randomIndex), trips);
 
-      console.log(destinations)
       displayUserData(currentUser);
       displayTripCards(currentUser.trips);
       populateDestinationList(destinations);
