@@ -6,11 +6,6 @@ import Trip from './clasess/Trip';
 import dayjs from 'dayjs';
 import MicroModal from 'micromodal';
 
-// MicroModal.init();
-
-// modal.style.display = "block"
-// MicroModal.show('modal-1');
-
 
 // Global Variables
 
@@ -20,7 +15,7 @@ let currentUser,
 
 // Query Selectors
 
-const userName = document.getElementById('user-name'),
+const userName = document.getElementById('js-user-name'),
       // userInfo = document.getElementById('user-info'),
       formBackground = document.getElementById('form-background'),
       newTripBtn = document.getElementById('new-trip-btn'),
@@ -33,10 +28,13 @@ const userName = document.getElementById('user-name'),
       destinationList = document.getElementById('destinationList'),
       cardContainer = document.getElementById('js-card-container'),
       userTotal = document.getElementById('js-user-total'),
-      accountBtn = document.getElementById('js-account-btn')
-
-  let overlay = document.querySelector('.overlay')
-
+      accountBtn = document.getElementById('js-account-btn'),
+      overlay = document.querySelector('.overlay'),
+      modals = document.querySelectorAll('.modal'),
+      modalCloseBtns = [...document.querySelectorAll(".close-modal-btn")],
+      modalAccountName = document.getElementById('js-account-name'),
+      modalAccountTotal = document.getElementById('js-account-total'),
+      accountModal = document.getElementById('js-account-modal')
 
       // Atomic Functions
 
@@ -90,8 +88,10 @@ let displayTripCards = (trips) => {
 };
 
 let displayUserData = (user) => {
-  userName.innerText = `Welcome back, ${user.name.split(" ")[0]}!`;
-  userTotal.innerText = `Total spent on trips this year: $${ Math.floor(user.totalSpentOnTrips())}`;
+  userName.innerText = `${user.name.split(" ")[0]}'s Trips`;
+
+  modalAccountName.innerText =`${user.name}`
+  modalAccountTotal.innerText = `Total spent on trips this year: $${ Math.floor(user.totalSpentOnTrips())}`;
 };
 
 let populateDestinationList = (destinations) => {
@@ -148,10 +148,14 @@ newTripBtn.addEventListener('click', () => {
   };
 });
 
-accountBtn.addEventListener('click', () => {
-  modal.classList.add('active-modal')
-  overlay.classList.add('active')
-  console.log("test")
+modalCloseBtns.forEach( btn=> btn.addEventListener('click', () => {
+  modals.forEach(modal => modal.classList.remove('active-modal'))
+  overlay.classList.remove('active-overlay')
+}))
+
+accountBtn.addEventListener('click', (event) => {
+  accountModal.classList.add('active-modal')
+  overlay.classList.add('active-overlay')
 })
 
 window.addEventListener('load', () => {
@@ -161,13 +165,10 @@ window.addEventListener('load', () => {
       let trips = makeTripArray(data[1].trips, randomIndex);
 
       currentUser = new User(data[0].travelers.find(traveler => traveler.id === randomIndex), trips);
-
-      // displayUserData(currentUser);
-
+      displayUserData(currentUser);
       displayTripCards(currentUser.trips);
       populateDestinationList(destinations);
       displayRandomDestination(destinations);
       });
 });
 
-let modal = document.querySelector('.modal')

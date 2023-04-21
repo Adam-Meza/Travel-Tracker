@@ -1,0 +1,60 @@
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  z-index: 2;
+  background-color: white;
+
+}
+
+.active-modal {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.account-modal {
+  min-width: 40%;
+  min-height: 60%;
+  width: 40%;
+  height: 60%;
+  padding-left: 30px;
+  padding-right: 10px;
+}
+
+.overlay {
+  position: fixed;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0 ,0, .5);
+  pointer-events: none;
+}
+
+.active-overlay {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-header {
+  @include flex-row;
+  justify-content: space-between;
+  height: 15%;
+  width: 100%;
+}
+
+.account-modal-content {
+
+}
+
+.close-modal-btn {
+  font-size: 30px;
+ background-color: white;
+ border: none;
+}
+
+.log-in-modal-header{
+  @include flex-row;
+  justify-content: flex-end;
+}

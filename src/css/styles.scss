@@ -4,6 +4,7 @@
 @import './event';
 @import './header';
 @import './form';
+@import './modal';
 
 * {
   // border: solid 1px rgb(0, 255, 0);
@@ -29,7 +30,10 @@ h1 {
 
 h2 {
   color: black;
-  margin: 0px
+  // margin: 0px;
+  margin-bottom: 0px;
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 30px;
 }
 
 button:hover {
@@ -38,9 +42,9 @@ button:hover {
 
 main {
   @include flex-column;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
-  height: 300px;
+  height: 60%;
   color: white;
   // position: relative;
 }
@@ -63,53 +67,8 @@ main {
   width: 60%;
 }
 
-
-
 [hidden] {
   display: none;
 }
 
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  z-index: 2;
-  background-color: white;
-  width: 300px;
-  height: 600px;
 
-  // .active {
-  //   transform: translate(-50%, -50%) scale(1);
-  // }
-}
-
-
-.active-modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: 2;
-  background-color: white;
-  width: 300px;
-  height: 600px;
-  transform: translate(-50%, -50%) scale(1);
-
-}
-
-.overlay {
-  position: fixed;
-  opacity: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0 ,0, .5);
-  pointer-events: none;
-
-  // .active {
-  //   opacity: 1;
-  //   pointer-events: all;
-  // }
-
-}
