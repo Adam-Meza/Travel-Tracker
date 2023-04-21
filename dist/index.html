@@ -76,17 +76,20 @@
         </section>
     </main>
 
-    <div class="modal login-modal" aria-hidden="true">
-        <div tabindex="-1" data-micromodal-close>
-            <div role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
-                <header class="log-in-modal-header">
-                    <button class="close-modal-btn " aria-label="Close modal" data-micromodal-close>&times;</button>
-                </header>
-                <div >
-                    <h2 id="js-account-name">Name Goes here </h2>
-                    <h3 id="js-account-total">total spent on trips</h3>
+    <div class="modal login-modal active" aria-hidden="true">
+        <div class="log-in-content" tabindex="-1" data-micromodal-close>
+            <form class="log-in-content" class="" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+                <h2>Log In</h2>
+                <div class="log-in-input-box">
+                    <h3>Username</h3>
+                    <input id="js-username-input">
                 </div>
-            </div>
+                <div class="log-in-input-box">
+                    <h3>Password</h3>
+                    <input id="js-password-input" >
+                </div>
+                <btn class="log-in-btn" id="js-log-in-btn">Log In</btn>
+            </form>
         </div>
     </div>
     <div class="modal account-modal" aria-hidden="true" id="js-account-modal">
@@ -106,7 +109,7 @@
         </div>
     </div>
 
-    <div class="overlay"></div>
+    <div class="overlay active-overlay"></div>
     <script src="bundle.js"></script>
     <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
 
