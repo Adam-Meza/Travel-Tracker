@@ -88,7 +88,7 @@
   width: 100px;
   height: 30px;
   color: rgb(213, 12, 12);
-  border-style: none;
+  border: solid 1px rgb(204, 204, 204);
   background-color: white;
   font-size: 16px;
 }
@@ -105,7 +105,7 @@
   background-color: white;
   padding: 10px;
 }
-.new-trip-form h3 {
+.new-trip-form h2 {
   margin: 0px 10px;
   font-size: 12px;
 }
@@ -166,6 +166,13 @@ span {
   background-position-y: center;
 }
 
+.input-error-display {
+  font-size: 16px;
+  color: rgb(213, 12, 12);
+  margin: 3px 0px 5px 15px;
+  padding: 0;
+}
+
 .modal {
   position: fixed;
   top: 50%;
@@ -196,6 +203,7 @@ span {
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
 }
 
 .active-overlay {
@@ -230,6 +238,7 @@ span {
 }
 .log-in-content h2 {
   margin-bottom: 20px;
+  border-bottom: 1px solid rgb(213, 12, 12);
 }
 
 .log-in-input-box {
@@ -246,8 +255,9 @@ span {
 .log-in-input-box input {
   width: 90%;
   height: 30px;
-  border: solid 1px rgb(213, 12, 12);
+  border: solid 1px rgb(204, 204, 204);
   margin: 0px;
+  text-align: center;
 }
 
 .log-in-btn {
@@ -257,6 +267,12 @@ span {
   font-size: 18px;
   height: 8%;
   width: 15%;
+}
+
+.agent-container {
+  width: 60%;
+  height: 300px;
+  border: solid 1px rgb(204, 204, 204);
 }
 
 * {
@@ -277,6 +293,16 @@ html, body {
   margin: 0px;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 60%;
+  color: white;
+}
+
 h1 {
   margin: 0px;
 }
@@ -292,16 +318,6 @@ button:hover {
   cursor: pointer;
 }
 
-main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  height: 60%;
-  color: white;
-}
-
 .card-container {
   display: flex;
   flex-direction: row;
@@ -313,11 +329,6 @@ main {
   flex-wrap: wrap;
   width: 60%;
   max-height: 300px;
-}
-
-.user-info {
-  max-width: 60%;
-  width: 60%;
 }
 
 [hidden] {

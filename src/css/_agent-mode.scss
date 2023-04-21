@@ -1,0 +1,9 @@
+@import './variables';
+@import './mixins';
+
+.agent-container {
+  width: 60%;
+  height: 300px;
+  border: $grey-border;
+
+}

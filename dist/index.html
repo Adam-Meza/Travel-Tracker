@@ -17,7 +17,6 @@
 </head>
 
 <body>
-
     <header class="main-header">
         <section class="header-box">
             <h1><em class="page-title" tabindex="0">wander</em></h1>
@@ -26,52 +25,55 @@
                     <img src="" alt="">
                     <button class="nav-btn" id="js-account-btn" tabindex="0">Account</button>
                 </div>
-
-                <!--<div class="nav-btn-box" id="">
-                    <img src="" alt="">
-                    <button class="nav-btn" tabindex="0">Search</button>
-                </div>
-                <div class="nav-btn-box" id="">
-                    <img src="" alt="">
-                    <button class="nav-btn" tabindex="0" >Explore</button>
-                </div> -->
             </nav>
         </section>
     </header>
-    <!-- <section class="user-info">
-        <h2 id="user-name" tabindex="0"></h2>
-        <h3 id="js-user-total" tabindex="0"></h3>
-    </section> -->
-    <section id="form-background" class="form-background">
+    <section id="js-form-background" class="form-background">
         <form class="new-trip-form">
             <section class="destination input-box">
-                <h3><label for="js-destination-input">Where to? <span>*</span></label></h3>
+                <h2><label for="js-destination-input">Where to? <span>*</span></label></h2>
                 <input type="text" class="destination-input" id="js-destination-input" list="destinationList"
                     placeholder="Choose destination...">
                 <datalist id="destinationList">
                 </datalist>
             </section>
             <section class="travel-date input-box">
-                <h3><label for="date-inputs">Select Dates <span>*</span></label></h3>
+                <h2><label for="date-inputs">Select Dates <span>*</span></label></h2>
                 <div id="date-inputs">
                     <input type="date" aria-label="start-date-input" placeholder="Start Date" id="js-start-date">
                     <input type="date" aria-label="end-date-input" placeholder="End Date" id="js-end-date" disabled>
                 </div>
             </section>
             <section class="num-travlers input-box">
-                <h3><label for="js-num-travelers-input">Number of Travelers <span>*</span></label></h3>
+                <h2><label for="js-num-travelers-input">Number of Travelers <span>*</span></label></h2>
                 <div>
                     <input id="js-num-travelers-input" placeholder="Number of Travelers">
                     <button id="new-trip-btn" class="new-trip-btn">Let's Wander</button>
                 </div>
             </section>
-            <div>
-                <h2 id="js-input-display" hidden></h2>
-            </div>
+            <h3 id="js-input-error-display" class="input-error-display" hidden></h3>
         </form>
     </section>
     <main class="main">
-        <h2 id="js-user-name">Trips</h2>
+        <h2 id="js-main-title">Trips</h2>
+        <section class="agent-container" id="js-agent-container">
+            <nav>
+                <button class="agent-nav-btn" id="finances" hidden>Finances</button>
+                <button class="agent-nav-btn" id="requests">Requests</button>
+            </nav>
+            <h2 id="agent-header"></h2>
+            <div>
+                <h2>Yearly profit</h2>
+                <h3>current travlers list </h3>
+            </div>
+            <section class="agent-request-view" id="agent-request-view">
+                <input class="agent-search-input" id="js-agent-serach-input">
+                <section class="trip-requests-container" id="js-trip-requests-container">
+
+
+                </section>
+            </section>
+        </section>
         <section id='js-card-container' class="card-container">
         </section>
     </main>
@@ -86,7 +88,7 @@
                 </div>
                 <div class="log-in-input-box">
                     <h3>Password</h3>
-                    <input id="js-password-input" >
+                    <input id="js-password-input">
                 </div>
                 <btn class="log-in-btn" id="js-log-in-btn">Log In</btn>
             </form>
@@ -96,9 +98,7 @@
         <div tabindex="-1" data-micromodal-close>
             <div role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
                 <header class="modal-header">
-                    <h2>
-                        Account Info
-                    </h2>
+                    <h2>Account Info</h2>
                     <button class="close-modal-btn " aria-label="Close modal" data-micromodal-close>&times;</button>
                 </header>
                 <div id="modal-1-content">

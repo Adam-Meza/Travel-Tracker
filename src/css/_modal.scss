@@ -31,7 +31,7 @@
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0 ,0, .5);
-  // pointer-events: none;
+  pointer-events: none;
 }
 
 .active-overlay {
@@ -44,10 +44,6 @@
   justify-content: space-between;
   height: 15%;
   width: 100%;
-}
-
-.account-modal-content {
-
 }
 
 .close-modal-btn {
@@ -67,6 +63,7 @@
 
   h2 {
     margin-bottom: 20px;
+    border-bottom: 1px solid $red;
   }
 }
 
@@ -78,13 +75,15 @@
 
   h3 {
     margin: 5px;
+
   }
 
   input {
     width: 90%;
     height: 30px;
-    border: solid 1px $red;
+    border: $grey-border;
     margin: 0px;
+    text-align:center;
   }
 }
 

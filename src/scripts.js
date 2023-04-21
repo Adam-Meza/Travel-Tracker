@@ -14,19 +14,17 @@ let currentUser,
 
 // Query Selectors
 
-const userName = document.getElementById('js-user-name'),
-  // userInfo = document.getElementById('user-info'),
-  formBackground = document.getElementById('form-background'),
+const mainTitle = document.getElementById('js-main-title'),
+  formBackground = document.getElementById('js-form-background'),
   newTripBtn = document.getElementById('new-trip-btn'),
   inputs = [...document.querySelectorAll('input')],
-  inputDisplay = document.getElementById('js-input-display'),
+  inputDisplay = document.getElementById('js-input-error-display'),
   numTravelersInput = document.getElementById('js-num-travelers-input'),
   destinationInput = document.getElementById('js-destination-input'),
   startDateInput = document.getElementById('js-start-date'),
   endDateInput = document.getElementById('js-end-date'),
   destinationList = document.getElementById('destinationList'),
   cardContainer = document.getElementById('js-card-container'),
-  userTotal = document.getElementById('js-user-total'),
   accountBtn = document.getElementById('js-account-btn'),
   overlay = document.querySelector('.overlay'),
   modals = document.querySelectorAll('.modal'),
@@ -91,7 +89,7 @@ let displayTripCards = (trips) => {
 };
 
 let displayUserData = (user) => {
-  userName.innerText = `${user.name.split(" ")[0]}'s Trips`;
+  mainTitle.innerText = `${user.name.split(" ")[0]}'s Trips`;
 
   modalAccountName.innerText = `${user.name}`
   modalAccountTotal.innerText = `Total spent on trips this year: $${Math.floor(user.totalSpentOnTrips())}`;
@@ -156,7 +154,7 @@ let closeModals = () => {
 }
 
 modalCloseBtns.forEach(btn => btn.addEventListener('click', () => {
- closeModals()
+  closeModals()
 }))
 
 accountBtn.addEventListener('click', (event) => {
@@ -169,43 +167,35 @@ logInBtn.addEventListener('click', () => {
 
   if (userNameRegEx.test(usernameInput.value) && passwordInput.value === 'travel') {
     if (usernameInput.value === "agent") {
-      currentUser = new Agent()
       fetchGetAll()
-        .then(data => console.log(data))
+        .then((data) => {
+          currentUser = new Agent(data[0], data[1], data[2])
+          closeModals()
+          cardContainer.toggleAttribute('hidden')
+          formBackground.toggleAttribute('hidden')
+          mainTitle.innerText = 'Agent Portal'
+          console.log(data)
+
+        })
     } else {
       let userId = usernameInput.value.match(/^traveler([1-9]|[1-4][0-9]|50)$/)[1]
       fetchGetAll(userId)
         .then((data) => {
           destinations = data[2].destinations;
           let trips = makeTripArray(data[1].trips, userId);
-
           currentUser = new User(data[0], trips);
-          console.log(currentUser)
 
           closeModals()
           displayUserData(currentUser);
           displayTripCards(currentUser.trips);
           populateDestinationList(destinations);
           displayRandomDestination(destinations);
-        });
+        })
+        .catch(err => console.log(err));
     }
   } else {
     console.log("there was an error")
   }
 })
-/// this is gonna happen on click instead
-// its also going to be just for one when its the 
-// window.addEventListener('load', () => {
-//   fetchGetAll()
-//     .then((data) => {
-//       destinations = data[2].destinations;
-//       let trips = makeTripArray(data[1].trips, randomIndex);
 
-//       currentUser = new User(data[0].travelers.find(traveler => traveler.id === randomIndex), trips);
-//       displayUserData(currentUser);
-//       displayTripCards(currentUser.trips);
-//       populateDestinationList(destinations);
-//       displayRandomDestination(destinations);
-//     });
-// });
 
