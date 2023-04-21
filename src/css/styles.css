@@ -44,19 +44,18 @@
 .header-box {
   display: flex;
   flex-direction: row;
+  padding: 0px 100px;
   justify-content: space-between;
   align-items: flex-end;
   color: rgb(213, 12, 12);
-  width: 60%;
+  width: 100%;
 }
 
 .page-title {
   height: 30px;
   margin: 24px;
-  padding: 0px;
   font-family: "Nanum Myeongjo", serif;
   font-size: 50px;
-  margin-left: 100px;
 }
 
 .logo {
@@ -212,7 +211,6 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  position: absolute;
   width: 60%;
   height: 700px;
   color: white;
@@ -222,6 +220,44 @@ main {
   max-height: 300px;
 }
 
+.user-info {
+  max-width: 60%;
+  width: 60%;
+}
+
 [hidden] {
   display: none;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  z-index: 2;
+  background-color: white;
+  width: 300px;
+  height: 600px;
+}
+
+.active-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  background-color: white;
+  width: 300px;
+  height: 600px;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.overlay {
+  position: fixed;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
 }/*# sourceMappingURL=styles.css.map */
