@@ -113,17 +113,8 @@ startDateInput.addEventListener('change', () => {
   endDateInput.setAttribute('min', startDateInput.value);
 });
 
-
 inputs.forEach(input => input.addEventListener('submit', () => {
   event.preventDefault();
-}));
-
-inputs.forEach(input => input.addEventListener('change', () => {
-  event.preventDefault();
-  if (checkIfInputsAreValid()) {
-    inputDisplay.toggleAttribute('hidden')
-    inputDisplay.innerText = `Estimated Cost: $${ makeNewTrip().totalPrice}`;
-  };
 }));
 
 newTripBtn.addEventListener('click', () => {
@@ -136,6 +127,14 @@ newTripBtn.addEventListener('click', () => {
     inputDisplay.innerText = "Please fill out all the inputs"
   };
 });
+
+inputs.forEach(input => input.addEventListener('change', () => {
+  event.preventDefault();
+  if (checkIfInputsAreValid()) {
+    inputDisplay.toggleAttribute('hidden')
+    inputDisplay.innerText = `Estimated Cost: $${ makeNewTrip().totalPrice}`;
+  };
+}));
 
 
 window.addEventListener('load', () => {
