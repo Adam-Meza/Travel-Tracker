@@ -43,21 +43,21 @@
     <section id="form-background" class="form-background">
         <form class="new-trip-form">
             <section class="destination input-box">
-                <h3> Where to? <span>*</span> </h3>
+                <h3><label for="js-destination-input">Where to? <span>*</span></label></h3>
                 <input type="text" class="destination-input" id="js-destination-input" list="destinationList"
                     placeholder="Choose destination...">
                 <datalist id="destinationList">
                 </datalist>
             </section>
             <section class="travel-date input-box">
-                <h3> Select Dates <span>*</span> </h3>
-                <div>
-                    <input type="date" placeholder="Start Date" id="js-start-date">
-                    <input type="date" placeholder="End Date" id="js-end-date" disabled>
+                <h3><label for="date-inputs">Select Dates <span>*</span></label></h3>
+                <div id="date-inputs">
+                    <input type="date" aria-label="start-date-input" placeholder="Start Date" id="js-start-date">
+                    <input type="date" aria-label="end-date-input" placeholder="End Date" id="js-end-date" disabled>
                 </div>
             </section>
             <section class="num-travlers input-box">
-                <h3> Number of Travelers <span>*</span> </h3>
+                <h3><label for="js-num-travelers-input">Number of Travelers <span>*</span></label></h3>
                 <div>
                     <input id="js-num-travelers-input" placeholder="Number of Travelers">
                     <button id="new-trip-btn" class="new-trip-btn">Let's Wander</button>

@@ -27,7 +27,6 @@ const userName = document.getElementById('user-name'),
       cardContainer = document.getElementById('js-card-container'),
       userTotal = document.getElementById('js-user-total');
 
-
 // Atomic Functions
 
 let makeNewTrip = () => {
