@@ -4,6 +4,13 @@ import './css/styles.css';
 import User from './clasess/User.js'
 import Trip from './clasess/Trip';
 import dayjs from 'dayjs';
+import MicroModal from 'micromodal';
+
+// MicroModal.init();
+
+// modal.style.display = "block"
+// MicroModal.show('modal-1');
+
 
 // Global Variables
 
@@ -25,9 +32,13 @@ const userName = document.getElementById('user-name'),
       endDateInput = document.getElementById('js-end-date'),
       destinationList = document.getElementById('destinationList'),
       cardContainer = document.getElementById('js-card-container'),
-      userTotal = document.getElementById('js-user-total');
+      userTotal = document.getElementById('js-user-total'),
+      accountBtn = document.getElementById('js-account-btn')
 
-// Atomic Functions
+  let overlay = document.querySelector('.overlay')
+
+
+      // Atomic Functions
 
 let makeNewTrip = () => {
   let newDestination = destinations.find(dest => dest.destination === destinationInput.value);
@@ -136,7 +147,6 @@ inputs.forEach(input => input.addEventListener('change', () => {
   };
 }));
 
-
 window.addEventListener('load', () => {
   fetchGetAll()
     .then((data) => {
@@ -145,9 +155,12 @@ window.addEventListener('load', () => {
 
       currentUser = new User(data[0].travelers.find(traveler => traveler.id === randomIndex), trips);
 
-      displayUserData(currentUser);
+      // displayUserData(currentUser);
+
       displayTripCards(currentUser.trips);
       populateDestinationList(destinations);
       displayRandomDestination(destinations);
       });
 });
+
+let modal = document.querySelector('.modal')

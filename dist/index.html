@@ -17,15 +17,17 @@
 </head>
 
 <body>
+
     <header class="main-header">
         <section class="header-box">
             <h1><em class="page-title" tabindex="0">wander</em></h1>
             <nav class="navigation-container">
-                <!-- <div class="nav-btn-box" id="">
-                    <img src="" alt="">
-                    <button class="nav-btn" tabindex="0">Account</button>
-                </div>
                 <div class="nav-btn-box" id="">
+                    <img src="" alt="">
+                    <button class="nav-btn"id="js-account-btn"tabindex="0">Account</button>
+                </div>
+
+                <!--<div class="nav-btn-box" id="">
                     <img src="" alt="">
                     <button class="nav-btn" tabindex="0">Search</button>
                 </div>
@@ -36,10 +38,10 @@
             </nav>
         </section>
     </header>
-    <section class="user-info">
+    <!-- <section class="user-info">
         <h2 id="user-name" tabindex="0"></h2>
         <h3 id="js-user-total" tabindex="0"></h3>
-    </section>
+    </section> -->
     <section id="form-background" class="form-background">
         <form class="new-trip-form">
             <section class="destination input-box">
@@ -69,10 +71,33 @@
         </form>
     </section>
     <main class="main">
+        <!-- <h2>Test</h2> -->
         <section id='js-card-container' class="card-container">
         </section>
     </main>
+
+
+<div class="modal" aria-hidden="true">
+    <div tabindex="-1" data-micromodal-close>
+      <div role="dialog" aria-modal="true" aria-labelledby="modal-1-title" >
+        <header>
+          <h2 id="modal-1-title">
+            Modal Title
+          </h2>
+          <button aria-label="Close modal" data-micromodal-close></button>
+        </header>
+        <div id="modal-1-content">
+          Modal Content
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="overlay"></div>
     <script src="bundle.js"></script>
+    <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
+
+
 </body>
 
 </html>
