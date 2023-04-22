@@ -7,6 +7,8 @@ import dayjs from 'dayjs';
 import Agent from './clasess/Agent';
 import { displayYearlyProfitChart } from './charts';
 import { displayUsersChart } from './charts';
+import { postNewTrip } from './fetches';
+import { updateTrip } from './fetches';
 
 // Global Variables
 
@@ -17,18 +19,19 @@ let currentUser,
 
 const mainTitle = document.getElementById('js-main-title'),
   formBackground = document.getElementById('js-form-background'),
+  
   newTripBtn = document.getElementById('new-trip-btn'),
   newTripInputs = [...document.querySelectorAll('new-trip-input')],
-  inputErrorDisplay = document.getElementById('js-input-error-display'),
   numTravelersInput = document.getElementById('js-num-travelers-input'),
   destinationInput = document.getElementById('js-destination-input'),
+  destinationList = document.getElementById('destinationList'),
   startDateInput = document.getElementById('js-start-date'),
   endDateInput = document.getElementById('js-end-date'),
-  destinationList = document.getElementById('destinationList'),
+  inputErrorDisplay = document.getElementById('js-input-error-display'),
   cardContainer = document.getElementById('js-card-container'),
-  accountBtn = document.getElementById('js-account-btn'),
-  overlay = document.querySelector('.overlay'),
+  
   modals = document.querySelectorAll('.modal'),
+  overlay = document.querySelector('.overlay'),
   modalCloseBtns = [...document.querySelectorAll(".close-modal-btn")],
   modalAccountName = document.getElementById('js-account-name'),
   modalAccountTotal = document.getElementById('js-account-total'),
@@ -36,19 +39,22 @@ const mainTitle = document.getElementById('js-main-title'),
   logInBtn = document.getElementById('js-log-in-btn'),
   usernameInput = document.getElementById('js-username-input'),
   passwordInput = document.getElementById('js-password-input'),
+
   agentViewContainer = document.getElementById("js-agent-container"),
   yearlyProfitChart = document.getElementById('js-yearly-profit-chart'),
   usersChart = document.getElementById('js-users-chart'),
+
   totalDataPoints = [...document.querySelectorAll('.js-total')],
   usersFinanceDataPoint = document.querySelector('.js-users'),
   requestBtn = document.getElementById('js-request-btn'),
   financesBox = document.getElementById('js-finances-box'),
   financesBtn = document.getElementById('js-finances-btn'),
-  requestBox = document.getElementById('js-request-box'),
+  requestsBox = document.getElementById('js-request-box'),
+  requestsCardsBox = document.getElementById('js-requests-cards-box'),
   agentNavBtns = [...document.querySelectorAll('.agent-nav-btn')],
-  requestsBox = document.getElementById('js-requests-cards-box')
+  accountBtn = document.getElementById('js-account-btn')
 
-// Atomic Functions
+  // Atomic Functions
 
 let makeNewTrip = () => {
   let newDestination = destinations.find(dest => dest.destination === destinationInput.value);
@@ -59,8 +65,8 @@ let makeNewTrip = () => {
     duration: dayjs(endDateInput.value).diff(dayjs(startDateInput.value), "days"),
     travelers: numTravelersInput.value,
     status: "pending",
-    suggestedActivites: [],
-    date: startDateInput.value
+    suggestedActivities: [],
+    date: dayjs(startDateInput.value).format("YYYY/MM/DD")
   }, newDestination);
   return newTrip;
 };
@@ -94,7 +100,7 @@ let displayTripCards = (trips) => {
       <div class="trip-card js-trip-card" tabindex="0">
         <img class="trip-img js-trip-img" src="${trip.destination.image}"alt="${trip.destination.alt}" >
         <h3>${trip.destination.destination}</h3>
-        <time" name="travel-dates" >${dayjs(trip.startDate).format('MM/DD/YYYY')} - ${dayjs(trip.startDate).add(trip.duration, "days").format('MM/DD/YYYY')}</time>
+        <time" name="travel-dates" >${dayjs(trip.date).format('MM/DD/YYYY')} - ${dayjs(trip.date).add(trip.duration, "days").format('MM/DD/YYYY')}</time>
         <h4 class="${trip.status}">${trip.status}</h5>
       </div> `
   });
@@ -130,7 +136,26 @@ let displayFinanceData = () => {
 
   totalDataPoints.forEach((span, index) => span.innerHTML = `$${totalFinanceData[index]}`)
   usersFinanceDataPoint.innerHTML = `$${currentUser.getTotalUserAverage()}`
+}
 
+let displayRequestCards = (trips) => {
+  requestsCardsBox.innerHTML = trips.map(trip => `
+  <div class="request-card">
+  <img src="${trip.destination.image}"alt="${trip.destination.alt}" >
+  <div>
+      <p> User Name: ${ currentUser.usersData.find(user => user.id === trip.userID).name } | User ID: ${ trip.userID } </p>
+      <p> Destination: ${ trip.destination.destination } </p>
+      <p> Duration: ${ trip.duration } days | Number of travelers: ${ trip.travelers } </p>
+    </div>
+    <div>
+      <p>Total Profit: $${ Math.floor(trip.totalPrice * .10) } | Status: <span class="${trip.status}"> ${trip.status}</span> </p>
+      <div class="request-btn-box" id=${ trip.id } >
+          <button class="approved">Approve</button>
+          <button class="pending">Deny</button>
+      </div>
+    </div>
+  </div>`
+  ).join('')
 }
 
 let updateInputDOM = () => {
@@ -138,6 +163,26 @@ let updateInputDOM = () => {
   displayTripCards(currentUser.trips);
   newTripInputs.forEach(input => input.value = null);
 };
+
+let closeModals = () => {
+  modals.forEach(modal => modal.classList.remove('active'))
+  overlay.classList.remove('active-overlay')
+}
+
+let displayAgentPortal = () => {
+  cardContainer.toggleAttribute('hidden')
+  agentViewContainer.toggleAttribute('hidden')
+  mainTitle.innerText = 'Agent Portal'
+  displayUsersChart(usersChart)
+  displayYearlyProfitChart(yearlyProfitChart)
+}
+
+let handleNav = () => {
+  financesBtn.toggleAttribute('hidden');
+  financesBox.toggleAttribute('hidden');
+  requestsBox.toggleAttribute('hidden');
+  requestBtn.toggleAttribute('hidden');
+}
 
 
 // Event Listeners
@@ -166,64 +211,40 @@ newTripInputs.forEach(input => input.addEventListener('change', () => {
 newTripBtn.addEventListener('click', () => {
   event.preventDefault();
   if (checkIfInputsAreValid()) {
-    currentUser.trips.push(makeNewTrip());
-    console.log(currentUser.trips)
-    updateInputDOM();
+    postNewTrip(makeNewTrip())
+    .then(() => {
+      currentUser.trips.push(makeNewTrip())
+      updateInputDOM()
+    })
   } else {
     inputErrorDisplay.toggleAttribute('hidden');
     inputErrorDisplay.innerText = "Please fill out all the inputs";
   };
 });
 
-let closeModals = () => {
-  modals.forEach(modal => modal.classList.remove('active'))
-  overlay.classList.remove('active-overlay')
-}
-
 modalCloseBtns.forEach(btn => btn.addEventListener('click', () => {
   closeModals()
 }))
+
+requestsBox.addEventListener('click', (event) => {
+  if (event.target.classList.contains('approved') || event.target.classList.contains('pending' )) {
+    updateTrip(currentUser.tripsData.find(trip => trip.id === Number (event.target.parentNode.id)), `${event.target.classList}`)
+    .then(() => {
+      fetchGetAll()
+        .then((data) => {
+          destinations = data[2].destinations;
+          currentUser = new Agent(data[0].travelers, makeTripArray(data[1].trips), data[2].destinations)
+          console.log(currentUser)
+          displayRequestCards(currentUser.tripsData.filter(trip => trip.status === "pending"));
+        })
+    })
+  }}
+)
 
 accountBtn.addEventListener('click', (event) => {
   accountModal.classList.add('active')
   overlay.classList.add('active-overlay')
 })
-
-let displayAgentPortal = () => {
-  cardContainer.toggleAttribute('hidden')
-  agentViewContainer.toggleAttribute('hidden')
-  mainTitle.innerText = 'Agent Portal'
-  displayUsersChart(usersChart)
-  displayYearlyProfitChart(yearlyProfitChart)
-}
-
-let handleNav = () => {
-  console.log("test")
-  financesBtn.toggleAttribute('hidden');
-  financesBox.toggleAttribute('hidden');
-  requestBox.toggleAttribute('hidden');
-  requestBtn.toggleAttribute('hidden');
-}
-
-let displayRequestCards = (trips) => {
-  requestsBox.innerHTML = trips.map(trip => `
-  <div class="request-card">
-  <img src="${trip.destination.image}"alt="${trip.destination.alt}" >
-  <div>
-      <p> User Name: ${ currentUser.usersData.find(user => user.id === trip.userID).name } | User ID: ${ trip.userID } </p>
-      <p> Destination: ${ trip.destination.destination } </p>
-      <p> Duration: ${ trip.duration } days | Number of travelers: ${ trip.travelers } </p>
-    </div>
-    <div>
-      <p>Total Profit: $${ Math.floor(trip.totalPrice * .10) } | Status: <span class="${trip.status}"> ${trip.status}</span> </p>
-      <div class="request-btn-box">
-          <button class="appoved">Approve</button>
-          <button class="pending">Deny</button>
-      </div>
-    </div>
-  </div>`
-  ).join('')
-}
 
 agentNavBtns.forEach(btn => btn.addEventListener('click', () => handleNav()))
 
@@ -236,7 +257,6 @@ logInBtn.addEventListener('click', () => {
         .then((data) => {
           destinations = data[2].destinations;
           currentUser = new Agent(data[0].travelers, makeTripArray(data[1].trips), data[2].destinations);
-          console.log(currentUser.getTotalUserAverage())
 
           closeModals();
           displayAgentPortal();

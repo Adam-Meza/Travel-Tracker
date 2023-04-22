@@ -3,7 +3,7 @@ class Trip {
     this.id = tripObj.id,
     this.userID = tripObj.userID,
     this.destinationID = tripObj.destinationID,
-    this.startDate = tripObj.date,
+    this.date = tripObj.date,
     this.duration = tripObj.duration,
     this.status = tripObj.status,
     this.suggestedActivities = tripObj.suggestedActivities

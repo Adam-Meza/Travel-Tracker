@@ -12,4 +12,37 @@ const fetchGetAll = (userId) => {
   ])
 }
 
+const postNewTrip = (trip) => {
+  fetch("http://localhost:3001/api/v1/trips", {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(trip)
+  })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error))
+}
+
+const updateTrip = (trip, decision ) => {
+  return fetch("http://localhost:3001/api/v1/updateTrip", {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(
+      { id: trip.id, 
+        status: decision
+      })
+  })
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error))
+}
+
+
+
 export { fetchGetAll }
+export { postNewTrip }
+export { updateTrip }
