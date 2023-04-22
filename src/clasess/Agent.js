@@ -19,19 +19,21 @@ class Agent {
   }
 
   getTotalForYear(year) {
-    return Math.floor(this.getTotalProfit(this.tripsData.filter(trip => dayjs(trip.startDate)['$y'] === year)))
+    return Math.floor(this.getTotalProfit(this.tripsData.filter(trip => dayjs(trip.date)['$y'] === year)))
   }
 
   getTotalUserAverage() {
-    let newObj = this.tripsData.reduce((acc, currentTrip) => {
+    let newObj = this.arrangeUsersById()
+    let totalPerUserArray = Object.keys(newObj).map(key => ({ totalPrice : this.getTotalProfit(newObj[key]) }))
+    return this.getAverageCost(totalPerUserArray)
+  }
+
+  arrangeUsersById() {
+   return this.tripsData.reduce((acc, currentTrip) => {
       !acc[currentTrip.userID] ? acc[currentTrip.userID] = [] : null;
       acc[currentTrip.userID].push(currentTrip)
       return acc 
     }, {})
-  
-    let totalPerUserArray = Object.keys(newObj).map(key => ({ totalPrice : this.getTotalProfit(newObj[key]) }))
-  
-    return this.getAverageCost(totalPerUserArray)
   }
 
   
