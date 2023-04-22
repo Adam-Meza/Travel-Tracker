@@ -1,7 +1,7 @@
 // look at fit bit 
 import Chart from 'chart.js/auto';
 
-let displayYearlyProfitChart = (location) => {
+let displayYearlyProfitChart = (location, trips) => {
 
   let testData = [
     { profit: 10000, year: '2019'},

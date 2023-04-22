@@ -20,15 +20,16 @@
   margin: 2px 0px;
   width: 85%;
 }
-.trip-card .pending {
-  background-color: orange;
-  color: white;
-  width: 70px;
-}
 .trip-card .approved {
   background-color: green;
   color: white;
   width: 75px;
+}
+
+.pending {
+  background-color: orange;
+  color: white;
+  width: 70px;
 }
 
 .main-header {
@@ -84,7 +85,7 @@
   align-items: flex-end;
 }
 
-.nav-btn {
+.nav-btn, .request-card .request-btn-box button, .agent-nav-btn {
   width: 100px;
   height: 30px;
   color: rgb(213, 12, 12);
@@ -142,7 +143,7 @@
   text-indent: 5px;
 }
 
-.new-trip-btn, .agent-nav-btn, .log-in-btn {
+.new-trip-btn, .log-in-btn {
   width: 120px;
   height: 35px;
   background-color: rgb(213, 12, 12);
@@ -260,14 +261,21 @@ span {
   text-align: center;
 }
 
-.agent-container {
+.log-in-btn {
+  font-size: 18px;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.agent-box {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 60%;
-  height: 300px;
+  align-items: flex-start;
+  height: 1000px;
   border: solid 1px rgb(204, 204, 204);
   color: black;
+  padding: 0px 40px;
 }
 
 .agent-view-header {
@@ -275,12 +283,64 @@ span {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 10%;
   width: 100%;
+  border-bottom: solid 1px rgb(204, 204, 204);
 }
 
+.request-view-box {
+  margin: 20px;
+  width: 100%;
+  height: 100%;
+}
+.request-view-box input {
+  width: 90%;
+  height: 30px;
+  text-indent: 15px;
+}
+
+.request-cards-box {
+  margin-top: 10px;
+  width: 700px;
+  height: 600px;
+  overflow: scroll;
+  color: black;
+}
+
+.request-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 60px;
+  margin-top: 20px;
+  color: black;
+}
+.request-card img {
+  width: 10%;
+  height: 100%;
+  border-radius: 3%;
+}
+.request-card div {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: flex-start;
+}
+.request-card p {
+  margin: 0px;
+  pad: 0px;
+  font-size: 12px;
+}
+.request-card .request-btn-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
 * {
-  border: solid 1px rgb(0, 255, 0);
   font-family: "Amatic SC", cursive;
   font-family: "Open Sans", sans-serif;
 }

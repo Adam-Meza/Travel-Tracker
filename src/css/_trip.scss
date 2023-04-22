@@ -22,16 +22,16 @@
       margin: 2px 0px;
       width: 85%;
     }
-
-    .pending {
-      background-color: orange;
-      color: white;
-      width: 70px;
-    }
-
+    
     .approved {
       background-color: green;
       color: white;
       width: 75px;
     }
+}
+
+.pending {
+  background-color: orange;
+  color: white;
+  width: 70px;
 }

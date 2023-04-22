@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 
 class Agent {
   constructor (usersData, tripsData, destinationsData) {
+    this.name = "Adam Meza"
     this.usersData = usersData;
     this.tripsData = tripsData;
     this.destinationsData = destinationsData;

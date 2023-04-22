@@ -88,6 +88,9 @@
 }
 
 .log-in-btn {
-  @extend .new-trip-btn
+  @extend .new-trip-btn;
+  font-size: 18px;
+  text-align: center;
+  margin-top: 15px;
 }
 

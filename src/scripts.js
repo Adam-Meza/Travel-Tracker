@@ -40,7 +40,13 @@ const mainTitle = document.getElementById('js-main-title'),
   yearlyProfitChart = document.getElementById('js-yearly-profit-chart'),
   usersChart = document.getElementById('js-users-chart'),
   totalDataPoints = [...document.querySelectorAll('.js-total')],
-  usersFinanceDataPoints = [...document.querySelectorAll('.js-users')]
+  usersFinanceDataPoint = document.querySelector('.js-users'),
+  requestBtn = document.getElementById('js-request-btn'),
+  financesBox = document.getElementById('js-finances-box'),
+  financesBtn = document.getElementById('js-finances-btn'),
+  requestBox = document.getElementById('js-request-box'),
+  agentNavBtns = [...document.querySelectorAll('.agent-nav-btn')],
+  requestsBox = document.getElementById('js-requests-cards-box')
 
 // Atomic Functions
 
@@ -82,6 +88,7 @@ let checkIfInputsAreValid = () => {
 // DOM functions 
 
 let displayTripCards = (trips) => {
+  cardContainer.innerHTML = ''
   trips.forEach((trip) => {
     cardContainer.innerHTML += `
       <div class="trip-card js-trip-card" tabindex="0">
@@ -122,18 +129,7 @@ let displayFinanceData = () => {
   ]
 
   totalDataPoints.forEach((span, index) => span.innerHTML = `$${totalFinanceData[index]}`)
-
-
-
-  let usersFinanceData = [
-    currentUser.getTotalUserAverage()
-    // currentUser
-    
-
-
-  ]
-
-  usersFinanceDataPoints.forEach((span, index) => span.innerHTML = `$${usersFinanceData[index]}`)
+  usersFinanceDataPoint.innerHTML = `$${currentUser.getTotalUserAverage()}`
 
 }
 
@@ -171,6 +167,7 @@ newTripBtn.addEventListener('click', () => {
   event.preventDefault();
   if (checkIfInputsAreValid()) {
     currentUser.trips.push(makeNewTrip());
+    console.log(currentUser.trips)
     updateInputDOM();
   } else {
     inputErrorDisplay.toggleAttribute('hidden');
@@ -200,6 +197,36 @@ let displayAgentPortal = () => {
   displayYearlyProfitChart(yearlyProfitChart)
 }
 
+let handleNav = () => {
+  console.log("test")
+  financesBtn.toggleAttribute('hidden');
+  financesBox.toggleAttribute('hidden');
+  requestBox.toggleAttribute('hidden');
+  requestBtn.toggleAttribute('hidden');
+}
+
+let displayRequestCards = (trips) => {
+  requestsBox.innerHTML = trips.map(trip => `
+  <div class="request-card">
+  <img src="${trip.destination.image}"alt="${trip.destination.alt}" >
+  <div>
+      <p> User Name: ${ currentUser.usersData.find(user => user.id === trip.userID).name } | User ID: ${ trip.userID } </p>
+      <p> Destination: ${ trip.destination.destination } </p>
+      <p> Duration: ${ trip.duration } days | Number of travelers: ${ trip.travelers } </p>
+    </div>
+    <div>
+      <p>Total Profit: $${ Math.floor(trip.totalPrice * .10) } | Status: <span class="${trip.status}"> ${trip.status}</span> </p>
+      <div class="request-btn-box">
+          <button class="appoved">Approve</button>
+          <button class="pending">Deny</button>
+      </div>
+    </div>
+  </div>`
+  ).join('')
+}
+
+agentNavBtns.forEach(btn => btn.addEventListener('click', () => handleNav()))
+
 logInBtn.addEventListener('click', () => {
   let userNameRegEx = /^(traveler([1-9]|[1-4][0-9]|50)|agent)$/;
 
@@ -213,7 +240,9 @@ logInBtn.addEventListener('click', () => {
 
           closeModals();
           displayAgentPortal();
-          displayFinanceData()
+          displayFinanceData();
+          displayRequestCards(currentUser.tripsData.filter(trip => trip.status === "pending"));
+
         })
     } else {
       let userId = usernameInput.value.match(/^traveler([1-9]|[1-4][0-9]|50)$/)[1]

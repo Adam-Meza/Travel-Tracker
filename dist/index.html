@@ -58,15 +58,15 @@
     </section>
     <main class="main">
         <h2 id="js-main-title"></h2>
-        <section class="agent-container" id="js-agent-container" hidden>
+        <section class="agent-box" id="js-agent-container" hidden>
             <header class="agent-view-header">
                 <h2 class="agent-title" id="js-agent-title">Finances</h2>
                 <nav>
-                    <button class="agent-nav-btn" id="finances" hidden>Finances</button>
-                    <button class="agent-nav-btn" id="requests">Requests</button>
+                    <button class="agent-nav-btn" id="js-finances-btn" hidden>Finances</button>
+                    <button class="agent-nav-btn" id="js-request-btn">Requests</button>
                 </nav>
             </header>
-            <section class="agent-finances-box" id="js-agent-fiances-box">
+            <section class="agent-finances-box" id="js-finances-box">
                 <p tabindex="0" class="chart yearly-profit-chart"><canvas id="js-yearly-profit-chart" width="400"
                         height="200"></canvasid></canvas></p>
                 <div id="js-total-data-points">
@@ -79,13 +79,12 @@
                 </div>
                 <div>
                     <p class="finances-data">Total Users: 50 </p>
-                    <p class="finances-data">Profit from an average users : <span class="js-users"></span></p>                 
-                    <!-- <p class="finances-data">Total Users: <span class="js-users"></span></p> -->
+                    <p class="finances-data">Profit from an average users : <span class="js-users"></span></p>
                 </div>
             </section>
-            <section class="agent-request-view" id="agent-request-view" hidden>
-                <input class="agent-search-input" id="js-agent-serach-input">
-                <section class="trip-requests-container" id="js-trip-requests-container">
+            <section class="request-view-box" id="js-request-box" hidden>
+                <input class="agent-search-input" id="js-agent-serach-input" placeholder="Search requests by user name">
+                <section class="request-cards-box" id="js-requests-cards-box">
                 </section>
             </section>
         </section>
