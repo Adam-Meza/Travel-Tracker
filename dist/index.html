@@ -28,26 +28,28 @@
             </nav>
         </section>
     </header>
-    <section id="js-form-background" class="form-background">
+    <section id="js-form-background" class="form-background" hidden>
         <form class="new-trip-form">
             <section class="destination input-box">
                 <h2><label for="js-destination-input">Where to? <span>*</span></label></h2>
-                <input type="text" class="destination-input" id="js-destination-input" list="destinationList"
-                    placeholder="Choose destination...">
+                <input type="text" class="destination-input new-trip-input" id="js-destination-input"
+                    list="destinationList" placeholder="Choose destination...">
                 <datalist id="destinationList">
                 </datalist>
             </section>
             <section class="travel-date input-box">
                 <h2><label for="date-inputs">Select Dates <span>*</span></label></h2>
                 <div id="date-inputs">
-                    <input type="date" aria-label="start-date-input" placeholder="Start Date" id="js-start-date">
-                    <input type="date" aria-label="end-date-input" placeholder="End Date" id="js-end-date" disabled>
+                    <input class="new-trip-input" type="date" aria-label="start-date-input" placeholder="Start Date"
+                        id="js-start-date">
+                    <input class="new-trip-input" type="date" aria-label="end-date-input" placeholder="End Date"
+                        id="js-end-date" disabled>
                 </div>
             </section>
             <section class="num-travlers input-box">
                 <h2><label for="js-num-travelers-input">Number of Travelers <span>*</span></label></h2>
                 <div>
-                    <input id="js-num-travelers-input" placeholder="Number of Travelers">
+                    <input class="new-trip-input" id="js-num-travelers-input" placeholder="Number of Travelers">
                     <button id="new-trip-btn" class="new-trip-btn">Let's Wander</button>
                 </div>
             </section>
@@ -55,22 +57,35 @@
         </form>
     </section>
     <main class="main">
-        <h2 id="js-main-title">Trips</h2>
-        <section class="agent-container" id="js-agent-container">
-            <nav>
-                <button class="agent-nav-btn" id="finances" hidden>Finances</button>
-                <button class="agent-nav-btn" id="requests">Requests</button>
-            </nav>
-            <h2 id="agent-header"></h2>
-            <div>
-                <h2>Yearly profit</h2>
-                <h3>current travlers list </h3>
-            </div>
-            <section class="agent-request-view" id="agent-request-view">
+        <h2 id="js-main-title"></h2>
+        <section class="agent-container" id="js-agent-container" hidden>
+            <header class="agent-view-header">
+                <h2 class="agent-title" id="js-agent-title">Finances</h2>
+                <nav>
+                    <button class="agent-nav-btn" id="finances" hidden>Finances</button>
+                    <button class="agent-nav-btn" id="requests">Requests</button>
+                </nav>
+            </header>
+            <section class="agent-finances-box" id="js-agent-fiances-box">
+                <p tabindex="0" class="chart yearly-profit-chart"><canvas id="js-yearly-profit-chart" width="400"
+                        height="200"></canvasid></canvas></p>
+                <div id="js-total-data-points">
+                    <p class="finances-data">Total Profit: <span class="js-total"></span></p>
+                    <p class="finances-data">Current Year Profit: <span class="js-total"></span></p>
+                    <p class="finances-data">Last Year Profit: <span class="js-total"></span></p>
+                    <p class="finances-data">Average Year Profit: <span class="js-total"></span></p>
+                    <p tabindex="0" class="chart users-chart"><canvas id="js-users-chart" width="400" height="200">
+                            </canvasid></canvas></p>
+                </div>
+                <div>
+                    <p class="finances-data">Total Users: 50 </p>
+                    <p class="finances-data">Profit from an average users : <span class="js-users"></span></p>                 
+                    <!-- <p class="finances-data">Total Users: <span class="js-users"></span></p> -->
+                </div>
+            </section>
+            <section class="agent-request-view" id="agent-request-view" hidden>
                 <input class="agent-search-input" id="js-agent-serach-input">
                 <section class="trip-requests-container" id="js-trip-requests-container">
-
-
                 </section>
             </section>
         </section>

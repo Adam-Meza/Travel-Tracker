@@ -142,7 +142,7 @@
   text-indent: 5px;
 }
 
-.new-trip-btn {
+.new-trip-btn, .agent-nav-btn, .log-in-btn {
   width: 120px;
   height: 35px;
   background-color: rgb(213, 12, 12);
@@ -260,22 +260,27 @@ span {
   text-align: center;
 }
 
-.log-in-btn {
-  margin-top: 30px;
-  background-color: rgb(213, 12, 12);
-  color: white;
-  font-size: 18px;
-  height: 8%;
-  width: 15%;
-}
-
 .agent-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 60%;
   height: 300px;
   border: solid 1px rgb(204, 204, 204);
+  color: black;
+}
+
+.agent-view-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 10%;
+  width: 100%;
 }
 
 * {
+  border: solid 1px rgb(0, 255, 0);
   font-family: "Amatic SC", cursive;
   font-family: "Open Sans", sans-serif;
 }

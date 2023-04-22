@@ -2,8 +2,25 @@
 @import './mixins';
 
 .agent-container {
+  @include flex-column;
   width: 60%;
   height: 300px;
   border: $grey-border;
+  color: black
+}
+
+.agent-view-header {
+  @include flex-row;
+  justify-content: space-between;
+  align-items: center;
+  height: 10%; 
+  width: 100%;
+}
+
+.agent-nav-btn {
+  @extend .new-trip-btn;
+}
+
+.agent-finances-box {
 
 }

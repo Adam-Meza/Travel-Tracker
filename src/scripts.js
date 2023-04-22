@@ -5,20 +5,21 @@ import User from './clasess/User.js'
 import Trip from './clasess/Trip';
 import dayjs from 'dayjs';
 import Agent from './clasess/Agent';
+import { displayYearlyProfitChart } from './charts';
+import { displayUsersChart } from './charts';
 
 // Global Variables
 
 let currentUser,
-  destinations,
-  randomIndex = Math.floor(Math.random() * 50);
+  destinations;
 
 // Query Selectors
 
 const mainTitle = document.getElementById('js-main-title'),
   formBackground = document.getElementById('js-form-background'),
   newTripBtn = document.getElementById('new-trip-btn'),
-  inputs = [...document.querySelectorAll('input')],
-  inputDisplay = document.getElementById('js-input-error-display'),
+  newTripInputs = [...document.querySelectorAll('new-trip-input')],
+  inputErrorDisplay = document.getElementById('js-input-error-display'),
   numTravelersInput = document.getElementById('js-num-travelers-input'),
   destinationInput = document.getElementById('js-destination-input'),
   startDateInput = document.getElementById('js-start-date'),
@@ -34,7 +35,12 @@ const mainTitle = document.getElementById('js-main-title'),
   accountModal = document.getElementById('js-account-modal'),
   logInBtn = document.getElementById('js-log-in-btn'),
   usernameInput = document.getElementById('js-username-input'),
-  passwordInput = document.getElementById('js-password-input')
+  passwordInput = document.getElementById('js-password-input'),
+  agentViewContainer = document.getElementById("js-agent-container"),
+  yearlyProfitChart = document.getElementById('js-yearly-profit-chart'),
+  usersChart = document.getElementById('js-users-chart'),
+  totalDataPoints = [...document.querySelectorAll('.js-total')],
+  usersFinanceDataPoints = [...document.querySelectorAll('.js-users')]
 
 // Atomic Functions
 
@@ -54,19 +60,18 @@ let makeNewTrip = () => {
 };
 
 let makeTripArray = (data, userID) => {
-  return data
-    .filter(trip => trip.userID === Number(userID))
-    .map(trip => {
+  userID ? data = data.filter(trip => trip.userID === Number(userID)) : null ; 
+  return data .map(trip => {
       let destination = destinations.find(dest => dest.id === trip.destinationID);
       return new Trip(trip, destination)
-    });
+  });
 };
 
 let checkIfInputsAreValid = () => {
   let dateRegEx = /^(20[0-3][0-9]|2040)-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/
   let numRegEx = /^([1-9]|[1-9][0-9]|[1-2][0-9]{2}|3[0-5][0-9]|36[0-5])$/
 
-  return inputs.every(input => input.value)
+  return newTripInputs.every(input => input.value)
     && destinations.find(dest => dest.destination === destinationInput.value)
     && dateRegEx.test(`${startDateInput.value}`)
     && dateRegEx.test(`${endDateInput.value}`)
@@ -104,15 +109,40 @@ let populateDestinationList = (destinations) => {
 let displayRandomDestination = (destinationData) => {
   let randomIndex = Math.floor(Math.random() * 50);
   let randomDestination = destinationData[randomIndex];
+  formBackground.toggleAttribute('hidden')
   formBackground.style.backgroundImage = `url(${randomDestination.image})`;
 };
 
+let displayFinanceData = () => {
+  let totalFinanceData = [
+    currentUser.getTotalProfit(), 
+    currentUser.getTotalForYear(2023),
+    currentUser.getTotalForYear(2022),
+    currentUser.getAverageCost()
+  ]
+
+  totalDataPoints.forEach((span, index) => span.innerHTML = `$${totalFinanceData[index]}`)
+
+
+
+  let usersFinanceData = [
+    currentUser.getTotalUserAverage()
+    // currentUser
+    
+
+
+  ]
+
+  usersFinanceDataPoints.forEach((span, index) => span.innerHTML = `$${usersFinanceData[index]}`)
+
+}
+
 let updateInputDOM = () => {
-  inputDisplay.toggleAttribute('hidden');
+  inputErrorDisplay.toggleAttribute('hidden');
   displayTripCards(currentUser.trips);
-  inputs.forEach(input => input.value = null);
-  inputDisplay.toggleAttribute('hidden');
+  newTripInputs.forEach(input => input.value = null);
 };
+
 
 // Event Listeners
 
@@ -125,15 +155,15 @@ startDateInput.addEventListener('change', () => {
   endDateInput.setAttribute('min', startDateInput.value);
 });
 
-inputs.forEach(input => input.addEventListener('submit', () => {
+newTripInputs.forEach(input => input.addEventListener('submit', () => {
   event.preventDefault();
 }));
 
-inputs.forEach(input => input.addEventListener('change', () => {
+newTripInputs.forEach(input => input.addEventListener('change', () => {
   event.preventDefault();
   if (checkIfInputsAreValid()) {
-    inputDisplay.toggleAttribute('hidden')
-    inputDisplay.innerText = `Estimated Cost: $${makeNewTrip().totalPrice}`;
+    inputErrorDisplay.toggleAttribute('hidden');
+    inputErrorDisplay.innerText = `Estimated Cost: $${makeNewTrip().totalPrice}`;
   };
 }));
 
@@ -143,8 +173,8 @@ newTripBtn.addEventListener('click', () => {
     currentUser.trips.push(makeNewTrip());
     updateInputDOM();
   } else {
-    inputDisplay.toggleAttribute('hidden')
-    inputDisplay.innerText = "Please fill out all the inputs"
+    inputErrorDisplay.toggleAttribute('hidden');
+    inputErrorDisplay.innerText = "Please fill out all the inputs";
   };
 });
 
@@ -162,20 +192,28 @@ accountBtn.addEventListener('click', (event) => {
   overlay.classList.add('active-overlay')
 })
 
+let displayAgentPortal = () => {
+  cardContainer.toggleAttribute('hidden')
+  agentViewContainer.toggleAttribute('hidden')
+  mainTitle.innerText = 'Agent Portal'
+  displayUsersChart(usersChart)
+  displayYearlyProfitChart(yearlyProfitChart)
+}
+
 logInBtn.addEventListener('click', () => {
-  let userNameRegEx = /^(traveler([1-9]|[1-4][0-9]|50)|agent)$/
+  let userNameRegEx = /^(traveler([1-9]|[1-4][0-9]|50)|agent)$/;
 
   if (userNameRegEx.test(usernameInput.value) && passwordInput.value === 'travel') {
     if (usernameInput.value === "agent") {
       fetchGetAll()
         .then((data) => {
-          currentUser = new Agent(data[0], data[1], data[2])
-          closeModals()
-          cardContainer.toggleAttribute('hidden')
-          formBackground.toggleAttribute('hidden')
-          mainTitle.innerText = 'Agent Portal'
-          console.log(data)
+          destinations = data[2].destinations;
+          currentUser = new Agent(data[0].travelers, makeTripArray(data[1].trips), data[2].destinations);
+          console.log(currentUser.getTotalUserAverage())
 
+          closeModals();
+          displayAgentPortal();
+          displayFinanceData()
         })
     } else {
       let userId = usernameInput.value.match(/^traveler([1-9]|[1-4][0-9]|50)$/)[1]
@@ -186,6 +224,7 @@ logInBtn.addEventListener('click', () => {
           currentUser = new User(data[0], trips);
 
           closeModals()
+          
           displayUserData(currentUser);
           displayTripCards(currentUser.trips);
           populateDestinationList(destinations);
@@ -194,8 +233,6 @@ logInBtn.addEventListener('click', () => {
         .catch(err => console.log(err));
     }
   } else {
-    console.log("there was an error")
+    console.log("there was an error");
   }
 })
-
-
