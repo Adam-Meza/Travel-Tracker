@@ -2,7 +2,7 @@ let trips = [
       {
           "id": 1,
           "userID": 44,
-          "destinationID": 49,
+          "destinationID": 12,
           "travelers": 1,
           "date": "2022/09/16",
           "duration": 8,
@@ -12,7 +12,7 @@ let trips = [
       {
           "id": 2,
           "userID": 44,
-          "destinationID": 25,
+          "destinationID": 2,
           "travelers": 5,
           "date": "2022/10/04",
           "duration": 18,
@@ -22,7 +22,7 @@ let trips = [
       {
           "id": 3,
           "userID": 3,
-          "destinationID": 22,
+          "destinationID": 2,
           "travelers": 4,
           "date": "2022/05/22",
           "duration": 17,
@@ -32,7 +32,7 @@ let trips = [
       {
           "id": 4,
           "userID": 43,
-          "destinationID": 14,
+          "destinationID": 4,
           "travelers": 2,
           "date": "2022/02/25",
           "duration": 10,
@@ -42,7 +42,7 @@ let trips = [
       {
           "id": 5,
           "userID": 42,
-          "destinationID": 29,
+          "destinationID": 9,
           "travelers": 3,
           "date": "2022/04/30",
           "duration": 18,
@@ -52,7 +52,7 @@ let trips = [
       {
           "id": 6,
           "userID": 29,
-          "destinationID": 35,
+          "destinationID": 5,
           "travelers": 3,
           "date": "2022/06/29",
           "duration": 9,
@@ -62,7 +62,7 @@ let trips = [
       {
           "id": 7,
           "userID": 37,
-          "destinationID": 17,
+          "destinationID": 7,
           "travelers": 5,
           "date": "2022/5/28",
           "duration": 20,
@@ -72,7 +72,7 @@ let trips = [
       {
           "id": 8,
           "userID": 36,
-          "destinationID": 39,
+          "destinationID": 9,
           "travelers": 6,
           "date": "2022/02/07",
           "duration": 4,
@@ -82,7 +82,7 @@ let trips = [
       {
           "id": 9,
           "userID": 44,
-          "destinationID": 19,
+          "destinationID": 1,
           "travelers": 5,
           "date": "2022/12/19",
           "duration": 19,
@@ -92,7 +92,7 @@ let trips = [
       {
           "id": 10,
           "userID": 9,
-          "destinationID": 50,
+          "destinationID": 10,
           "travelers": 6,
           "date": "2022/07/23",
           "duration": 17,
@@ -102,7 +102,7 @@ let trips = [
       {
           "id": 11,
           "userID": 50,
-          "destinationID": 5,
+          "destinationID": 2,
           "travelers": 4,
           "date": "2022/10/14",
           "duration": 4,
@@ -112,7 +112,7 @@ let trips = [
       {
         "id": 12,
         "userID": 33,
-        "destinationID": 33,
+        "destinationID": 3,
         "travelers": 6,
         "date": "2022/10/17",
         "duration": 6,
@@ -132,7 +132,7 @@ let trips = [
     {
         "id": 14,
         "userID": 19,
-        "destinationID": 35,
+        "destinationID": 6,
         "travelers": 1,
         "date": "2022/09/24",
         "duration": 10,
@@ -142,7 +142,7 @@ let trips = [
     {
         "id": 15,
         "userID": 50,
-        "destinationID": 13,
+        "destinationID": 11,
         "travelers": 3,
         "date": "2022/07/04",
         "duration": 6,
@@ -152,7 +152,7 @@ let trips = [
     {
         "id": 16,
         "userID": 19,
-        "destinationID": 27,
+        "destinationID": 7,
         "travelers": 1,
         "date": "2022/11/20",
         "duration": 9,
@@ -162,7 +162,7 @@ let trips = [
     {
         "id": 17,
         "userID": 28,
-        "destinationID": 31,
+        "destinationID": 3,
         "travelers": 1,
         "date": "2022/10/30",
         "duration": 20,
@@ -182,7 +182,7 @@ let trips = [
     {
         "id": 19,
         "userID": 47,
-        "destinationID": 47,
+        "destinationID": 4,
         "travelers": 4,
         "date": "2022/07/21",
         "duration": 5,
@@ -192,7 +192,7 @@ let trips = [
     {
         "id": 20,
         "userID": 41,
-        "destinationID": 19,
+        "destinationID": 12,
         "travelers": 4,
         "date": "2022/10/05",
         "duration": 6,
@@ -212,7 +212,7 @@ let trips = [
     {
         "id": 22,
         "userID": 22,
-        "destinationID": 9,
+        "destinationID": 12,
         "travelers": 4,
         "date": "2022/05/01",
         "duration": 19,

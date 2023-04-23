@@ -5,9 +5,9 @@ import { destinations } from './test-data/destination-test-data';
 import { trips } from './test-data/trips-test-data';
 import { travelers } from './test-data/user-test-data';
 
-// import Trip from '../clasess/Trip';
-// import User from '../clasess/User';
-// import { makeTripArray } from '../scripts';
+import Trip from '../src/clasess/Trip';
+import User from '../src/clasess/User';
+// import { makeTripArray } from '../src/scripts';
 
 
 describe("User-Test", function () {
