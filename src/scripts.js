@@ -11,15 +11,14 @@ import { deleteTrip } from './fetches';
 import { fetchGetAll } from './fetches';
 
 // Global Variables
-
 let currentUser,
   destinations;
 
 // Query Selectors
-
 const mainTitle = document.getElementById('js-main-title'),
   formBackground = document.getElementById('js-form-background'),
-  
+  mainBox = document.getElementById('js-main'),
+
   newTripBtn = document.getElementById('new-trip-btn'),
   newTripInputs = [...document.querySelectorAll('new-trip-input')],
   numTravelersInput = document.getElementById('js-num-travelers-input'),
@@ -36,6 +35,8 @@ const mainTitle = document.getElementById('js-main-title'),
   modalAccountName = document.getElementById('js-account-name'),
   modalAccountTotal = document.getElementById('js-account-total'),
   accountModal = document.getElementById('js-account-modal'),
+
+  logInModal = document.getElementById('js-log-in-modal'),
   logInBtn = document.getElementById('js-log-in-btn'),
   usernameInput = document.getElementById('js-username-input'),
   passwordInput = document.getElementById('js-password-input'),
@@ -43,15 +44,15 @@ const mainTitle = document.getElementById('js-main-title'),
   agentViewContainer = document.getElementById("js-agent-container"),
   yearlyProfitChart = document.getElementById('js-yearly-profit-chart'),
 
-  totalDataPoints = [...document.querySelectorAll('.js-total')],
-  usersFinanceDataPoint = document.querySelector('.js-users'),
+  financesDataPoints = [...document.querySelectorAll('.js-finances-data')],
   requestBtn = document.getElementById('js-request-btn'),
   financesBox = document.getElementById('js-finances-box'),
   financesBtn = document.getElementById('js-finances-btn'),
   requestsBox = document.getElementById('js-request-box'),
   requestsCardsBox = document.getElementById('js-requests-cards-box'),
   agentNavBtns = [...document.querySelectorAll('.agent-nav-btn')],
-  accountBtn = document.getElementById('js-account-btn')
+  accountBtn = document.getElementById('js-account-btn'),
+  logOutBtn = document.getElementById("js-log-out-btn")
 
   // Atomic Functions
 
@@ -98,13 +99,14 @@ let closeModals = () => {
 }
 
 let displayTripCards = (trips) => {
+  cardContainer.hidden = false
   cardContainer.innerHTML = ''
   trips.forEach((trip) => {
     cardContainer.innerHTML += `
       <div class="trip-card js-trip-card" tabindex="0">
         <img class="trip-img js-trip-img" src="${trip.destination.image}"alt="${trip.destination.alt}" >
         <h3>${trip.destination.destination}</h3>
-        <time" name="travel-dates" >${dayjs(trip.date).format('MM/DD/YYYY')} - ${dayjs(trip.date).add(trip.duration, "days").format('MM/DD/YYYY')}</time>
+        <time" name="travel-dates" >${ dayjs(trip.date).format('MM/DD/YYYY') } - ${trip.endDate}</time>
         <h4 class="${trip.status}">${trip.status}</h5>
       </div> `
   });
@@ -165,11 +167,12 @@ let displayFinanceData = () => {
     currentUser.getTotalProfit(), 
     currentUser.getTotalForYear(2023),
     currentUser.getTotalForYear(2022),
-    currentUser.getAverageCost()
+    currentUser.getAverageCost(),
+    currentUser.getTotalUserAverage(),
+    currentUser.getUsersCurrentlyTraveling()
   ]
 
-  totalDataPoints.forEach((span, index) => span.innerHTML = `$${totalFinanceData[index]}`)
-  usersFinanceDataPoint.innerHTML = `$${currentUser.getTotalUserAverage()}`
+  financesDataPoints.forEach((span, index) => span.innerHTML = `${totalFinanceData[index]}`)
   displayYearlyProfitChart(yearlyProfitChart, dataForYearlyChart())
 }
 
@@ -185,10 +188,12 @@ let displayRequestCards = (trips) => {
   <div>
       <p> User Name: ${ currentUser.usersData.find(user => user.id === trip.userID).name } | User ID: ${ trip.userID } </p>
       <p> Destination: ${ trip.destination.destination } </p>
+      <p> ${ dayjs(trip.date).format('MM/DD/YYYY') } - ${ trip.endDate } </p>
       <p> Duration: ${ trip.duration } days | Number of travelers: ${ trip.travelers } </p>
+
     </div>
     <div>
-      <p>Total Profit: $${ Math.floor(trip.totalPrice * .10) } | Status: <span class="${trip.status}"> ${trip.status}</span> </p>
+      <p>Total Profit: $${ Math.floor( trip.totalPrice * .10) } | Status: <span class="${trip.status}"> ${trip.status}</span> </p>
       <div class="request-btn-box" id=${ trip.id } >
           <button class="approved">Approve</button>
           <button class="denied">Deny</button>
@@ -241,6 +246,19 @@ modalCloseBtns.forEach(btn => btn.addEventListener('click', () => {
   closeModals();
 }))
 
+logOutBtn.addEventListener('click', () => {
+  hideOrShowMain()
+  agentViewContainer.setAttribute('hidden', true)
+  formBackground.setAttribute('hidden', true)
+  cardContainer.innerHTML = "true"
+  accountModal.classList.remove('active')
+  logInModal.classList.add('active')
+})
+
+let hideOrShowMain = () => {
+  mainBox.toggleAttribute('hidden')
+}
+
 logInBtn.addEventListener('click', () => {
   let userNameRegEx = /^(traveler([1-9]|[1-4][0-9]|50)|agent)$/;
 
@@ -248,6 +266,7 @@ logInBtn.addEventListener('click', () => {
     if (usernameInput.value === "agent") {
       fetchGetAll()
         .then((data) => {
+          hideOrShowMain()
           setAgentUser(data, true)
         })
     } else {
@@ -260,6 +279,7 @@ logInBtn.addEventListener('click', () => {
 
           closeModals()
           
+          hideOrShowMain()
           displayUserData(currentUser);
           displayTripCards(currentUser.trips);
           populateDestinationList(destinations);

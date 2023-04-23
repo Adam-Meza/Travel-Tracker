@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+
 class Trip {
   constructor(tripObj, destination) {
     this.id = tripObj.id,
@@ -11,6 +13,7 @@ class Trip {
     this.destination = destination
     this.image = this.destination.image
     this.totalPrice = Math.floor(this.calculatePrice())
+    this.endDate = this.getEndDate()
   }
 
   calculatePrice () {
@@ -18,6 +21,10 @@ class Trip {
     let flightCost = this.destination.estimatedFlightCostPerPerson * this.travelers
     let total = (totalLogdging + flightCost) * 1.10
     return total
+  }
+
+  getEndDate(date = this.date) {
+    return dayjs(date).add(this.duration, "days").format('MM/DD/YYYY')
   }
 }
 

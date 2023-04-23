@@ -1,4 +1,6 @@
 import dayjs from "dayjs";
+import isBetween from 'dayjs/plugin/isBetween';
+dayjs.extend(isBetween);
 
 class Agent {
   constructor (usersData, tripsData, destinationsData) {
@@ -23,8 +25,9 @@ class Agent {
   }
 
   getTotalUserAverage() {
-    let newObj = this.arrangeUsersById()
-    let totalPerUserArray = Object.keys(newObj).map(key => ({ totalPrice : this.getTotalProfit(newObj[key]) }))
+    let usersObject = this.arrangeUsersById()
+    let totalPerUserArray = Object.keys(usersObject)
+      .map(key => ({ totalPrice : this.getTotalProfit(usersObject[key]) }))
     return this.getAverageCost(totalPerUserArray)
   }
 
@@ -34,6 +37,17 @@ class Agent {
       acc[currentTrip.userID].push(currentTrip)
       return acc 
     }, {})
+  }
+
+  getUsersCurrentlyTraveling () {
+    return this.tripsData
+      .filter(trip => dayjs().isBetween(dayjs(trip.date), dayjs(trip.endDate), null, '[inclusive]', 'day'))
+      .reduce((acc, currentTrip) => {
+        let userName = this.usersData.find(user => currentTrip.userID === user.id).name
+        !acc.includes(userName) ? acc.push(userName) : null;
+        return acc
+      }, [] )
+      .join(", ")
   }
 
   

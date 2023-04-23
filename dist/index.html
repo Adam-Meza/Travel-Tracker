@@ -56,7 +56,7 @@
             <h3 id="js-input-error-display" class="input-error-display" hidden></h3>
         </form>
     </section>
-    <main class="main">
+    <main class="main" id="js-main" hidden>
         <h2 id="js-main-title"></h2>
         <section class="agent-box" id="js-agent-container" hidden>
             <header class="agent-view-header">
@@ -70,12 +70,13 @@
                 <p tabindex="0" class="chart yearly-profit-chart"><canvas id="js-yearly-profit-chart" width="400"
                         height="200"></canvasid></canvas></p>
                 <div id="js-total-data-points">
-                    <p class="finances-data">Total Profit: <span class="js-total"></span></p>
-                    <p class="finances-data">Current Year Profit: <span class="js-total"></span></p>
-                    <p class="finances-data">Last Year Profit: <span class="js-total"></span></p>
-                    <p class="finances-data">Average Year Profit: <span class="js-total"></span></p>
+                    <p class="finances-data">Total Profit: $<span class="js-finances-data"></span></p>
+                    <p class="finances-data">Current Year Profit: $<span class="js-finances-data"></span></p>
+                    <p class="finances-data">Last Year Profit: $<span class="js-finances-data"></span></p>
+                    <p class="finances-data">Average Year Profit: $<span class="js-finances-data"></span></p>
                     <p class="finances-data">Total Users: <span>50</span> </p>
-                    <p class="finances-data">Profit from an average users : <span class="js-users"></span></p>
+                    <p class="finances-data">Profit from an Average User: $<span class="js-finances-data"></span></p>
+                    <p class="finances-data">Users Currnetly Traveling <span class="js-finances-data"></span></p>
                 </div>
             </section>
             <section class="request-view-box" id="js-request-box" hidden>
@@ -88,7 +89,7 @@
         </section>
     </main>
 
-    <div class="modal login-modal active" aria-hidden="true">
+    <div class="modal login-modal active" id="js-log-in-modal"aria-hidden="true">
         <div class="log-in-content" tabindex="-1" data-micromodal-close>
             <form class="log-in-content" class="" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
                 <h2>Log In</h2>
@@ -114,6 +115,7 @@
                 <div id="modal-1-content">
                     <h2 id="js-account-name">Name Goes here </h2>
                     <h3 id="js-account-total">total spent on trips</h3>
+                    <button class="log-out-btn" id="js-log-out-btn">Log Out</button>
                 </div>
             </div>
         </div>
