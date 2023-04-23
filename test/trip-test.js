@@ -1,29 +1,26 @@
 import chai from 'chai';
 const expect = chai.expect;
 
-
 describe("Test Suite", function () {
   beforeEach(function () {
     // Set up code before each test
   });
 
-  it("Test description 1", function () {
+  it("should hold all the information in properties", function () {
     // Test code for the first case
   });
 
-  it.skip("Test description 2", function () {
+  it.skip("should hold the data for the destination", function () {
     // Test code for the second case
   });
 
-  it("Test description 3", function () {
+  it("should be able to calculate total price", function () {
     // Test code for the third case
   });
 
-  it.skip("Test description 4", function () {
+  it.skip("should find the end date for this trip", function () {
     // Test code for the fourth case
   });
 
-  it("Test description 5", function () {
-    // Test code for the fifth case
-  });
+
 });

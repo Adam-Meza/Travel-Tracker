@@ -9,6 +9,8 @@ import { postNewTrip } from './fetches';
 import { updateTrip } from './fetches';
 import { deleteTrip } from './fetches';
 import { fetchGetAll } from './fetches';
+import { displayTripCards } from './cards';
+import { displayRequestCards } from './cards'
 
 // Global Variables
 let currentUser,
@@ -49,11 +51,13 @@ const mainTitle = document.getElementById('js-main-title'),
   financesBox = document.getElementById('js-finances-box'),
   financesBtn = document.getElementById('js-finances-btn'),
   requestsBox = document.getElementById('js-request-box'),
-  requestsCardsBox = document.getElementById('js-requests-cards-box'),
   agentNavBtns = [...document.querySelectorAll('.agent-nav-btn')],
   accountBtn = document.getElementById('js-account-btn'),
   logOutBtn = document.getElementById("js-log-out-btn"),
-  searchUsersInput = document.getElementById('js-agent-serach-input')
+  searchUsersInput = document.getElementById('js-agent-serach-input'),
+
+  tripDetailsView = document.getElementById('js-trip-details-view'),
+  tripDetailsHeader = document.getElementById('js-trip-view-header')
 
   // Atomic Functions
 
@@ -92,26 +96,20 @@ let checkIfInputsAreValid = () => {
     true : false;
 };
 
+let searchByName = () => {
+  return currentUser.usersData
+    .filter(user => user.name.toLowerCase().includes(`${ searchUsersInput.value.toLowerCase() }`))
+    .map(user => currentUser.tripsData.filter(trip => trip.userID === user.id))
+    .flat();
+};
+
+
 // DOM functions 
 
 let closeModals = () => {
   modals.forEach(modal => modal.classList.remove('active'))
   overlay.classList.remove('active-overlay')
 }
-
-let displayTripCards = (trips) => {
-  cardContainer.hidden = false
-  cardContainer.innerHTML = ''
-  trips.forEach((trip) => {
-    cardContainer.innerHTML += `
-      <div class="trip-card js-trip-card" tabindex="0">
-        <img class="trip-img js-trip-img" src="${trip.destination.image}"alt="${trip.destination.alt}" >
-        <h3>${trip.destination.destination}</h3>
-        <time" name="travel-dates" >${ dayjs(trip.date).format('MM/DD/YYYY') } - ${trip.endDate}</time>
-        <h4 class="${trip.status}">${trip.status}</h5>
-      </div> `
-  });
-};
 
 let displayUserData = (user) => {
   mainTitle.innerText = `${user.name.split(" ")[0]}'s Trips`;
@@ -152,7 +150,7 @@ let setAgentUser = (data, charts) => {
 
   closeModals();
   displayAgentPortal();
-  displayRequestCards(currentUser.tripsData.filter(trip => trip.status === "pending"));
+  displayRequestCards(currentUser.tripsData.filter(trip => trip.status === "pending"), currentUser);
   charts ? displayFinanceData() : null;
 }
 
@@ -180,28 +178,6 @@ let displayFinanceData = () => {
 let dataForYearlyChart = () => {
   let years = [2019, 2020, 2021, 2022, 2023]
   return years.map(year => ( { profit: currentUser.getTotalForYear(year), year: year}))
-}
-
-let displayRequestCards = (trips) => {
-  requestsCardsBox.innerHTML = trips.map(trip => `
-  <div class="request-card">
-  <img src="${trip.destination.image}"alt="${trip.destination.alt}" >
-  <div>
-      <p> User Name: ${ currentUser.usersData.find(user => user.id === trip.userID).name } | User ID: ${ trip.userID } </p>
-      <p> Destination: ${ trip.destination.destination } </p>
-      <p> ${ dayjs(trip.date).format('MM/DD/YYYY') } - ${ trip.endDate } </p>
-      <p> Duration: ${ trip.duration } days | Number of travelers: ${ trip.travelers } </p>
-
-    </div>
-    <div>
-      <p>Total Profit: $${ Math.floor( trip.totalPrice * .10) } | Status: <span class="${trip.status}"> ${trip.status}</span> </p>
-      <div class="request-btn-box" id=${ trip.id } >
-          <button class="approved">Approve</button>
-          <button class="denied">Deny</button>
-      </div>
-    </div>
-  </div>`
-  ).join('')
 }
 
 // Event Listeners
@@ -317,18 +293,11 @@ requestsBox.addEventListener('click', (event) => {
 
 searchUsersInput.addEventListener("input", () => {
   if (searchUsersInput.value) {
-    displayRequestCards(searchByName())
+    displayRequestCards(searchByName(), currentUser)
   } else {
-    displayRequestCards(currentUser.tripsData.filter(trip => trip.status === "pending"))
+    displayRequestCards(currentUser.tripsData.filter(trip => trip.status === "pending"), currentUser)
   }
 })
-
-let searchByName = () => {
-  return currentUser.usersData
-    .filter(user => user.name.toLowerCase().includes(`${ searchUsersInput.value.toLowerCase() }`))
-    .map(user => currentUser.tripsData.filter(trip => trip.userID === user.id))
-    .flat()
-}
 
 accountBtn.addEventListener('click', (event) => {
   accountModal.classList.add('active');
@@ -337,5 +306,15 @@ accountBtn.addEventListener('click', (event) => {
 
 agentNavBtns.forEach(btn => btn.addEventListener('click', () => handleNav()));
 
+// Trip Card Event Listeners
 
+cardContainer.addEventListener('click', () => {
+  if (event.target.classList.contains('js-view-details')) {
+    cardContainer.hidden = true;
+    formBackground.hidden = true;
+    tripDetailsView.hidden = false;
+    getTripForDetails()
+  }
+})
 
+export { makeTripArray }

@@ -1,0 +1,26 @@
+@import './mixins';
+@import './variables';
+
+.trip-details-view {
+  @extend .agent-box ;
+
+  img{
+    height: 300px;
+    width: 700px;
+    margin: 20px;
+  }
+  .trip-details-info {
+    @include flex-row;
+    height: 300px;
+    width: 100%;
+  }
+  .event-details, .trip-details {
+    width: 50%;
+    height: 300px;
+  }
+
+  .events-search-box {
+    @extend .request-cards-box;
+  }
+}
+

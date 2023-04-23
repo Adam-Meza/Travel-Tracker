@@ -85,11 +85,28 @@
                 </section>
             </section>
         </section>
+
         <section id='js-card-container' class="card-container">
+        </section>
+
+        <section class="trip-details-view" id="js-trip-details-view" hidden>
+            <img class="trip-view-header" id="js-trip-view-header">
+            <section class="trip-details-info">
+                <div class="trip-details">
+                    <h2 id="js-trip-destination">destination title</h2>
+                    <h3 id="js-trip dates">dates </h3>
+                    <h3 id="js-status">status: </h3>
+                    <p id="js-num-travelers">Number of guests</p>
+                    <p id="js-trip-price">total ptrice</p>
+                </div>
+                <div class="event-details">
+                    <h3>No Events Yet!</h3>
+                </div>
+            </section>
         </section>
     </main>
 
-    <div class="modal login-modal active" id="js-log-in-modal"aria-hidden="true">
+    <div class="modal login-modal active" id="js-log-in-modal" aria-hidden="true">
         <div class="log-in-content" tabindex="-1" data-micromodal-close>
             <form class="log-in-content" class="" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
                 <h2>Log In</h2>
@@ -112,7 +129,7 @@
                     <h2>Account Info</h2>
                     <button class="close-modal-btn " aria-label="Close modal" data-micromodal-close>&times;</button>
                 </header>
-                <div id="modal-1-content">
+                <div>
                     <h2 id="js-account-name">Name Goes here </h2>
                     <h3 id="js-account-total">total spent on trips</h3>
                     <button class="log-out-btn" id="js-log-out-btn">Log Out</button>
@@ -123,9 +140,6 @@
 
     <div class="overlay active-overlay"></div>
     <script src="bundle.js"></script>
-    <script src="https://unpkg.com/micromodal/dist/micromodal.min.js"></script>
-
-
 </body>
 
 </html>

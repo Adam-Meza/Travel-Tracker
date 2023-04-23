@@ -44,6 +44,7 @@ class Agent {
       .filter(trip => dayjs().isBetween(dayjs(trip.date), dayjs(trip.endDate), null, '[inclusive]', 'day'))
       .reduce((acc, currentTrip) => {
         let userName = this.usersData.find(user => currentTrip.userID === user.id).name
+        console.log(acc)
         !acc.includes(userName) ? acc.push(userName) : null;
         return acc
       }, [] )
