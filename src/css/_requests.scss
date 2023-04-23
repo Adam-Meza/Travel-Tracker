@@ -41,7 +41,12 @@
     width: 100%;
     
     button {
-      @extend .nav-btn
+      @extend .nav-btn;
+    }
+
+    .denied {
+      background-color: $red;
+      color: white
     }
   }
 }

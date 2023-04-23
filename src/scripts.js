@@ -52,7 +52,8 @@ const mainTitle = document.getElementById('js-main-title'),
   requestsCardsBox = document.getElementById('js-requests-cards-box'),
   agentNavBtns = [...document.querySelectorAll('.agent-nav-btn')],
   accountBtn = document.getElementById('js-account-btn'),
-  logOutBtn = document.getElementById("js-log-out-btn")
+  logOutBtn = document.getElementById("js-log-out-btn"),
+  searchUsersInput = document.getElementById('js-agent-serach-input')
 
   // Atomic Functions
 
@@ -313,6 +314,21 @@ requestsBox.addEventListener('click', (event) => {
     })
   }
 })
+
+searchUsersInput.addEventListener("input", () => {
+  if (searchUsersInput.value) {
+    displayRequestCards(searchByName())
+  } else {
+    displayRequestCards(currentUser.tripsData.filter(trip => trip.status === "pending"))
+  }
+})
+
+let searchByName = () => {
+  return currentUser.usersData
+    .filter(user => user.name.toLowerCase().includes(`${ searchUsersInput.value.toLowerCase() }`))
+    .map(user => currentUser.tripsData.filter(trip => trip.userID === user.id))
+    .flat()
+}
 
 accountBtn.addEventListener('click', (event) => {
   accountModal.classList.add('active');

@@ -20,14 +20,17 @@
   margin: 2px 0px;
   width: 85%;
 }
-.trip-card .approved {
+
+.approved {
   background-color: green;
+  border: none;
   color: white;
   width: 75px;
 }
 
 .pending {
   background-color: orange;
+  border: none;
   color: white;
   width: 70px;
 }
@@ -340,6 +343,11 @@ span {
   align-items: center;
   width: 100%;
 }
+.request-card .request-btn-box .denied {
+  background-color: rgb(213, 12, 12);
+  color: white;
+}
+
 * {
   font-family: "Amatic SC", cursive;
   font-family: "Open Sans", sans-serif;
