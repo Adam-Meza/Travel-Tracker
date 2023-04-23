@@ -11,8 +11,8 @@
 
 .header-box{
   @include flex-row;
-  padding: 0px 100px;
   justify-content: space-between;
+  padding: 0px 100px;
   align-items: flex-end;
   color: $red;
   width: 100%;

@@ -1,5 +1,4 @@
 // Import
-import { fetchGetAll } from './fetches';
 import './css/styles.css';
 import User from './clasess/User.js'
 import Trip from './clasess/Trip';
@@ -9,12 +8,12 @@ import { displayYearlyProfitChart } from './charts';
 import { postNewTrip } from './fetches';
 import { updateTrip } from './fetches';
 import { deleteTrip } from './fetches';
+import { fetchGetAll } from './fetches';
 
 // Global Variables
 
 let currentUser,
-  destinations,
-  today = dayjs().format('YYYY-MM-DD');
+  destinations;
 
 // Query Selectors
 
@@ -200,14 +199,7 @@ let displayRequestCards = (trips) => {
 }
 
 // Event Listeners
-
-startDateInput.setAttribute('min', today);
-endDateInput.setAttribute('min', today);
-
-startDateInput.addEventListener('change', () => {
-  endDateInput.disabled = false;
-  endDateInput.setAttribute('min', startDateInput.value);
-});
+// New Trip Inputs/Button Event Listeners
 
 newTripInputs.forEach(input => input.addEventListener('submit', () => {
   event.preventDefault();
@@ -220,6 +212,14 @@ newTripInputs.forEach(input => input.addEventListener('change', () => {
     inputErrorDisplay.innerText = `Estimated Cost: $${makeNewTrip().totalPrice}`;
   };
 }));
+
+startDateInput.setAttribute('min', dayjs().format('YYYY-MM-DD'));
+endDateInput.setAttribute('min', dayjs().format('YYYY-MM-DD'));
+
+startDateInput.addEventListener('change', () => {
+  endDateInput.disabled = false;
+  endDateInput.setAttribute('min', startDateInput.value);
+});
 
 newTripBtn.addEventListener('click', () => {
   event.preventDefault();
@@ -235,36 +235,11 @@ newTripBtn.addEventListener('click', () => {
   };
 });
 
+//Login Modal Event Listeners
+
 modalCloseBtns.forEach(btn => btn.addEventListener('click', () => {
   closeModals();
 }))
-
-requestsBox.addEventListener('click', (event) => {
-  if (event.target.classList.contains('approved')) {
-    updateTrip(currentUser.tripsData.find(trip => trip.id === Number (event.target.parentNode.id)), `${event.target.classList}`)
-    .then(() => {
-      fetchGetAll()
-        .then((data) => {
-          setAgentUser(data, false);
-         })
-    })
-  } else if (event.target.classList.contains('denied')) {
-    deleteTrip(event.target.parentNode.id)
-    .then(() => {
-      fetchGetAll()
-      .then((data) => {
-        setAgentUser(data, false);
-       })
-    })
-  }
-})
-
-accountBtn.addEventListener('click', (event) => {
-  accountModal.classList.add('active');
-  overlay.classList.add('active-overlay');
-})
-
-agentNavBtns.forEach(btn => btn.addEventListener('click', () => handleNav()));
 
 logInBtn.addEventListener('click', () => {
   let userNameRegEx = /^(traveler([1-9]|[1-4][0-9]|50)|agent)$/;
@@ -296,5 +271,35 @@ logInBtn.addEventListener('click', () => {
     console.log("there was an error");
   }
 });
+
+// Agent Mode Event Listeners
+
+requestsBox.addEventListener('click', (event) => {
+  if (event.target.classList.contains('approved')) {
+    updateTrip(currentUser.tripsData.find(trip => trip.id === Number (event.target.parentNode.id)), `${event.target.classList}`)
+    .then(() => {
+      fetchGetAll()
+        .then((data) => {
+          setAgentUser(data, false);
+         })
+    })
+  } else if (event.target.classList.contains('denied')) {
+    deleteTrip(event.target.parentNode.id)
+    .then(() => {
+      fetchGetAll()
+      .then((data) => {
+        setAgentUser(data, false);
+       })
+    })
+  }
+})
+
+accountBtn.addEventListener('click', (event) => {
+  accountModal.classList.add('active');
+  overlay.classList.add('active-overlay');
+})
+
+agentNavBtns.forEach(btn => btn.addEventListener('click', () => handleNav()));
+
 
 

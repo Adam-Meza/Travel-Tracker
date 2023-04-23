@@ -9,18 +9,10 @@
   min-height: 60%;
   width: 40%;
   height: 60%;
-  // pointer-events: none;
-
 }
 
 .active {
   transform: translate(-50%, -50%) scale(1);
-}
-
-.account-modal {
-
-  padding-left: 30px;
-  padding-right: 10px;
 }
 
 .overlay {
@@ -30,13 +22,18 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0 ,0, .5);
+  background-color: rgba(0, 0, 0, .5);
   pointer-events: none;
 }
 
 .active-overlay {
   opacity: 1;
   pointer-events: all;
+}
+
+.account-modal {
+  padding-left: 30px;
+  padding-right: 10px;
 }
 
 .modal-header {
@@ -48,8 +45,8 @@
 
 .close-modal-btn {
   font-size: 30px;
- background-color: white;
- border: none;
+  background-color: white;
+  border: none;
 }
 
 .log-in-content {
@@ -67,7 +64,7 @@
   }
 }
 
-.log-in-input-box{
+.log-in-input-box {
   @include flex-column;
   justify-content: center;
   font-size: 18px;
@@ -83,7 +80,7 @@
     height: 30px;
     border: $grey-border;
     margin: 0px;
-    text-align:center;
+    text-align: center;
   }
 }
 
@@ -93,4 +90,3 @@
   text-align: center;
   margin-top: 15px;
 }
-

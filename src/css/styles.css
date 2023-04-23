@@ -45,8 +45,8 @@
 .header-box {
   display: flex;
   flex-direction: row;
-  padding: 0px 100px;
   justify-content: space-between;
+  padding: 0px 100px;
   align-items: flex-end;
   color: rgb(213, 12, 12);
   width: 100%;
@@ -191,11 +191,6 @@ span {
   transform: translate(-50%, -50%) scale(1);
 }
 
-.account-modal {
-  padding-left: 30px;
-  padding-right: 10px;
-}
-
 .overlay {
   position: fixed;
   opacity: 0;
@@ -210,6 +205,11 @@ span {
 .active-overlay {
   opacity: 1;
   pointer-events: all;
+}
+
+.account-modal {
+  padding-left: 30px;
+  padding-right: 10px;
 }
 
 .modal-header {
@@ -368,6 +368,19 @@ main {
   color: white;
 }
 
+.card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 60%;
+  height: 700px;
+  color: white;
+  overflow: visible;
+  flex-wrap: wrap;
+  width: 60%;
+  max-height: 300px;
+}
+
 h1 {
   margin: 0px;
 }
@@ -381,19 +394,6 @@ h2 {
 
 button:hover {
   cursor: pointer;
-}
-
-.card-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 60%;
-  height: 700px;
-  color: white;
-  overflow: visible;
-  flex-wrap: wrap;
-  width: 60%;
-  max-height: 300px;
 }
 
 [hidden] {

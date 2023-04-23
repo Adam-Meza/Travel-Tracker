@@ -6,6 +6,7 @@
 @import './form';
 @import './modal';
 @import './agent-mode';
+@import './requests';
 
 * {
   // border: solid 1px rgb(0, 255, 0);
@@ -31,23 +32,6 @@ main {
   width: 100%;
   height: 60%;
   color: white;
-  // position: relative;
-}
-
-h1 {
-  margin: 0px;
-}
-
-h2 {
-  color: black;
-  // margin: 0px;
-  margin-bottom: 10px;
-  font-family: 'Nanum Myeongjo', serif;
-  font-size: 30px;
-}
-
-button:hover {
-  cursor: pointer;
 }
 
 .card-container {
@@ -61,6 +45,22 @@ button:hover {
   width: 60%;
   max-height: 300px;
 }
+
+h1 {
+  margin: 0px;
+}
+
+h2 {
+  color: black;
+  margin-bottom: 10px;
+  font-family: 'Nanum Myeongjo', serif;
+  font-size: 30px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
 
 [hidden] {
   display: none;
