@@ -22,7 +22,6 @@
             <h1><em class="page-title" tabindex="0">wander</em></h1>
             <nav class="navigation-container">
                 <div class="nav-btn-box" id="">
-                    <img src="" alt="">
                     <button class="nav-btn" id="js-account-btn" tabindex="0">Account</button>
                 </div>
             </nav>
@@ -40,17 +39,15 @@
             <section class="travel-date input-box">
                 <h2><label for="date-inputs">Select Dates <span>*</span></label></h2>
                 <div id="date-inputs">
-                    <input class="new-trip-input" type="date" aria-label="start-date-input" placeholder="Start Date"
-                        id="js-start-date">
-                    <input class="new-trip-input" type="date" aria-label="end-date-input" placeholder="End Date"
-                        id="js-end-date" disabled>
+                    <input class="new-trip-input" id="js-start-date" type="date" aria-label="start-date-input" placeholder="Start Date">
+                    <input class="new-trip-input" id="js-end-date" type="date" aria-label="end-date-input" placeholder="End Date" disabled>
                 </div>
             </section>
             <section class="num-travlers input-box">
                 <h2><label for="js-num-travelers-input">Number of Travelers <span>*</span></label></h2>
                 <div>
                     <input class="new-trip-input" id="js-num-travelers-input" placeholder="Number of Travelers">
-                    <button id="new-trip-btn" class="new-trip-btn">Let's Wander</button>
+                    <button class="new-trip-btn" id="js-new-trip-btn">Let's Wander</button>
                 </div>
             </section>
             <h3 id="js-input-error-display" class="input-error-display" hidden></h3>
@@ -59,11 +56,11 @@
     <main class="main" id="js-main" hidden>
         <h2 id="js-main-title"></h2>
         <section class="agent-box" id="js-agent-container" hidden>
-            <header class="agent-view-header">
+            <header class="agent-view-header" id="js-agent-header">
                 <h2 class="agent-title" id="js-agent-title">Finances</h2>
                 <nav>
-                    <button class="agent-nav-btn" id="js-finances-btn" hidden>Finances</button>
-                    <button class="agent-nav-btn" id="js-request-btn">Requests</button>
+                    <button class="agent-nav-btn" id="js-finances-btn" name="Finances" hidden>Finances</button>
+                    <button class="agent-nav-btn" id="js-request-btn" name="Requests">Requests</button>
                 </nav>
             </header>
             <section class="agent-finances-box" id="js-finances-box">
@@ -90,14 +87,14 @@
         </section>
 
         <section class="trip-details-view" id="js-trip-details-view" hidden>
-            <img class="trip-view-header" id="js-trip-view-header">
+            <div class="trip-view-header" id="js-trip-view-header"></div>
             <section class="trip-details-info">
                 <div class="trip-details">
                     <h2 class="trip-detail"></h2>
-                    <h3> <span class="trip-detail"></span>  -  <span class="trip-detail"></span> </h3>
+                    <h3><span class="trip-detail"></span>  -  <span class="trip-detail"></span> </h3>
                     <h3 class="trip-detail">Status: </h3>
                     <p class="trip-detail">Number of Guests: </p>
-                    <p class="trip-detail">Total Price: </p>
+                    <p class="trip-detail">Total Price: $ </p>
                 </div>
                 <div class="event-details">
                     <h3>No Events Yet!</h3>
@@ -108,7 +105,7 @@
 
     <div class="modal login-modal active" id="js-log-in-modal" aria-hidden="true">
         <div class="log-in-content" tabindex="-1" data-micromodal-close>
-            <form class="log-in-content" class="" role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+            <form class="log-in-content" class="" role="dialog" aria-modal="true">
                 <h2>Log In</h2>
                 <div class="log-in-input-box">
                     <h3>Username</h3>
@@ -124,7 +121,7 @@
     </div>
     <div class="modal account-modal" aria-hidden="true" id="js-account-modal">
         <div tabindex="-1" data-micromodal-close>
-            <div role="dialog" aria-modal="true" aria-labelledby="modal-1-title">
+            <div role="dialog" aria-modal="true">
                 <header class="modal-header">
                     <h2>Account Info</h2>
                     <button class="close-modal-btn " aria-label="Close modal" data-micromodal-close>&times;</button>
@@ -138,7 +135,7 @@
         </div>
     </div>
 
-    <div class="overlay active-overlay"></div>
+    <div class="overlay active-overlay" id="js-overlay"></div>
     <script src="bundle.js"></script>
 </body>
 

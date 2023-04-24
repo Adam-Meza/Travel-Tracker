@@ -4,23 +4,39 @@
 .trip-details-view {
   @extend .agent-box ;
 
-  img{
+  .trip-view-header{
     height: 300px;
     width: 700px;
     margin: 20px;
+    background-position-x: center;
+    background-position-y: center;
   }
   .trip-details-info {
     @include flex-row;
-    height: 300px;
+    justify-content: space-evenly;
+    height: 200px;
     width: 100%;
   }
   .event-details, .trip-details {
-    width: 50%;
+    width: 40%;
     height: 300px;
   }
 
   .events-search-box {
     @extend .request-cards-box;
+  }
+  .trip-details {
+    @include flex-column;
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .event-details {
+    @include flex-column;
+    justify-content: center;
+
+    background-color: rgb(207, 207, 207); 
+    color: grey;
   }
 }
 

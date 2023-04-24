@@ -352,23 +352,41 @@
   color: white;
 }
 
-.trip-details-view img {
+.trip-details-view .trip-view-header {
   height: 300px;
   width: 700px;
   margin: 20px;
+  background-position-x: center;
+  background-position-y: center;
 }
 .trip-details-view .trip-details-info {
   display: flex;
   flex-direction: row;
-  height: 300px;
+  justify-content: space-evenly;
+  height: 200px;
   width: 100%;
 }
 .trip-details-view .event-details, .trip-details-view .trip-details {
-  width: 50%;
+  width: 40%;
   height: 300px;
 }
+.trip-details-view .trip-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: flex-start;
+  justify-content: center;
+}
+.trip-details-view .event-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(207, 207, 207);
+  color: grey;
+}
+
 * {
-  border: solid 1px rgb(0, 255, 0);
   font-family: "Amatic SC", cursive;
   font-family: "Open Sans", sans-serif;
 }

@@ -20,8 +20,9 @@ let currentUser,
 const mainTitle = document.getElementById('js-main-title'),
   formBackground = document.getElementById('js-form-background'),
   mainBox = document.getElementById('js-main'),
-// make all js-
-  newTripBtn = document.getElementById('new-trip-btn'),
+  cardContainer = document.getElementById('js-card-container'),
+
+  newTripBtn = document.getElementById('js-new-trip-btn'),
   newTripInputs = [...document.querySelectorAll('new-trip-input')],
   numTravelersInput = document.getElementById('js-num-travelers-input'),
   destinationInput = document.getElementById('js-destination-input'),
@@ -29,25 +30,24 @@ const mainTitle = document.getElementById('js-main-title'),
   startDateInput = document.getElementById('js-start-date'),
   endDateInput = document.getElementById('js-end-date'),
   inputErrorDisplay = document.getElementById('js-input-error-display'),
-  cardContainer = document.getElementById('js-card-container'),
-  
+
   modals = document.querySelectorAll('.modal'),
-  // make id
-  overlay = document.querySelector('.overlay'),
+  overlay = document.getElementById('js-overlay'),
   modalCloseBtns = [...document.querySelectorAll('.close-modal-btn')],
+  accountModal = document.getElementById('js-account-modal'),
   modalAccountName = document.getElementById('js-account-name'),
   modalAccountTotal = document.getElementById('js-account-total'),
-  accountModal = document.getElementById('js-account-modal'),
-
+  
   logInModal = document.getElementById('js-log-in-modal'),
   logInBtn = document.getElementById('js-log-in-btn'),
+  logOutBtn = document.getElementById('js-log-out-btn'),
   usernameInput = document.getElementById('js-username-input'),
   passwordInput = document.getElementById('js-password-input'),
   allInputs = [...document.querySelectorAll('input')],
 
   agentViewContainer = document.getElementById('js-agent-container'),
+  agentTitle = document.getElementById('js-agent-title'),
   yearlyProfitChart = document.getElementById('js-yearly-profit-chart'),
-
   financesDataPoints = [...document.querySelectorAll('.js-finances-data')],
   requestBtn = document.getElementById('js-request-btn'),
   financesBox = document.getElementById('js-finances-box'),
@@ -55,7 +55,6 @@ const mainTitle = document.getElementById('js-main-title'),
   requestsBox = document.getElementById('js-request-box'),
   agentNavBtns = [...document.querySelectorAll('.agent-nav-btn')],
   accountBtn = document.getElementById('js-account-btn'),
-  logOutBtn = document.getElementById('js-log-out-btn'),
   searchUsersInput = document.getElementById('js-agent-serach-input'),
 
   tripDetailsView = document.getElementById('js-trip-details-view'),
@@ -112,10 +111,21 @@ let getTripDetails = () => {
 
 // DOM functions 
 
+let clearAllInputs = () => {
+  allInputs.forEach(input => input.value = '')
+}
+
+let hideDOM = () => {
+  mainBox.hidden = true;
+  agentViewContainer.hidden = true;
+  formBackground.hidden = true
+  cardContainer.hidden = true;
+  tripDetailsView.hidden = true;
+}
+
 let handleNavigation = (viewToShow) => {
   clearAllInputs();
   hideDOM() ;
-  // cardContainer.innerHTML = ''
 
   switch (viewToShow) {
     case 'user': {
@@ -143,18 +153,6 @@ let handleNavigation = (viewToShow) => {
   }
 }
 
-let clearAllInputs = () => {
-  allInputs.forEach(input => input.value = '')
-}
-
-let hideDOM = () => {
-  mainBox.hidden = true;
-  agentViewContainer.hidden = true;
-  formBackground.hidden = true
-  cardContainer.hidden = true;
-  tripDetailsView.hidden = true;
-}
-
 let closeModals = () => {
   modals.forEach(modal => modal.classList.remove('active'))
   overlay.classList.remove('active-overlay')
@@ -178,10 +176,10 @@ let displayRandomDestination = (destinationData) => {
   formBackground.style.backgroundImage = `url(${randomDestination.image})`;
 };
 
-let updateInputDOM = () => {
+let updateDOMAfterInput = () => {
   displayTripCards(currentUser.trips);
-  inputErrorDisplay.toggleAttribute('hidden');
-  newTripInputs.forEach(input => input.value = null);
+  inputErrorDisplay.hidden = true;
+  clearAllInputs();
 };
 
 let displayTripDetailsInfo = (trip) => {
@@ -194,8 +192,8 @@ let displayTripDetailsInfo = (trip) => {
     trip.totalPrice 
   ]
 
-  tripDetailsHeader.src = `${trip.image}`;
-  tripDetails.forEach((elem , index ) => { elem.innerText += tripDetailsData[index] })
+  tripDetailsHeader.style.backgroundImage = `url(${trip.image})`;
+  tripDetails.forEach((elem , index ) => { elem.innerText += ` ${tripDetailsData[index]}` })
 }
 
 // Agent Mode DOM
@@ -207,11 +205,13 @@ let setAgentUser = (data, charts) => {
   charts ? displayFinanceData() : null;
 }
 
-let handleAgentNav = () => {
+let handleAgentNav = (header) => {
   financesBtn.toggleAttribute('hidden');
   financesBox.toggleAttribute('hidden');
   requestsBox.toggleAttribute('hidden');
   requestBtn.toggleAttribute('hidden');
+  agentTitle.innerText = header
+
 }
 
 let displayFinanceData = () => {
@@ -262,7 +262,7 @@ newTripBtn.addEventListener('click', () => {
     postNewTrip(makeNewTrip())
     .then(() => {
       currentUser.trips.push(makeNewTrip());
-      updateInputDOM();
+      updateDOMAfterInput();
     })
   } else {
     inputErrorDisplay.toggleAttribute('hidden');
@@ -349,7 +349,7 @@ accountBtn.addEventListener('click', () => {
   overlay.classList.add('active-overlay');
 })
 
-agentNavBtns.forEach(btn => btn.addEventListener('click', () => handleAgentNav()));
+agentNavBtns.forEach(btn => btn.addEventListener('click', () => handleAgentNav(event.target.name)));
 
 // Trip Card Event Listeners
 
