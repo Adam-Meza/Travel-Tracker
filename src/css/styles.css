@@ -163,10 +163,6 @@
   margin: 0px 20px;
 }
 
-span {
-  color: rgb(213, 12, 12);
-}
-
 .form-background {
   display: flex;
   flex-direction: column;
@@ -422,6 +418,10 @@ h2 {
   margin-bottom: 10px;
   font-family: "Nanum Myeongjo", serif;
   font-size: 30px;
+}
+
+span {
+  color: rgb(213, 12, 12);
 }
 
 button:hover {

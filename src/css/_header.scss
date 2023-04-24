@@ -9,7 +9,7 @@
   height: 100px;
 }
 
-.header-box{
+.header-box {
   @include flex-row;
   justify-content: space-between;
   padding: 0px 100px;
@@ -32,7 +32,6 @@
   width: 400px;
   height: 60px;
   color: $red;
-
 }
 
 .navigation-container {

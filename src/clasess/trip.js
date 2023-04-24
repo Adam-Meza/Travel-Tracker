@@ -23,8 +23,8 @@ class Trip {
     return total
   }
 
-  getEndDate(date = this.date) {
-    return dayjs(date).add(this.duration, "days").format('MM/DD/YYYY')
+  getEndDate() {
+    return dayjs(this.date).add(this.duration, "days").format('MM/DD/YYYY')
   }
 }
 

@@ -1,7 +1,7 @@
-let trips = [
+const trips = [
       {
           "id": 1,
-          "userID": 44,
+          "userID": 4,
           "destinationID": 12,
           "travelers": 1,
           "date": "2022/09/16",
@@ -81,7 +81,7 @@ let trips = [
       },
       {
           "id": 9,
-          "userID": 44,
+          "userID": 40,
           "destinationID": 1,
           "travelers": 5,
           "date": "2022/12/19",
@@ -211,10 +211,10 @@ let trips = [
     },
     {
         "id": 22,
-        "userID": 22,
+        "userID": 2,
         "destinationID": 12,
         "travelers": 4,
-        "date": "2022/05/01",
+        "date": "2023/04/20",
         "duration": 19,
         "status": "approved",
         "suggestedActivities": []

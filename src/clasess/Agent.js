@@ -11,27 +11,29 @@ class Agent {
   }
 
   getTotalProfit(trips = this.tripsData) {
-    return Math.floor(trips.reduce((acc, currentTrip) => {
+    return !trips ? "Check Trips Arguement" : Math.floor(trips.reduce((acc, currentTrip) => {
       return acc += currentTrip.totalPrice
     }, 0) * .10)
   }
   
-  getAverageCost(trips = this.tripsData) {
+  getAverageProfit(trips = this.tripsData) {
     return Math.floor(this.getTotalProfit(trips) / trips.length)
   }
 
   getTotalForYear(year) {
-    return Math.floor(this.getTotalProfit(this.tripsData.filter(trip => dayjs(trip.date)['$y'] === year)))
+    return /^20(1[89]|2[0-5])$/.test(year) ? 
+    Math.floor(this.getTotalProfit(this.tripsData.filter(trip => dayjs(trip.date)['$y'] === year)))
+    : "Check Year Arguement"
   }
 
   getTotalUserAverage() {
-    let usersObject = this.arrangeUsersById()
+    let usersObject = this.arrangeTripsByUserId()
     let totalPerUserArray = Object.keys(usersObject)
       .map(key => ({ totalPrice : this.getTotalProfit(usersObject[key]) }))
-    return this.getAverageCost(totalPerUserArray)
+    return this.getAverageProfit(totalPerUserArray)
   }
 
-  arrangeUsersById() {
+  arrangeTripsByUserId() {
    return this.tripsData.reduce((acc, currentTrip) => {
       !acc[currentTrip.userID] ? acc[currentTrip.userID] = [] : null;
       acc[currentTrip.userID].push(currentTrip)
@@ -50,7 +52,6 @@ class Agent {
       }, [] )
       .join(", ")
   }
-
   
 }
 

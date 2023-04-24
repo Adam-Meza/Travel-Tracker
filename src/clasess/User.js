@@ -7,9 +7,9 @@ class User {
   }
 
   totalSpentOnTrips () {
-    return this.trips.reduce((acc, currentTrip) => {
+    return !this.trips ? "Trips Data is undefined" : this.trips.reduce((acc, currentTrip) => {
       return acc += currentTrip.totalPrice
-    }, 0)
+    }, 0) ;
   }
   
 }

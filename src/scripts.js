@@ -20,7 +20,7 @@ let currentUser,
 const mainTitle = document.getElementById('js-main-title'),
   formBackground = document.getElementById('js-form-background'),
   mainBox = document.getElementById('js-main'),
-
+// make all js-
   newTripBtn = document.getElementById('new-trip-btn'),
   newTripInputs = [...document.querySelectorAll('new-trip-input')],
   numTravelersInput = document.getElementById('js-num-travelers-input'),
@@ -32,6 +32,7 @@ const mainTitle = document.getElementById('js-main-title'),
   cardContainer = document.getElementById('js-card-container'),
   
   modals = document.querySelectorAll('.modal'),
+  // make id
   overlay = document.querySelector('.overlay'),
   modalCloseBtns = [...document.querySelectorAll(".close-modal-btn")],
   modalAccountName = document.getElementById('js-account-name'),
@@ -78,7 +79,7 @@ let makeNewTrip = () => {
 
 let makeTripArray = (data, userID) => {
   userID ? data = data.filter(trip => trip.userID === Number(userID)) : null ; 
-  return data .map(trip => {
+  return data.map(trip => {
       let destination = destinations.find(dest => dest.id === trip.destinationID);
       return new Trip(trip, destination)
   });
@@ -103,6 +104,11 @@ let searchByName = () => {
     .flat();
 };
 
+let getTripDetails = () => {
+  let trip = currentUser.trips.find(trip => trip.id === Number (event.target.id))
+  // make display a seperate function 
+  tripDetailsHeader.src = `${trip.image}`;
+};
 
 // DOM functions 
 
@@ -166,7 +172,7 @@ let displayFinanceData = () => {
     currentUser.getTotalProfit(), 
     currentUser.getTotalForYear(2023),
     currentUser.getTotalForYear(2022),
-    currentUser.getAverageCost(),
+    currentUser.getAverageProfit(),
     currentUser.getTotalUserAverage(),
     currentUser.getUsersCurrentlyTraveling()
   ]
@@ -225,6 +231,7 @@ modalCloseBtns.forEach(btn => btn.addEventListener('click', () => {
 
 logOutBtn.addEventListener('click', () => {
   hideOrShowMain()
+  //make one handle nav function 
   agentViewContainer.setAttribute('hidden', true)
   formBackground.setAttribute('hidden', true)
   cardContainer.innerHTML = "true"
@@ -232,6 +239,7 @@ logOutBtn.addEventListener('click', () => {
   logInModal.classList.add('active')
 })
 
+//delete this and factor it into the handlenac function 
 let hideOrShowMain = () => {
   mainBox.toggleAttribute('hidden')
 }
@@ -313,8 +321,7 @@ cardContainer.addEventListener('click', () => {
     cardContainer.hidden = true;
     formBackground.hidden = true;
     tripDetailsView.hidden = false;
-    getTripForDetails()
+    getTripDetails()
   }
 })
 
-export { makeTripArray }
