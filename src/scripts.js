@@ -14,13 +14,16 @@ import { displayRequestCards } from './cards'
 
 // Global Variables
 let currentUser,
-  destinations;
+destinations;
 
 // Query Selectors
 const mainTitle = document.getElementById('js-main-title'),
   formBackground = document.getElementById('js-form-background'),
   mainBox = document.getElementById('js-main'),
   cardContainer = document.getElementById('js-card-container'),
+
+  accountBtn = document.getElementById('js-account-btn'),
+  homeBtn = document.getElementById('js-home-btn'),
 
   newTripBtn = document.getElementById('js-new-trip-btn'),
   newTripInputs = [...document.querySelectorAll('new-trip-input')],
@@ -54,7 +57,7 @@ const mainTitle = document.getElementById('js-main-title'),
   financesBtn = document.getElementById('js-finances-btn'),
   requestsBox = document.getElementById('js-request-box'),
   agentNavBtns = [...document.querySelectorAll('.agent-nav-btn')],
-  accountBtn = document.getElementById('js-account-btn'),
+  
   searchUsersInput = document.getElementById('js-agent-serach-input'),
 
   tripDetailsView = document.getElementById('js-trip-details-view'),
@@ -115,6 +118,14 @@ let clearAllInputs = () => {
   allInputs.forEach(input => input.value = '')
 }
 
+//******** */
+
+homeBtn.addEventListener('click', () => {
+  homeBtn.hidden = true;
+  clearTripDetails()
+  handleNavigation('user');
+})
+
 let hideDOM = () => {
   mainBox.hidden = true;
   agentViewContainer.hidden = true;
@@ -151,6 +162,17 @@ let handleNavigation = (viewToShow) => {
       break;
     }
   }
+}
+
+let clearTripDetails = () => {
+  let resetDetails = [
+    "", "", "",
+    "Status: ",
+    "Number of Travelers: ",
+    "Total Price: $ "
+  ]
+
+  tripDetails.forEach((elem, index) => { elem.innerText = resetDetails[index] })
 }
 
 let closeModals = () => {
@@ -355,6 +377,7 @@ agentNavBtns.forEach(btn => btn.addEventListener('click', () => handleAgentNav(e
 
 cardContainer.addEventListener('click', () => {
   if (event.target.classList.contains('js-view-details')) {
+    homeBtn.hidden = false
     handleNavigation('trip details')
     displayTripDetailsInfo(getTripDetails())
   }

@@ -51,6 +51,7 @@
   background: white;
   width: 100%;
   height: 100px;
+  border-bottom: solid 1px rgb(204, 204, 204);
 }
 
 .header-box {
@@ -81,22 +82,14 @@
   color: rgb(213, 12, 12);
 }
 
-.navigation-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  width: 400px;
-  height: 60px;
-}
-
 .nav-btn-box {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: flex-end;
+  width: 250px;
 }
-
-.nav-btn, .request-card .request-btn-box button, .agent-nav-btn {
+.nav-btn-box .nav-btn, .nav-btn-box .request-card .request-btn-box button, .request-card .request-btn-box .nav-btn-box button, .nav-btn-box .agent-nav-btn {
   width: 100px;
   height: 30px;
   color: rgb(213, 12, 12);
@@ -169,7 +162,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 300px;
+  height: 400px;
   background-position-x: center;
   background-position-y: center;
 }
@@ -352,9 +345,13 @@
   color: white;
 }
 
+.trip-details-view {
+  padding: 0px;
+  justify-content: space-evenly;
+}
 .trip-details-view .trip-view-header {
-  height: 300px;
-  width: 700px;
+  height: 400px;
+  width: 800px;
   margin: 20px;
   background-position-x: center;
   background-position-y: center;
@@ -363,8 +360,12 @@
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  height: 200px;
+  height: 300px;
   width: 100%;
+}
+.trip-details-view .trip-details-info li {
+  list-style-type: none;
+  margin: 5px;
 }
 .trip-details-view .event-details, .trip-details-view .trip-details {
   width: 40%;
@@ -375,13 +376,17 @@
   flex-direction: column;
   align-items: center;
   align-items: flex-start;
-  justify-content: center;
+  justify-content: flex-start;
+  padding: 0px;
+  margin: 0px;
 }
 .trip-details-view .event-details {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 90%;
+  width: 400px;
   background-color: rgb(207, 207, 207);
   color: grey;
 }

@@ -20,10 +20,9 @@
     <header class="main-header">
         <section class="header-box">
             <h1><em class="page-title" tabindex="0">wander</em></h1>
-            <nav class="navigation-container">
                 <div class="nav-btn-box" id="">
+                    <button class="nav-btn" id="js-home-btn" tabindex="0" hidden>Home</button>
                     <button class="nav-btn" id="js-account-btn" tabindex="0">Account</button>
-                </div>
             </nav>
         </section>
     </header>
@@ -89,13 +88,13 @@
         <section class="trip-details-view" id="js-trip-details-view" hidden>
             <div class="trip-view-header" id="js-trip-view-header"></div>
             <section class="trip-details-info">
-                <div class="trip-details">
+                <ul class="trip-details">
                     <h2 class="trip-detail"></h2>
-                    <h3><span class="trip-detail"></span>  -  <span class="trip-detail"></span> </h3>
-                    <h3 class="trip-detail">Status: </h3>
-                    <p class="trip-detail">Number of Guests: </p>
-                    <p class="trip-detail">Total Price: $ </p>
-                </div>
+                    <li><span class="trip-detail"></span>  -  <span class="trip-detail"></span> </li>
+                    <li class="trip-detail">Status: </li>
+                    <li class="trip-detail">Number of Travelers: </li>
+                    <li class="trip-detail">Total Price: $ </li>
+                </ul>
                 <div class="event-details">
                     <h3>No Events Yet!</h3>
                 </div>
