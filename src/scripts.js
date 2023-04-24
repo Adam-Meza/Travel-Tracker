@@ -34,7 +34,7 @@ const mainTitle = document.getElementById('js-main-title'),
   modals = document.querySelectorAll('.modal'),
   // make id
   overlay = document.querySelector('.overlay'),
-  modalCloseBtns = [...document.querySelectorAll(".close-modal-btn")],
+  modalCloseBtns = [...document.querySelectorAll('.close-modal-btn')],
   modalAccountName = document.getElementById('js-account-name'),
   modalAccountTotal = document.getElementById('js-account-total'),
   accountModal = document.getElementById('js-account-modal'),
@@ -43,8 +43,9 @@ const mainTitle = document.getElementById('js-main-title'),
   logInBtn = document.getElementById('js-log-in-btn'),
   usernameInput = document.getElementById('js-username-input'),
   passwordInput = document.getElementById('js-password-input'),
+  allInputs = [...document.querySelectorAll('input')],
 
-  agentViewContainer = document.getElementById("js-agent-container"),
+  agentViewContainer = document.getElementById('js-agent-container'),
   yearlyProfitChart = document.getElementById('js-yearly-profit-chart'),
 
   financesDataPoints = [...document.querySelectorAll('.js-finances-data')],
@@ -54,11 +55,12 @@ const mainTitle = document.getElementById('js-main-title'),
   requestsBox = document.getElementById('js-request-box'),
   agentNavBtns = [...document.querySelectorAll('.agent-nav-btn')],
   accountBtn = document.getElementById('js-account-btn'),
-  logOutBtn = document.getElementById("js-log-out-btn"),
+  logOutBtn = document.getElementById('js-log-out-btn'),
   searchUsersInput = document.getElementById('js-agent-serach-input'),
 
   tripDetailsView = document.getElementById('js-trip-details-view'),
-  tripDetailsHeader = document.getElementById('js-trip-view-header')
+  tripDetailsHeader = document.getElementById('js-trip-view-header'),
+  tripDetails = [...document.querySelectorAll('.trip-detail')]
 
   // Atomic Functions
 
@@ -68,11 +70,11 @@ let makeNewTrip = () => {
     id: Date.now(),
     userID: currentUser.id,
     destinationID: newDestination.id,
-    duration: dayjs(endDateInput.value).diff(dayjs(startDateInput.value), "days"),
+    duration: dayjs(endDateInput.value).diff(dayjs(startDateInput.value), 'days'),
     travelers: numTravelersInput.value,
-    status: "pending",
+    status: 'pending',
     suggestedActivities: [],
-    date: dayjs(startDateInput.value).format("YYYY/MM/DD")
+    date: dayjs(startDateInput.value).format('YYYY/MM/DD')
   }, newDestination);
   return newTrip;
 };
@@ -105,12 +107,53 @@ let searchByName = () => {
 };
 
 let getTripDetails = () => {
-  let trip = currentUser.trips.find(trip => trip.id === Number (event.target.id))
-  // make display a seperate function 
-  tripDetailsHeader.src = `${trip.image}`;
+  return currentUser.trips.find(trip => trip.id === Number (event.target.id))
 };
 
 // DOM functions 
+
+let handleNavigation = (viewToShow) => {
+  clearAllInputs();
+  hideDOM() ;
+  // cardContainer.innerHTML = ''
+
+  switch (viewToShow) {
+    case 'user': {
+      mainBox.hidden = false;
+      formBackground.hidden = false;
+      cardContainer.hidden = false ;
+      break;
+    }
+    case 'agent': {
+      mainBox.hidden = false
+      agentViewContainer.hidden = false;
+      mainTitle.innerText = 'Agent Portal';
+      break;
+    }
+    case 'trip details': {
+      mainBox.hidden = false;
+      tripDetailsView.hidden = false;
+      break;
+    }
+    case 'log out': {
+      accountModal.classList.remove('active');
+      logInModal.classList.add('active');
+      break;
+    }
+  }
+}
+
+let clearAllInputs = () => {
+  allInputs.forEach(input => input.value = '')
+}
+
+let hideDOM = () => {
+  mainBox.hidden = true;
+  agentViewContainer.hidden = true;
+  formBackground.hidden = true
+  cardContainer.hidden = true;
+  tripDetailsView.hidden = true;
+}
 
 let closeModals = () => {
   modals.forEach(modal => modal.classList.remove('active'))
@@ -118,21 +161,20 @@ let closeModals = () => {
 }
 
 let displayUserData = (user) => {
-  mainTitle.innerText = `${user.name.split(" ")[0]}'s Trips`;
+  mainTitle.innerText = `${user.name.split(' ')[0]}'s Trips`;
   modalAccountName.innerText = `${user.name}`
   modalAccountTotal.innerText = `Total spent on trips this year: $${Math.floor(user.totalSpentOnTrips())}`;
 };
 
 let populateDestinationList = (destinations) => {
   destinations.forEach((destination) => {
-    destinationList.innerHTML += `<option value="${destination.destination}">`;
+    destinationList.innerHTML += `<option value='${destination.destination}'>`;
   });
 };
 
 let displayRandomDestination = (destinationData) => {
   let randomIndex = Math.floor(Math.random() * 50);
   let randomDestination = destinationData[randomIndex];
-  formBackground.toggleAttribute('hidden')
   formBackground.style.backgroundImage = `url(${randomDestination.image})`;
 };
 
@@ -142,25 +184,30 @@ let updateInputDOM = () => {
   newTripInputs.forEach(input => input.value = null);
 };
 
-// Agent Mode DOM
+let displayTripDetailsInfo = (trip) => {
+  let tripDetailsData = [
+    trip.destination.destination,
+    trip.date,
+    trip.endDate,
+    trip.status,
+    trip.travelers,
+    trip.totalPrice 
+  ]
 
-let displayAgentPortal = () => {
-  cardContainer.hidden = false
-  agentViewContainer.hidden = false
-  mainTitle.innerText = 'Agent Portal'
+  tripDetailsHeader.src = `${trip.image}`;
+  tripDetails.forEach((elem , index ) => { elem.innerText += tripDetailsData[index] })
 }
+
+// Agent Mode DOM
 
 let setAgentUser = (data, charts) => {
   destinations = data[2].destinations;
   currentUser = new Agent(data[0].travelers, makeTripArray(data[1].trips), data[2].destinations);
-
-  closeModals();
-  displayAgentPortal();
-  displayRequestCards(currentUser.tripsData.filter(trip => trip.status === "pending"), currentUser);
+  displayRequestCards(currentUser.tripsData.filter(trip => trip.status === 'pending'), currentUser);
   charts ? displayFinanceData() : null;
 }
 
-let handleNav = () => {
+let handleAgentNav = () => {
   financesBtn.toggleAttribute('hidden');
   financesBox.toggleAttribute('hidden');
   requestsBox.toggleAttribute('hidden');
@@ -219,39 +266,29 @@ newTripBtn.addEventListener('click', () => {
     })
   } else {
     inputErrorDisplay.toggleAttribute('hidden');
-    inputErrorDisplay.innerText = "Please fill out all the inputs";
+    inputErrorDisplay.innerText = 'Please fill out all the inputs';
   };
 });
 
-//Login Modal Event Listeners
+//Login/Modal Event Listeners
 
 modalCloseBtns.forEach(btn => btn.addEventListener('click', () => {
   closeModals();
 }))
 
 logOutBtn.addEventListener('click', () => {
-  hideOrShowMain()
-  //make one handle nav function 
-  agentViewContainer.setAttribute('hidden', true)
-  formBackground.setAttribute('hidden', true)
-  cardContainer.innerHTML = "true"
-  accountModal.classList.remove('active')
-  logInModal.classList.add('active')
+  handleNavigation('log out')
 })
-
-//delete this and factor it into the handlenac function 
-let hideOrShowMain = () => {
-  mainBox.toggleAttribute('hidden')
-}
 
 logInBtn.addEventListener('click', () => {
   let userNameRegEx = /^(traveler([1-9]|[1-4][0-9]|50)|agent)$/;
 
   if (userNameRegEx.test(usernameInput.value) && passwordInput.value === 'travel') {
-    if (usernameInput.value === "agent") {
+    closeModals();
+    if (usernameInput.value === 'agent') {
       fetchGetAll()
         .then((data) => {
-          hideOrShowMain()
+          handleNavigation('agent')
           setAgentUser(data, true)
         })
     } else {
@@ -261,10 +298,8 @@ logInBtn.addEventListener('click', () => {
           destinations = data[2].destinations;
           let trips = makeTripArray(data[1].trips, userId);
           currentUser = new User(data[0], trips);
-
-          closeModals()
           
-          hideOrShowMain()
+          handleNavigation('user')
           displayUserData(currentUser);
           displayTripCards(currentUser.trips);
           populateDestinationList(destinations);
@@ -273,7 +308,7 @@ logInBtn.addEventListener('click', () => {
         .catch(err => console.log(err));
     }
   } else {
-    console.log("there was an error");
+    console.log('there was an error');
   }
 });
 
@@ -285,6 +320,7 @@ requestsBox.addEventListener('click', (event) => {
     .then(() => {
       fetchGetAll()
         .then((data) => {
+          handleNavigation('agent')
           setAgentUser(data, false);
          })
     })
@@ -293,35 +329,33 @@ requestsBox.addEventListener('click', (event) => {
     .then(() => {
       fetchGetAll()
       .then((data) => {
+        handleNavigation('agent')
         setAgentUser(data, false);
        })
     })
   }
 })
 
-searchUsersInput.addEventListener("input", () => {
+searchUsersInput.addEventListener('input', () => {
   if (searchUsersInput.value) {
     displayRequestCards(searchByName(), currentUser)
   } else {
-    displayRequestCards(currentUser.tripsData.filter(trip => trip.status === "pending"), currentUser)
+    displayRequestCards(currentUser.tripsData.filter(trip => trip.status === 'pending'), currentUser)
   }
 })
 
-accountBtn.addEventListener('click', (event) => {
+accountBtn.addEventListener('click', () => {
   accountModal.classList.add('active');
   overlay.classList.add('active-overlay');
 })
 
-agentNavBtns.forEach(btn => btn.addEventListener('click', () => handleNav()));
+agentNavBtns.forEach(btn => btn.addEventListener('click', () => handleAgentNav()));
 
 // Trip Card Event Listeners
 
 cardContainer.addEventListener('click', () => {
   if (event.target.classList.contains('js-view-details')) {
-    cardContainer.hidden = true;
-    formBackground.hidden = true;
-    tripDetailsView.hidden = false;
-    getTripDetails()
+    handleNavigation('trip details')
+    displayTripDetailsInfo(getTripDetails())
   }
 })
-
