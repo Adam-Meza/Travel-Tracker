@@ -58,7 +58,6 @@ const mainTitle = document.getElementById('js-main-title'),
   financesBtn = document.getElementById('js-finances-btn'),
   requestsBox = document.getElementById('js-request-box'),
   agentNavBtns = [...document.querySelectorAll('.agent-nav-btn')],
-  
   searchUsersInput = document.getElementById('js-agent-serach-input'),
 
   tripDetailsView = document.getElementById('js-trip-details-view'),
@@ -167,7 +166,7 @@ let clearTripDetails = () => {
     "Number of Travelers: ",
     "Total Price: $ "
   ]
-  
+
   tripDetails.forEach((elem, index) => { elem.innerText = resetDetails[index] })
 }
 
@@ -177,6 +176,7 @@ let closeModals = () => {
 }
 
 let displayUserData = (user) => {
+  /// this should check is the user is a nagent and not display anything if it is 
   mainTitle.innerText = `${user.name.split(' ')[0]}'s Trips`;
   modalAccountName.innerText = `${user.name}`
   modalAccountTotal.innerText = `Total spent on trips this year: $${Math.floor(user.totalSpentOnTrips())}`;
@@ -222,7 +222,8 @@ let setAgentUser = (data, charts) => {
   destinations = data[2].destinations;
   currentUser = new Agent(data[0].travelers, makeTripArray(data[1].trips), data[2].destinations);
   displayRequestCards(currentUser.tripsData.filter(trip => trip.status === 'pending'), currentUser);
-  charts ? displayFinanceData() : null;
+  displayFinanceData()
+  charts ? displayYearlyProfitChart(yearlyProfitChart, dataForYearlyChart()) : null;
 }
 
 let handleAgentNav = (header) => {
@@ -244,7 +245,6 @@ let displayFinanceData = () => {
   ]
 
   financesDataPoints.forEach((span, index) => span.innerHTML = `${totalFinanceData[index]}`)
-  displayYearlyProfitChart(yearlyProfitChart, dataForYearlyChart())
 }
 
 let dataForYearlyChart = () => {
@@ -267,8 +267,9 @@ newTripInputs.forEach(input => input.addEventListener('change', () => {
   };
 }));
 
-startDateInput.setAttribute('min', dayjs().format('YYYY-MM-DD'));
 endDateInput.setAttribute('min', dayjs().format('YYYY-MM-DD'));
+
+startDateInput.setAttribute('min', dayjs().format('YYYY-MM-DD'));
 
 startDateInput.addEventListener('change', () => {
   endDateInput.disabled = false;
@@ -289,7 +290,7 @@ newTripBtn.addEventListener('click', () => {
   };
 });
 
-//Login Listeners
+//Login Button Listener
 
 logInBtn.addEventListener('click', () => {
   let userNameRegEx = /^(traveler([1-9]|[1-4][0-9]|50)|agent)$/;
