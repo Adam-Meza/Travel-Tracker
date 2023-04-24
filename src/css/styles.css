@@ -89,7 +89,8 @@
   align-items: flex-end;
   width: 250px;
 }
-.nav-btn-box .nav-btn, .nav-btn-box .request-card .request-btn-box button, .request-card .request-btn-box .nav-btn-box button, .nav-btn-box .agent-nav-btn {
+
+.nav-btn, .request-card .request-btn-box button, .agent-nav-btn {
   width: 100px;
   height: 30px;
   color: rgb(213, 12, 12);
@@ -158,13 +159,44 @@
 
 .form-background {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
   justify-content: center;
+  align-items: center;
   width: 100%;
   height: 400px;
   background-position-x: center;
   background-position-y: center;
+}
+.form-background .advertisment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: flex-start;
+  justify-content: flex-end;
+  height: 250px;
+  width: 350px;
+  color: white;
+  margin-left: 150px;
+  padding: 20px;
+}
+.form-background .advertisment .ad-wander, .form-background .advertisment .ad-price, .form-background .advertisment .ad-destination, .form-background .advertisment .per-night {
+  margin: 0px;
+  color: white;
+  font-family: "Nanum Myeongjo", serif;
+}
+.form-background .advertisment .ad-destination {
+  font-size: 78px;
+}
+.form-background .advertisment .ad-wander {
+  font-size: 42px;
+  margin-left: 20px;
+}
+.form-background .advertisment .ad-price {
+  font-size: 36px;
+}
+.form-background .advertisment .per-night {
+  font-size: 19px;
+  font-family: "Open Sans", sans-serif;
 }
 
 .input-error-display {

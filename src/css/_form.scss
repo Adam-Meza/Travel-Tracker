@@ -58,14 +58,48 @@
 }
 
 
-
 .form-background {
-  @include flex-column;
+  @include flex-row;
   justify-content: center;
+  align-items: center;
   width: 100%;
   height: 400px;
   background-position-x: center;
   background-position-y: center;
+
+  .advertisment {
+    @include flex-column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    height: 250px;
+    width: 350px;
+    color:white;
+    margin-left: 150px;
+    padding: 20px;
+
+    .ad-wander, .ad-price, .ad-destination, .per-night {
+      margin: 0px;
+      color: white;
+      font-family: 'Nanum Myeongjo', serif;
+    }
+
+    .ad-destination {
+      font-size: 78px;
+    }
+    .ad-wander {
+      font-size: 42px;
+      margin-left: 20px;
+    }
+
+    .ad-price {
+      font-size: 36px;
+    }
+
+    .per-night {
+      font-size: 19px;
+      font-family: 'Open Sans', sans-serif;
+    }
+  }
 }
 
 .input-error-display {

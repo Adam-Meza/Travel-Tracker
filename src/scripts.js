@@ -44,6 +44,7 @@ const mainTitle = document.getElementById('js-main-title'),
   logInModal = document.getElementById('js-log-in-modal'),
   logInBtn = document.getElementById('js-log-in-btn'),
   logOutBtn = document.getElementById('js-log-out-btn'),
+  logInError = document.getElementById('js-log-in-error'),
   usernameInput = document.getElementById('js-username-input'),
   passwordInput = document.getElementById('js-password-input'),
   allInputs = [...document.querySelectorAll('input')],
@@ -62,7 +63,10 @@ const mainTitle = document.getElementById('js-main-title'),
 
   tripDetailsView = document.getElementById('js-trip-details-view'),
   tripDetailsHeader = document.getElementById('js-trip-view-header'),
-  tripDetails = [...document.querySelectorAll('.trip-detail')]
+  tripDetails = [...document.querySelectorAll('.trip-detail')],
+
+  adDestination = document.getElementById('js-ad-destination'),
+  adPrice = document.getElementById('js-ad-price');
 
   // Atomic Functions
 
@@ -118,14 +122,6 @@ let clearAllInputs = () => {
   allInputs.forEach(input => input.value = '')
 }
 
-//******** */
-
-homeBtn.addEventListener('click', () => {
-  homeBtn.hidden = true;
-  clearTripDetails()
-  handleNavigation('user');
-})
-
 let hideDOM = () => {
   mainBox.hidden = true;
   agentViewContainer.hidden = true;
@@ -171,7 +167,7 @@ let clearTripDetails = () => {
     "Number of Travelers: ",
     "Total Price: $ "
   ]
-
+  
   tripDetails.forEach((elem, index) => { elem.innerText = resetDetails[index] })
 }
 
@@ -196,6 +192,8 @@ let displayRandomDestination = (destinationData) => {
   let randomIndex = Math.floor(Math.random() * 50);
   let randomDestination = destinationData[randomIndex];
   formBackground.style.backgroundImage = `url(${randomDestination.image})`;
+  adDestination.innerText = randomDestination.destination.split(", ")[0];
+  adPrice.innerHTML = `$${randomDestination.estimatedLodgingCostPerDay}/<span class="per-night">per night</span>`
 };
 
 let updateDOMAfterInput = () => {
@@ -233,7 +231,6 @@ let handleAgentNav = (header) => {
   requestsBox.toggleAttribute('hidden');
   requestBtn.toggleAttribute('hidden');
   agentTitle.innerText = header
-
 }
 
 let displayFinanceData = () => {
@@ -292,27 +289,21 @@ newTripBtn.addEventListener('click', () => {
   };
 });
 
-//Login/Modal Event Listeners
-
-modalCloseBtns.forEach(btn => btn.addEventListener('click', () => {
-  closeModals();
-}))
-
-logOutBtn.addEventListener('click', () => {
-  handleNavigation('log out')
-})
+//Login Listeners
 
 logInBtn.addEventListener('click', () => {
   let userNameRegEx = /^(traveler([1-9]|[1-4][0-9]|50)|agent)$/;
 
   if (userNameRegEx.test(usernameInput.value) && passwordInput.value === 'travel') {
     closeModals();
+    logInError.hidden = true
     if (usernameInput.value === 'agent') {
       fetchGetAll()
         .then((data) => {
           handleNavigation('agent')
           setAgentUser(data, true)
         })
+        .catch(err => console.log(err))
     } else {
       let userId = usernameInput.value.match(/^traveler([1-9]|[1-4][0-9]|50)$/)[1]
       fetchGetAll(userId)
@@ -327,10 +318,11 @@ logInBtn.addEventListener('click', () => {
           populateDestinationList(destinations);
           displayRandomDestination(destinations);
         })
-        .catch(err => console.log(err));
+        .catch(err => console.log("Server Error. Please check that API is running on Local Host 3001"));
     }
   } else {
-    console.log('there was an error');
+    logInError.hidden = false
+    logInError.innerText = "Please Enter A Valid User Name and Password";
   }
 });
 
@@ -373,7 +365,7 @@ accountBtn.addEventListener('click', () => {
 
 agentNavBtns.forEach(btn => btn.addEventListener('click', () => handleAgentNav(event.target.name)));
 
-// Trip Card Event Listeners
+//Other Event Listeners
 
 cardContainer.addEventListener('click', () => {
   if (event.target.classList.contains('js-view-details')) {
@@ -381,4 +373,18 @@ cardContainer.addEventListener('click', () => {
     handleNavigation('trip details')
     displayTripDetailsInfo(getTripDetails())
   }
+})
+
+homeBtn.addEventListener('click', () => {
+  homeBtn.hidden = true;
+  clearTripDetails()
+  handleNavigation('user');
+})
+
+modalCloseBtns.forEach(btn => btn.addEventListener('click', () => {
+  closeModals();
+}))
+
+logOutBtn.addEventListener('click', () => {
+  handleNavigation('log out')
 })
