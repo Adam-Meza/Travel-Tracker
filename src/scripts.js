@@ -107,14 +107,14 @@ let checkIfInputsAreValid = () => {
 };
 
 let getTripDetails = () => {
-  return currentUser.trips.find(trip => trip.id === Number (event.target.id))
+  return currentUser.trips.find(trip => trip.id === Number (event.target.id));
 };
 
 // DOM functions 
 
 let clearAllInputs = () => {
-  allInputs.forEach(input => input.value = '')
-}
+  allInputs.forEach(input => input.value = '');
+};
 
 let hideDOM = () => {
   mainBox.hidden = true;
@@ -122,7 +122,7 @@ let hideDOM = () => {
   adBackground.hidden = true
   cardBox.hidden = true;
   tripDetailsView.hidden = true;
-}
+};
 
 let handleNavigation = (viewToShow) => {
   clearAllInputs();
@@ -140,24 +140,23 @@ let handleNavigation = (viewToShow) => {
       agentViewContainer.hidden = false;
       mainTitle.innerText = 'Agent Portal';
       break;
-    }
+    };
     case 'trip details': {
       mainBox.hidden = false;
       tripDetailsView.hidden = false;
       break;
-    }
+    };
     case 'log out': {
       accountModal.classList.remove('active');
       logInModal.classList.add('active');
       break;
-    }
-  }
-}
+    };
+  };
+};
 
 let resetDetails = (data, elements) => {
-  console.log(elements)
-  elements.forEach((elem, index) => { elem.innerText = data[index] })
-}
+  elements.forEach((elem, index) => { elem.innerText = data[index] });
+};
 
 let resetData = (dataWanted) => {
   let resetData;
@@ -170,7 +169,7 @@ let resetData = (dataWanted) => {
       "Total Amount of Trips Taken:"
     ]
     break;
-  }
+  };
   case 'trip': {
     resetData = [
       "", "", "",
@@ -179,10 +178,10 @@ let resetData = (dataWanted) => {
       "Total Price: $ "
     ]
     break;
-  }
-}
+  };
+};
   return resetData;
-}
+};
 
 let closeModals = () => {
   modals.forEach(modal => modal.classList.remove('active'));
@@ -289,7 +288,7 @@ let searchByName = () => {
 
 let filterByStatus = (trips, status) => {
   return trips.filter(trip => trip.status === status);
-}
+};
 
 // Event Listeners
 // New Trip Inputs/Button Event Listeners
@@ -336,12 +335,12 @@ logInBtn.addEventListener('click', () => {
 
   if (userNameRegEx.test(usernameInput.value) && passwordInput.value === 'travel') {
     closeModals();
-    logInError.hidden = true
+    logInError.hidden = true;
     if (usernameInput.value === 'agent') {
       fetchGetAll()
         .then((data) => {
-          handleNavigation('agent')
-          setAgentUser(data, true)
+          handleNavigation('agent');
+          setAgentUser(data, true);
         })
         .catch(err => console.log(err))
     } else {
@@ -355,11 +354,11 @@ logInBtn.addEventListener('click', () => {
           updateDOMForUser(currentUser);
         })
         .catch(err => console.log(err, "Server Error. Please check that API is running on Local Host 3001"));
-    }
+    };
   } else {
     logInError.hidden = false
     logInError.innerText = "Enter A Valid User Name and Password";
-  }
+  };
 });
 
 // Agent Mode Event Listeners
@@ -374,7 +373,7 @@ requestsBox.addEventListener('click', (event) => {
           setAgentUser(data, false);
          })
          .catch(err => console.log(err));
-    })
+    });
   } else if (event.target.classList.contains('denied')) {
     deleteTrip(event.target.parentNode.id)
     .then(() => {
@@ -384,9 +383,9 @@ requestsBox.addEventListener('click', (event) => {
         setAgentUser(data, false);
        })
        .catch(err => console.log(err));
-    })
-  }
-})
+    });
+  };
+});
 
 searchUsersInput.addEventListener('input', () => {
   requestsCardsBox.innerHTML = ''
@@ -395,13 +394,13 @@ searchUsersInput.addEventListener('input', () => {
     displayUserCards(filterByStatus(searchByName(), 'approved'), currentUser)
   } else {
     displayRequestCards(currentUser.tripsData.filter(trip => trip.status === 'pending'), currentUser);
-  }
-})
+  };
+});
 
 accountBtn.addEventListener('click', () => {
   accountModal.classList.add('active');
   overlay.classList.add('active-overlay');
-})
+});
 
 agentNavBtns.forEach(btn => btn.addEventListener('click', () => handleAgentNav(event.target.name)));
 
@@ -412,21 +411,21 @@ cardBox.addEventListener('click', () => {
     homeBtn.hidden = false;
     handleNavigation('trip details');
     displayTripDetailsInfo(getTripDetails());
-  }
-})
+  };
+});
 
 homeBtn.addEventListener('click', () => {
   homeBtn.hidden = true;
   resetDetails(resetData('trip'), tripDetails);
   displayRandomDestination();
   handleNavigation('user');
-})
+});
 
 modalCloseBtns.forEach(btn => btn.addEventListener('click', () => {
   closeModals();
-}))
+}));
 
 logOutBtn.addEventListener('click', () => {
   resetDetails(resetData('account') , accountInfo);
   handleNavigation('log out');
-})
+});
