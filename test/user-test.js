@@ -1,11 +1,10 @@
 import chai from 'chai';
 const expect = chai.expect;
+import Trip from '../src/clasess/Trip';
+import User from '../src/clasess/User';
 import { destinations } from './test-data/destination-test-data';
 import { trips } from './test-data/trips-test-data';
 import { travelers } from './test-data/user-test-data';
-
-import Trip from '../src/clasess/Trip';
-import User from '../src/clasess/User';
 
 describe("User Class", () => {
 

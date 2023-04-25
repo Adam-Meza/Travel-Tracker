@@ -13,7 +13,6 @@
 @import './modals/account-modal';
 
 * {
-  font-family: 'Amatic SC', cursive;
   font-family: 'Open Sans', sans-serif;
 
   &:focus {
@@ -36,8 +35,6 @@ main {
   height: 800px;
   color: white;
 }
-
-
 
 h1 {
   margin: 0px;

@@ -3,7 +3,7 @@
 .agent-box {
   @include flex-column;
   align-items: flex-start;
-  height: 1000px;
+  height: 90%;
   border: $grey-border;
   color: black;
   padding: 0px 40px;

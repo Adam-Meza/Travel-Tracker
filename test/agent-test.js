@@ -1,11 +1,10 @@
 import chai from 'chai';
 const expect = chai.expect;
+import Trip from '../src/clasess/Trip';
+import Agent from '../src/clasess/Agent';
 import { destinations } from './test-data/destination-test-data';
 import { trips } from './test-data/trips-test-data';
 import { travelers } from './test-data/user-test-data';
-
-import Trip from '../src/clasess/Trip';
-import Agent from '../src/clasess/Agent';
 
 describe("Agent Class", () => {
   let findDestination = (tripDestId) => destinations.find(dest => dest.id === tripDestId)
@@ -63,7 +62,6 @@ describe("Agent Class", () => {
   });
 
   it("should be able to arrange users by Id", () => {
-    console.log(agent2.arrangeTripsByUserId())
     expect(agent2.arrangeTripsByUserId()).to.deep.equal({
       '3': [
         {

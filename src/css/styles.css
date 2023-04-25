@@ -406,7 +406,7 @@
   flex-direction: column;
   align-items: center;
   align-items: flex-start;
-  height: 1000px;
+  height: 90%;
   border: solid 1px rgb(204, 204, 204);
   color: black;
   padding: 0px 40px;
@@ -610,7 +610,6 @@
 }
 
 * {
-  font-family: "Amatic SC", cursive;
   font-family: "Open Sans", sans-serif;
 }
 *:focus {

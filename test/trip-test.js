@@ -1,9 +1,8 @@
 import chai from 'chai';
 const expect = chai.expect;
-
+import Trip from '../src/clasess/Trip';
 import { destinations } from './test-data/destination-test-data';
 import { trips } from './test-data/trips-test-data';
-import Trip from '../src/clasess/Trip';
 
 describe("Trip Class", () => {
   let findDestination = (tripDestId) => destinations.find(dest => dest.id === tripDestId)
