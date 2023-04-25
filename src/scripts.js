@@ -154,29 +154,35 @@ let handleNavigation = (viewToShow) => {
   }
 }
 
-let clearTripDetails = () => {
-  let resetDetails = [
-    "", "", "",
-    "Status: ",
-    "Number of Travelers: ",
-    "Total Price: $ "
-  ];
-
-  tripDetails.forEach((elem, index) => { elem.innerText = resetDetails[index] });
-};
-
-let resetAccountDetails = () => {
-  let resetDetails = [
-    "",
-    "Traveler type:",
-    "Total spent on trips: $",
-    "Total Amount of Trips Taken:"
-  ]
-
-  accountInfo.forEach((elem, index) => { elem.innerText = resetDetails[index] })
+let resetDetails = (data, elements) => {
+  console.log(elements)
+  elements.forEach((elem, index) => { elem.innerText = data[index] })
 }
 
-
+let resetData = (dataWanted) => {
+  let resetData;
+  switch (dataWanted) {
+    case 'account': {
+    resetData = [
+      "",
+      "Traveler type:",
+      "Total spent on trips: $",
+      "Total Amount of Trips Taken:"
+    ]
+    break;
+  }
+  case 'trip': {
+    resetData = [
+      "", "", "",
+      "Status: ",
+      "Number of Travelers: ",
+      "Total Price: $ "
+    ]
+    break;
+  }
+}
+  return resetData;
+}
 
 let closeModals = () => {
   modals.forEach(modal => modal.classList.remove('active'));
@@ -411,7 +417,7 @@ cardBox.addEventListener('click', () => {
 
 homeBtn.addEventListener('click', () => {
   homeBtn.hidden = true;
-  clearTripDetails();
+  resetDetails(resetData('trip'), tripDetails);
   displayRandomDestination();
   handleNavigation('user');
 })
@@ -421,6 +427,6 @@ modalCloseBtns.forEach(btn => btn.addEventListener('click', () => {
 }))
 
 logOutBtn.addEventListener('click', () => {
-  resetAccountDetails()
+  resetDetails(resetData('account') , accountInfo);
   handleNavigation('log out');
 })
