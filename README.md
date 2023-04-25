@@ -5,6 +5,17 @@ Wander is a web based application that aims to help users plan their next trip. 
 
 ### Local Server
 
+1. Clone down the local server - found [here](https://github.com/turingschool-examples/travel-tracker-api)
+2. `cd` into the folder
+3. In terminal, run `npm install` and `npm start`
+
+### Application 
+
+1. Fork and clone this repo
+2. `cd` into the folder
+3. Run `npm install` and `npm start`
+4. Navigate to [http://localhost:8080/](http://localhost:8080/)
+
 ### Preview of App:
 ![alt text](link goes here)
 
