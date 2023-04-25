@@ -165,6 +165,17 @@ let clearTripDetails = () => {
   tripDetails.forEach((elem, index) => { elem.innerText = resetDetails[index] });
 };
 
+let resetAccountDetails = () => {
+  let resetDetails = [
+    "",
+    "Traveler type:",
+    "Total spent on trips: $",
+    "Total Amount of Trips Taken:"
+  ]
+
+  accountInfo.forEach((elem, index) => { elem.innerText = resetDetails[index] })
+}
+
 let closeModals = () => {
   modals.forEach(modal => modal.classList.remove('active'));
   overlay.classList.remove('active-overlay');
@@ -369,7 +380,6 @@ requestsBox.addEventListener('click', (event) => {
 
 searchUsersInput.addEventListener('input', () => {
   if (searchUsersInput.value) {
-    requestsCardsBox.innerHTML = ''
     displayRequestCards(filterByStatus(searchByName(), 'pending'), currentUser);
     displayUserCards(filterByStatus(searchByName(), 'approved'), currentUser)
   } else {
@@ -406,5 +416,6 @@ modalCloseBtns.forEach(btn => btn.addEventListener('click', () => {
 }))
 
 logOutBtn.addEventListener('click', () => {
+  resetAccountDetails()
   handleNavigation('log out');
 })
