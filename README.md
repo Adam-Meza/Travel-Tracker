@@ -17,7 +17,7 @@ Wander is a web based application that aims to help users plan their next trip. 
 4. Navigate to [http://localhost:8080/](http://localhost:8080/)
 
 ### Preview of App:
-![alt text](link goes here)
+![alt text](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjZkNDFlODMyOWM2MGE0ZWI0MGMzNDJjYzc0YzcxNWU4ZDZjMzRmYSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/aKpVyFr0gTIzKvhib9/giphy.gif)
 
 ### Context:
 This application was designed, built, and refined over 60 hours during a 1 week sprint as the final project of the second module of the Turing program. 
