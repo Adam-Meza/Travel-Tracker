@@ -176,6 +176,8 @@ let resetAccountDetails = () => {
   accountInfo.forEach((elem, index) => { elem.innerText = resetDetails[index] })
 }
 
+
+
 let closeModals = () => {
   modals.forEach(modal => modal.classList.remove('active'));
   overlay.classList.remove('active-overlay');
