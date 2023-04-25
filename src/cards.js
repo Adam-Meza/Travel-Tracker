@@ -22,7 +22,6 @@ const displayTripCards = (trips) => {
 };
 
 let displayRequestCards = (trips, currentUser) => {
-  requestsCardsBox.innerHTML = ''
   requestsCardsBox.innerHTML += trips.map(trip => `
   <div class="request-card">
   <img src="${trip.destination.image}"alt="${trip.destination.alt}" >
@@ -44,7 +43,6 @@ let displayRequestCards = (trips, currentUser) => {
 };
 
 let displayUserCards = (trips, currentUser) => {
-  requestsCardsBox.innerHTML = ''
   requestsCardsBox.innerHTML += trips.map(trip => `
   <div class="request-card">
   <img src="${trip.destination.image}"alt="${trip.destination.alt}" >

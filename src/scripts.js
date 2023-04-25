@@ -239,6 +239,8 @@ let updateDOMForUser = (currentUser) => {
 let setAgentUser = (data, charts) => {
   destinations = data[2].destinations;
   currentUser = new Agent(data[0].travelers, makeTripArray(data[1].trips), data[2].destinations);
+  
+  requestsCardsBox.innerHTML = ''
   displayRequestCards(currentUser.tripsData.filter(trip => trip.status === 'pending'), currentUser);
   displayFinanceData();
   charts ? displayYearlyProfitChart(yearlyProfitChart, dataForYearlyChart()) : null;
@@ -379,6 +381,7 @@ requestsBox.addEventListener('click', (event) => {
 })
 
 searchUsersInput.addEventListener('input', () => {
+  requestsCardsBox.innerHTML = ''
   if (searchUsersInput.value) {
     displayRequestCards(filterByStatus(searchByName(), 'pending'), currentUser);
     displayUserCards(filterByStatus(searchByName(), 'approved'), currentUser)
