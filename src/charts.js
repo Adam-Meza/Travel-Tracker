@@ -7,7 +7,7 @@ let displayYearlyProfitChart = (location, tripsData) => {
     data: {
       labels: tripsData.map( data => data.year),
       datasets: [{
-        label: 'total Profits',
+        label: 'Total Profits',
         data: tripsData.map( data => data.profit),
         borderColor: 'rgba(255, 99, 132, 1)',
         backgroundColor: 'rgba(255, 99, 132, 0.2)',

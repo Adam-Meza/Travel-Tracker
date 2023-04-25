@@ -24,7 +24,8 @@ const mainTitle = document.getElementById('js-main-title'),
 
   accountBtn = document.getElementById('js-account-btn'),
   homeBtn = document.getElementById('js-home-btn'),
-
+  
+  newTripForm = document.getElementById('js-new-trip-form'),
   newTripBtn = document.getElementById('js-new-trip-btn'),
   newTripInputs = [...document.querySelectorAll('new-trip-input')],
   numTravelersInput = document.getElementById('js-num-travelers-input'),
@@ -285,13 +286,13 @@ newTripInputs.forEach(input => input.addEventListener('submit', () => {
   event.preventDefault();
 }));
 
-newTripInputs.forEach(input => input.addEventListener('input', () => {
+newTripForm.addEventListener('change', () => {
   event.preventDefault();
   if (checkIfInputsAreValid()) {
-    inputErrorDisplay.toggleAttribute('hidden');
+    inputErrorDisplay.hidden = false;
     inputErrorDisplay.innerText = `Estimated Cost: $${makeNewTrip().totalPrice}`;
   };
-}));
+});
 
 newTripBtn.addEventListener('click', () => {
   event.preventDefault();
@@ -302,7 +303,7 @@ newTripBtn.addEventListener('click', () => {
       updateDOMAfterInput();
     })
   } else {
-    inputErrorDisplay.toggleAttribute('hidden');
+    inputErrorDisplay.hidden = false;
     inputErrorDisplay.innerText = 'Please fill out all the inputs';
   };
 });
@@ -336,7 +337,7 @@ logInBtn.addEventListener('click', () => {
     }
   } else {
     logInError.hidden = false
-    logInError.innerText = "Please Enter A Valid User Name and Password";
+    logInError.innerText = "Enter A Valid User Name and Password";
   }
 });
 

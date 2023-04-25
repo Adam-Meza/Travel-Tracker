@@ -27,7 +27,7 @@
         </section>
     </header>
     <section id="js-ad-background" class="ad-background" hidden>
-        <form class="new-trip-form">
+        <form class="new-trip-form"  id="js-new-trip-form">
             <section class="destination input-box">
                 <h2><label for="js-destination-input">Where to? <span>*</span></label></h2>
                 <input type="text" class="destination-input new-trip-input" id="js-destination-input"
@@ -108,7 +108,7 @@
     </main>
 
     <div class="modal login-modal active" id="js-log-in-modal" aria-hidden="true">
-        <div class="log-in-content" tabindex="-1" data-micromodal-close>
+        <div data-micromodal-close>
             <form class="log-in-content" class="" role="dialog" aria-modal="true">
                 <h2>Log In</h2>
                 <div class="log-in-input-box">
@@ -119,20 +119,20 @@
                     <h3>Password</h3>
                     <input id="js-password-input">
                 </div>
-                <btn class="log-in-btn" id="js-log-in-btn">Log In</btn>
-                <span id="js-log-in-error" hidden></span>
+                <btn class="log-in-btn" id="js-log-in-btn">Enter</btn>
+                <span class="log-in-error "id="js-log-in-error" hidden></span>
             </form>
         </div>
     </div>
     <div class="modal account-modal" aria-hidden="true" id="js-account-modal">
         <div tabindex="-1" data-micromodal-close>
             <div class="account-box"role="dialog" aria-modal="true">
-                <header class="modal-header">
+                <header class="account-modal-header">
                     <h2>Account Info</h2>
                     <button class="close-modal-btn " aria-label="Close modal" data-micromodal-close>&times;</button>
                 </header>
                 <ul>
-                    <h2 class="js-account-info" id="js-account-name"></h2>
+                    <h3 class="js-account-info" id="js-account-name"></h3>
                     <li class="js-account-info">Traveler type: </li>
                     <li class="js-account-info" id="js-account-total">Total spent on trips: $</li>
                     <li class="js-account-info">Total Amount of Trips Taken:</li>

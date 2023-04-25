@@ -7,6 +7,10 @@
   background-color: white;
   width: 40%;
   height: 60%;
+  div {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .active {
@@ -29,88 +33,8 @@
   pointer-events: all;
 }
 
-.account-modal {
-  @include flex-column;
-  justify-content: space-between;
-  align-items: center;
-  max-height: 350px;
-
-  header {
-    width: 450px;
-  }
-
-  ul {
-    @include flex-column;
-    justify-content: center;
-    padding: 0px;
-    margin: 20px 0px;
-  }
-  
-  li {
-    list-style-type: none;
-  }
-}
-
-.modal-header {
-  @include flex-row;
-  justify-content: space-between;
-  height: 15%;
-  width: 100%;
-}
-
 .close-modal-btn {
   font-size: 30px;
   background-color: white;
   border: none;
-}
-
-.log-in-content {
-  @include flex-column;
-  justify-content: center;
-  font-size: 30px;
-  width: 100%;
-  height: 100%;
-  min-width: 400px;
-  min-height: 500px;
-
-  h2 {
-    margin-bottom: 20px;
-    border-bottom: 1px solid $red;
-  }
-
-  span {
-    margin-top: 30px;
-    font-size: 18px;
-
-  }
-}
-
-.log-in-input-box {
-  @include flex-column;
-  justify-content: center;
-  font-size: 18px;
-  margin: 25px, 0px, 10px, 0px;
-
-  h3 {
-    margin: 5px;
-  }
-
-  input {
-    width: 90%;
-    height: 30px;
-    border: $grey-border;
-    margin: 0px;
-    text-align: center;
-  }
-}
-
-.log-in-btn {
-  @include btn-styling;
-  margin-top: 15px;
-}
-
-.log-out-btn {
-  @include btn-styling;
-  margin-top: 30px;
-  width: 150px;
 }

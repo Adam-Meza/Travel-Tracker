@@ -4,8 +4,8 @@ const cardBox = document.getElementById('js-card-box'),
 requestsCardsBox = document.getElementById('js-requests-cards-box');
 
 const displayTripCards = (trips) => {
-  cardBox.hidden = false
-  cardBox.innerHTML = ''
+  cardBox.hidden = false;
+  cardBox.innerHTML = '';
   
   trips.forEach((trip) => {
     cardBox.innerHTML += `
@@ -39,8 +39,8 @@ let displayRequestCards = (trips, currentUser) => {
       </div>
     </div>
   </div>`
-  ).join('')
-}
+  ).join('');
+};
 
 let displayUserCards = (trips, currentUser) => {
   requestsCardsBox.innerHTML += trips.map(trip => `
@@ -57,10 +57,9 @@ let displayUserCards = (trips, currentUser) => {
       <p class="status-box"> Status:  <span class="${trip.status}"> ${trip.status}</span> </p>
     </div>
   </div>`
-  ).join('')
-}
+  ).join('');
+};
 
-
-export { displayTripCards }
-export { displayRequestCards }
-export { displayUserCards }
+export { displayTripCards };
+export { displayRequestCards };
+export { displayUserCards };

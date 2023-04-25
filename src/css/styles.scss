@@ -1,14 +1,16 @@
 // Imports
 @import './variables';
 @import './mixins';
-@import '../css/user-view/trip';
-@import '../css/user-view/header';
-@import '../css/user-view/form';
-@import '../css/user-view/trip-details';
-@import '../css/user-view/advertisment';
+@import './user-view/trip';
+@import './user-view/header';
+@import './user-view/form';
+@import './user-view/trip-details';
+@import './user-view/advertisment';
 @import './modal';
-@import '../css/agent-view/agent-mode';
-@import '../css/agent-view/requests';
+@import './agent-view/agent-mode';
+@import './agent-view/requests';
+@import './modals/log-in-modal';
+@import './modals/account-modal';
 
 * {
   font-family: 'Amatic SC', cursive;

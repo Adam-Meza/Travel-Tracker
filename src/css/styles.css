@@ -334,6 +334,31 @@
   font-size: 19px;
   font-family: "Open Sans", sans-serif;
 }
+@media screen and (max-width: 1050px) {
+  .ad-background .advertisment {
+    justify-content: center;
+    margin-left: 30px;
+  }
+  .ad-background .advertisment .ad-destination {
+    font-size: 60px;
+  }
+  .ad-background .advertisment .ad-wander {
+    font-size: 36px;
+    margin-left: 20px;
+  }
+  .ad-background .advertisment .ad-price {
+    font-size: 24px;
+  }
+  .ad-background .advertisment .per-night {
+    font-size: 14px;
+    font-family: "Open Sans", sans-serif;
+  }
+}
+@media screen and (max-width: 750px) {
+  .ad-background .advertisment {
+    display: none;
+  }
+}
 
 .modal {
   position: fixed;
@@ -344,6 +369,10 @@
   background-color: white;
   width: 40%;
   height: 60%;
+}
+.modal div {
+  width: 100%;
+  height: 100%;
 }
 
 .active {
@@ -366,111 +395,10 @@
   pointer-events: all;
 }
 
-.account-modal {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  align-items: center;
-  max-height: 350px;
-}
-.account-modal header {
-  width: 450px;
-}
-.account-modal ul {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0px;
-  margin: 20px 0px;
-}
-.account-modal li {
-  list-style-type: none;
-}
-
-.modal-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 15%;
-  width: 100%;
-}
-
 .close-modal-btn {
   font-size: 30px;
   background-color: white;
   border: none;
-}
-
-.log-in-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 30px;
-  width: 100%;
-  height: 100%;
-  min-width: 400px;
-  min-height: 500px;
-}
-.log-in-content h2 {
-  margin-bottom: 20px;
-  border-bottom: 1px solid rgb(213, 12, 12);
-}
-.log-in-content span {
-  margin-top: 30px;
-  font-size: 18px;
-}
-
-.log-in-input-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  margin: 25px, 0px, 10px, 0px;
-}
-.log-in-input-box h3 {
-  margin: 5px;
-}
-.log-in-input-box input {
-  width: 90%;
-  height: 30px;
-  border: solid 1px rgb(204, 204, 204);
-  margin: 0px;
-  text-align: center;
-}
-
-.log-in-btn {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 120px;
-  height: 35px;
-  border: none;
-  color: white;
-  background-color: rgb(213, 12, 12);
-  font-size: 18px;
-  text-align: center;
-  margin-top: 15px;
-}
-
-.log-out-btn {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 120px;
-  height: 35px;
-  border: none;
-  color: white;
-  background-color: rgb(213, 12, 12);
-  font-size: 18px;
-  text-align: center;
-  margin-top: 30px;
-  width: 150px;
 }
 
 .agent-box, .trip-details-view {
@@ -527,12 +455,12 @@
   border-radius: 3%;
 }
 .request-card div {
-  width: 40%;
-  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
+  width: 40%;
+  height: 100%;
   align-items: flex-start;
 }
 .request-card p {
@@ -562,6 +490,123 @@
 .request-card .request-btn-box .denied {
   background-color: rgb(213, 12, 12);
   color: white;
+}
+
+.log-in-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  width: 100%;
+  height: 100%;
+}
+.log-in-content h2 {
+  border-bottom: 1px solid rgb(213, 12, 12);
+}
+.log-in-content .log-in-input-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin: 0px;
+  height: 20%;
+}
+.log-in-content .log-in-input-box h3 {
+  margin: 5px;
+}
+.log-in-content .log-in-input-box input {
+  width: 45%;
+  height: 30px;
+  border: solid 1px rgb(204, 204, 204);
+  margin: 0px;
+  text-align: center;
+}
+.log-in-content .log-in-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 35px;
+  border: none;
+  color: white;
+  background-color: rgb(213, 12, 12);
+  font-size: 18px;
+  text-align: center;
+  margin-top: 15px;
+  font-family: "Nanum Myeongjo", serif;
+}
+
+.log-in-error {
+  margin: 25px;
+  font-size: 18px;
+}
+
+@media screen and (max-width: 1150px) {
+  .log-in-error {
+    margin: 25px;
+    font-size: 16px;
+  }
+}
+.account-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  align-items: center;
+  max-height: 350px;
+  padding: 0px 30px;
+}
+.account-modal h3 {
+  font-family: "Nanum Myeongjo", serif;
+  margin: 5px;
+  font-size: 24px;
+}
+.account-modal ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0px;
+  margin: 20px 0px;
+}
+.account-modal li {
+  list-style-type: none;
+}
+
+.account-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin: 0px;
+  height: 100%;
+  width: 60%;
+}
+
+.account-modal-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 15%;
+  width: 100%;
+}
+
+.log-out-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 35px;
+  border: none;
+  color: white;
+  background-color: rgb(213, 12, 12);
+  font-size: 18px;
+  text-align: center;
+  width: 150px;
 }
 
 * {
