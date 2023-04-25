@@ -1,5 +1,4 @@
-@import './variables';
-@import './mixins';
+@import '../variables';
 
 .agent-box {
   @include flex-column;

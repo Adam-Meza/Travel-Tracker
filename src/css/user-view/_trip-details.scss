@@ -1,5 +1,4 @@
-@import './mixins';
-@import './variables';
+@import '../variables';
 
 .trip-details-view {
   @extend .agent-box ;
@@ -28,10 +27,6 @@
   .event-details, .trip-details {
     width: 40%;
     height: 300px;
-  }
-
-  .events-search-box {
-    @extend .request-cards-box;
   }
 
   .trip-details {

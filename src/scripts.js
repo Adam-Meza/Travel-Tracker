@@ -11,6 +11,7 @@ import { deleteTrip } from './fetches';
 import { fetchGetAll } from './fetches';
 import { displayTripCards } from './cards';
 import { displayRequestCards } from './cards'
+import { displayUserCards } from './cards';
 
 // Global Variables
 let currentUser,
@@ -18,9 +19,8 @@ destinations;
 
 // Query Selectors
 const mainTitle = document.getElementById('js-main-title'),
-  formBackground = document.getElementById('js-form-background'),
   mainBox = document.getElementById('js-main'),
-  cardContainer = document.getElementById('js-card-container'),
+  cardBox = document.getElementById('js-card-box'),
 
   accountBtn = document.getElementById('js-account-btn'),
   homeBtn = document.getElementById('js-home-btn'),
@@ -36,10 +36,9 @@ const mainTitle = document.getElementById('js-main-title'),
 
   modals = document.querySelectorAll('.modal'),
   overlay = document.getElementById('js-overlay'),
-  modalCloseBtns = [...document.querySelectorAll('.close-modal-btn')],
   accountModal = document.getElementById('js-account-modal'),
-  modalAccountName = document.getElementById('js-account-name'),
-  modalAccountTotal = document.getElementById('js-account-total'),
+  accountInfo = [...document.querySelectorAll('.js-account-info')],
+  modalCloseBtns = [...document.querySelectorAll('.close-modal-btn')],
   
   logInModal = document.getElementById('js-log-in-modal'),
   logInBtn = document.getElementById('js-log-in-btn'),
@@ -52,18 +51,20 @@ const mainTitle = document.getElementById('js-main-title'),
   agentViewContainer = document.getElementById('js-agent-container'),
   agentTitle = document.getElementById('js-agent-title'),
   yearlyProfitChart = document.getElementById('js-yearly-profit-chart'),
-  financesDataPoints = [...document.querySelectorAll('.js-finances-data')],
-  requestBtn = document.getElementById('js-request-btn'),
   financesBox = document.getElementById('js-finances-box'),
   financesBtn = document.getElementById('js-finances-btn'),
   requestsBox = document.getElementById('js-request-box'),
-  agentNavBtns = [...document.querySelectorAll('.agent-nav-btn')],
+  requestsCardsBox = document.getElementById('js-requests-cards-box'),
   searchUsersInput = document.getElementById('js-agent-serach-input'),
+  requestBtn = document.getElementById('js-request-btn'),
+  agentNavBtns = [...document.querySelectorAll('.agent-nav-btn')],
+  financesDataPoints = [...document.querySelectorAll('.js-finances-data')],
 
   tripDetailsView = document.getElementById('js-trip-details-view'),
   tripDetailsHeader = document.getElementById('js-trip-view-header'),
   tripDetails = [...document.querySelectorAll('.trip-detail')],
 
+  adBackground = document.getElementById('js-ad-background'),
   adDestination = document.getElementById('js-ad-destination'),
   adPrice = document.getElementById('js-ad-price');
 
@@ -104,13 +105,6 @@ let checkIfInputsAreValid = () => {
     true : false;
 };
 
-let searchByName = () => {
-  return currentUser.usersData
-    .filter(user => user.name.toLowerCase().includes(`${ searchUsersInput.value.toLowerCase() }`))
-    .map(user => currentUser.tripsData.filter(trip => trip.userID === user.id))
-    .flat();
-};
-
 let getTripDetails = () => {
   return currentUser.trips.find(trip => trip.id === Number (event.target.id))
 };
@@ -124,8 +118,8 @@ let clearAllInputs = () => {
 let hideDOM = () => {
   mainBox.hidden = true;
   agentViewContainer.hidden = true;
-  formBackground.hidden = true
-  cardContainer.hidden = true;
+  adBackground.hidden = true
+  cardBox.hidden = true;
   tripDetailsView.hidden = true;
 }
 
@@ -136,8 +130,8 @@ let handleNavigation = (viewToShow) => {
   switch (viewToShow) {
     case 'user': {
       mainBox.hidden = false;
-      formBackground.hidden = false;
-      cardContainer.hidden = false ;
+      adBackground.hidden = false;
+      cardBox.hidden = false ;
       break;
     }
     case 'agent': {
@@ -165,21 +159,14 @@ let clearTripDetails = () => {
     "Status: ",
     "Number of Travelers: ",
     "Total Price: $ "
-  ]
+  ];
 
-  tripDetails.forEach((elem, index) => { elem.innerText = resetDetails[index] })
-}
+  tripDetails.forEach((elem, index) => { elem.innerText = resetDetails[index] });
+};
 
 let closeModals = () => {
-  modals.forEach(modal => modal.classList.remove('active'))
-  overlay.classList.remove('active-overlay')
-}
-
-let displayUserData = (user) => {
-  /// this should check is the user is a nagent and not display anything if it is 
-  mainTitle.innerText = `${user.name.split(' ')[0]}'s Trips`;
-  modalAccountName.innerText = `${user.name}`
-  modalAccountTotal.innerText = `Total spent on trips this year: $${Math.floor(user.totalSpentOnTrips())}`;
+  modals.forEach(modal => modal.classList.remove('active'));
+  overlay.classList.remove('active-overlay');
 };
 
 let populateDestinationList = (destinations) => {
@@ -188,10 +175,10 @@ let populateDestinationList = (destinations) => {
   });
 };
 
-let displayRandomDestination = (destinationData) => {
+let displayRandomDestination = () => {
   let randomIndex = Math.floor(Math.random() * 50);
-  let randomDestination = destinationData[randomIndex];
-  formBackground.style.backgroundImage = `url(${randomDestination.image})`;
+  let randomDestination = destinations[randomIndex];
+  adBackground.style.backgroundImage = `url(${randomDestination.image})`;
   adDestination.innerText = randomDestination.destination.split(", ")[0];
   adPrice.innerHTML = `$${randomDestination.estimatedLodgingCostPerDay}/<span class="per-night">per night</span>`
 };
@@ -202,6 +189,17 @@ let updateDOMAfterInput = () => {
   clearAllInputs();
 };
 
+let populateAccountModal = (user) => {
+  let accountInfoData = [
+    user.name,
+    user.travelerType,
+    Math.floor(user.totalSpentOnTrips()),
+    user.trips.length
+  ];
+
+  accountInfo.forEach((elem, index) => { elem.innerText += ` ${accountInfoData[index]}` });
+};
+
 let displayTripDetailsInfo = (trip) => {
   let tripDetailsData = [
     trip.destination.destination,
@@ -210,28 +208,36 @@ let displayTripDetailsInfo = (trip) => {
     trip.status,
     trip.travelers,
     trip.totalPrice 
-  ]
+  ];
 
   tripDetailsHeader.style.backgroundImage = `url(${trip.image})`;
-  tripDetails.forEach((elem , index ) => { elem.innerText += ` ${tripDetailsData[index]}` })
-}
+  tripDetails.forEach((elem , index ) => { elem.innerText += ` ${tripDetailsData[index]}` });
+};
+
+let updateDOMForUser = (currentUser) => {
+  mainTitle.innerText = `${currentUser.name.split(' ')[0]}'s Trips`;
+  handleNavigation('user')
+  populateAccountModal(currentUser);
+  displayTripCards(currentUser.trips);
+  populateDestinationList(destinations);
+  displayRandomDestination();
+};
 
 // Agent Mode DOM
-
 let setAgentUser = (data, charts) => {
   destinations = data[2].destinations;
   currentUser = new Agent(data[0].travelers, makeTripArray(data[1].trips), data[2].destinations);
   displayRequestCards(currentUser.tripsData.filter(trip => trip.status === 'pending'), currentUser);
-  displayFinanceData()
+  displayFinanceData();
   charts ? displayYearlyProfitChart(yearlyProfitChart, dataForYearlyChart()) : null;
-}
+};
 
 let handleAgentNav = (header) => {
   financesBtn.toggleAttribute('hidden');
   financesBox.toggleAttribute('hidden');
   requestsBox.toggleAttribute('hidden');
   requestBtn.toggleAttribute('hidden');
-  agentTitle.innerText = header
+  agentTitle.innerText = header;
 }
 
 let displayFinanceData = () => {
@@ -242,30 +248,29 @@ let displayFinanceData = () => {
     currentUser.getAverageProfit(),
     currentUser.getTotalUserAverage(),
     currentUser.getUsersCurrentlyTraveling()
-  ]
+  ];
 
-  financesDataPoints.forEach((span, index) => span.innerHTML = `${totalFinanceData[index]}`)
-}
+  financesDataPoints.forEach((span, index) => span.innerHTML = `${totalFinanceData[index]}`);
+};
 
 let dataForYearlyChart = () => {
-  let years = [2019, 2020, 2021, 2022, 2023]
-  return years.map(year => ( { profit: currentUser.getTotalForYear(year), year: year}))
+  let years = [2019, 2020, 2021, 2022, 2023];
+  return years.map(year => ( { profit: currentUser.getTotalForYear(year), year: year}));
+};
+
+let searchByName = () => {
+  return currentUser.usersData
+    .filter(user => user.name.toLowerCase().includes(`${ searchUsersInput.value.toLowerCase() }`))
+    .map(user => currentUser.tripsData.filter(trip => trip.userID === user.id))
+    .flat();
+};
+
+let filterByStatus = (trips, status) => {
+  return trips.filter(trip => trip.status === status);
 }
 
 // Event Listeners
 // New Trip Inputs/Button Event Listeners
-
-newTripInputs.forEach(input => input.addEventListener('submit', () => {
-  event.preventDefault();
-}));
-
-newTripInputs.forEach(input => input.addEventListener('change', () => {
-  event.preventDefault();
-  if (checkIfInputsAreValid()) {
-    inputErrorDisplay.toggleAttribute('hidden');
-    inputErrorDisplay.innerText = `Estimated Cost: $${makeNewTrip().totalPrice}`;
-  };
-}));
 
 endDateInput.setAttribute('min', dayjs().format('YYYY-MM-DD'));
 
@@ -275,6 +280,18 @@ startDateInput.addEventListener('change', () => {
   endDateInput.disabled = false;
   endDateInput.setAttribute('min', startDateInput.value);
 });
+
+newTripInputs.forEach(input => input.addEventListener('submit', () => {
+  event.preventDefault();
+}));
+
+newTripInputs.forEach(input => input.addEventListener('input', () => {
+  event.preventDefault();
+  if (checkIfInputsAreValid()) {
+    inputErrorDisplay.toggleAttribute('hidden');
+    inputErrorDisplay.innerText = `Estimated Cost: $${makeNewTrip().totalPrice}`;
+  };
+}));
 
 newTripBtn.addEventListener('click', () => {
   event.preventDefault();
@@ -312,14 +329,10 @@ logInBtn.addEventListener('click', () => {
           destinations = data[2].destinations;
           let trips = makeTripArray(data[1].trips, userId);
           currentUser = new User(data[0], trips);
-          
-          handleNavigation('user')
-          displayUserData(currentUser);
-          displayTripCards(currentUser.trips);
-          populateDestinationList(destinations);
-          displayRandomDestination(destinations);
+
+          updateDOMForUser(currentUser);
         })
-        .catch(err => console.log("Server Error. Please check that API is running on Local Host 3001"));
+        .catch(err => console.log(err, "Server Error. Please check that API is running on Local Host 3001"));
     }
   } else {
     logInError.hidden = false
@@ -338,24 +351,28 @@ requestsBox.addEventListener('click', (event) => {
           handleNavigation('agent')
           setAgentUser(data, false);
          })
+         .catch(err => console.log(err));
     })
   } else if (event.target.classList.contains('denied')) {
     deleteTrip(event.target.parentNode.id)
     .then(() => {
       fetchGetAll()
       .then((data) => {
-        handleNavigation('agent')
+        handleNavigation('agent');
         setAgentUser(data, false);
        })
+       .catch(err => console.log(err));
     })
   }
 })
 
 searchUsersInput.addEventListener('input', () => {
   if (searchUsersInput.value) {
-    displayRequestCards(searchByName(), currentUser)
+    requestsCardsBox.innerHTML = ''
+    displayRequestCards(filterByStatus(searchByName(), 'pending'), currentUser);
+    displayUserCards(filterByStatus(searchByName(), 'approved'), currentUser)
   } else {
-    displayRequestCards(currentUser.tripsData.filter(trip => trip.status === 'pending'), currentUser)
+    displayRequestCards(currentUser.tripsData.filter(trip => trip.status === 'pending'), currentUser);
   }
 })
 
@@ -368,17 +385,18 @@ agentNavBtns.forEach(btn => btn.addEventListener('click', () => handleAgentNav(e
 
 //Other Event Listeners
 
-cardContainer.addEventListener('click', () => {
+cardBox.addEventListener('click', () => {
   if (event.target.classList.contains('js-view-details')) {
-    homeBtn.hidden = false
-    handleNavigation('trip details')
-    displayTripDetailsInfo(getTripDetails())
+    homeBtn.hidden = false;
+    handleNavigation('trip details');
+    displayTripDetailsInfo(getTripDetails());
   }
 })
 
 homeBtn.addEventListener('click', () => {
   homeBtn.hidden = true;
-  clearTripDetails()
+  clearTripDetails();
+  displayRandomDestination();
   handleNavigation('user');
 })
 
@@ -387,5 +405,5 @@ modalCloseBtns.forEach(btn => btn.addEventListener('click', () => {
 }))
 
 logOutBtn.addEventListener('click', () => {
-  handleNavigation('log out')
+  handleNavigation('log out');
 })

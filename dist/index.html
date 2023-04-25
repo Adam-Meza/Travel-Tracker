@@ -26,7 +26,7 @@
             </nav>
         </section>
     </header>
-    <section id="js-form-background" class="form-background" hidden>
+    <section id="js-ad-background" class="ad-background" hidden>
         <form class="new-trip-form">
             <section class="destination input-box">
                 <h2><label for="js-destination-input">Where to? <span>*</span></label></h2>
@@ -87,7 +87,7 @@
             </section>
         </section>
 
-        <section id='js-card-container' class="card-container">
+        <section id='js-card-box' class="card-container">
         </section>
 
         <section class="trip-details-view" id="js-trip-details-view" hidden>
@@ -120,22 +120,24 @@
                     <input id="js-password-input">
                 </div>
                 <btn class="log-in-btn" id="js-log-in-btn">Log In</btn>
+                <span id="js-log-in-error" hidden></span>
             </form>
-            <h5 id="js-log-in-error" hidden></h5>
         </div>
     </div>
     <div class="modal account-modal" aria-hidden="true" id="js-account-modal">
         <div tabindex="-1" data-micromodal-close>
-            <div role="dialog" aria-modal="true">
+            <div class="account-box"role="dialog" aria-modal="true">
                 <header class="modal-header">
                     <h2>Account Info</h2>
                     <button class="close-modal-btn " aria-label="Close modal" data-micromodal-close>&times;</button>
                 </header>
-                <div>
-                    <h2 id="js-account-name">Name Goes here </h2>
-                    <h3 id="js-account-total">total spent on trips</h3>
-                    <button class="log-out-btn" id="js-log-out-btn">Log Out</button>
-                </div>
+                <ul>
+                    <h2 class="js-account-info" id="js-account-name"></h2>
+                    <li class="js-account-info">Traveler type: </li>
+                    <li class="js-account-info" id="js-account-total">Total spent on trips: $</li>
+                    <li class="js-account-info">Total Amount of Trips Taken:</li>
+                </ul>
+                <button class="log-out-btn" id="js-log-out-btn">Log Out</button>
             </div>
         </div>
     </div>

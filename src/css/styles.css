@@ -1,48 +1,109 @@
+.card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 700px;
+  color: white;
+  overflow: visible;
+  flex-wrap: wrap;
+  width: 80%;
+  max-height: 300px;
+}
+
 .trip-card {
   display: flex;
   flex-direction: column;
   align-items: center;
+  align-items: center;
   justify-content: flex-start;
   background-color: white;
   color: black;
-  width: 250px;
-  height: 300px;
+  width: 400px;
+  height: 400px;
   border-radius: 30px;
-  margin-top: 30px;
-  padding: 0px;
+  margin-bottom: 30px;
+  padding: 5px;
 }
 .trip-card .trip-img {
   border-radius: 20px;
   width: 100%;
   height: 60%;
 }
-.trip-card h3,
-.trip-card p,
-.trip-card time,
+.trip-card h3, .trip-card p, .trip-card time, .trip-card h4 {
+  margin: 2px;
+}
+.trip-card .card-destination {
+  font-size: 30px;
+  margin-top: 5px;
+}
+.trip-card time {
+  font-size: 16px;
+  max-width: 60%;
+  color: rgb(182, 182, 182);
+  margin-left: 10%;
+}
 .trip-card h4 {
-  margin: 2px 0px;
+  max-width: 80px;
+}
+.trip-card div {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  justify-content: space-evenly;
+  width: 100%;
 }
 .trip-card button {
-  margin: 5px;
-  border: none;
-  border: solid 1px rgb(204, 204, 204);
-  background-color: white;
+  padding: 5px;
+  margin: 5px 0px;
+  font-family: "Nanum Myeongjo", serif;
 }
 
 .approved {
-  background-color: green;
-  border: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  border-radius: 4px;
   color: white;
-  width: 80px;
+  width: 75px;
+  background-color: rgb(85, 141, 61);
+  border: 1px solid rgb(85, 141, 61);
 }
 
 .pending {
-  background-color: orange;
-  border: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  border-radius: 4px;
   color: white;
-  width: 80px;
+  width: 75px;
+  border: 1px solid rgb(233, 173, 62);
+  background-color: rgb(233, 173, 62);
 }
 
+@media screen and (max-width: 1600px) {
+  .trip-card {
+    width: 45%;
+    height: 500px;
+  }
+  .trip-card .card-destination {
+    font-size: 24px;
+    margin-top: 5px;
+  }
+}
+@media screen and (max-width: 900px) {
+  .trip-card {
+    width: 100%;
+    height: 500px;
+  }
+  .trip-card .card-destination {
+    font-size: 30px;
+    margin-top: 5px;
+  }
+}
 .main-header {
   display: flex;
   flex-direction: row;
@@ -58,7 +119,7 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 0px 100px;
+  padding: 0px 0px 0px 100px;
   align-items: flex-end;
   color: rgb(213, 12, 12);
   width: 100%;
@@ -90,13 +151,26 @@
   width: 250px;
 }
 
-.nav-btn, .request-card .request-btn-box button, .agent-nav-btn {
-  width: 100px;
-  height: 30px;
+.nav-btn, .request-card .request-btn-box button, .agent-nav-btn, .trip-card button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 35px;
+  border: none;
+  color: white;
+  background-color: rgb(213, 12, 12);
+  font-size: 18px;
+  text-align: center;
   color: rgb(213, 12, 12);
   border: solid 1px rgb(204, 204, 204);
   background-color: white;
-  font-size: 16px;
+  transition: transform 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+.nav-btn:active, .request-card .request-btn-box button:active, .agent-nav-btn:active, .trip-card button:active, .nav-btn:focus, .request-card .request-btn-box button:focus, .agent-nav-btn:focus, .trip-card button:focus {
+  transform: translateY(2px);
+  background-color: #b6b6b6;
 }
 
 .new-trip-form {
@@ -148,55 +222,20 @@
   text-indent: 5px;
 }
 
-.new-trip-btn, .log-in-btn, .log-out-btn {
-  width: 120px;
-  height: 35px;
-  background-color: rgb(213, 12, 12);
-  color: white;
-  border: none;
-  margin: 0px 20px;
-}
-
-.form-background {
+.new-trip-btn {
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 400px;
-  background-position-x: center;
-  background-position-y: center;
-}
-.form-background .advertisment {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-items: flex-start;
-  justify-content: flex-end;
-  height: 250px;
-  width: 350px;
+  width: 120px;
+  height: 35px;
+  border: none;
   color: white;
-  margin-left: 150px;
-  padding: 20px;
-}
-.form-background .advertisment .ad-wander, .form-background .advertisment .ad-price, .form-background .advertisment .ad-destination, .form-background .advertisment .per-night {
-  margin: 0px;
-  color: white;
-  font-family: "Nanum Myeongjo", serif;
-}
-.form-background .advertisment .ad-destination {
-  font-size: 78px;
-}
-.form-background .advertisment .ad-wander {
-  font-size: 42px;
-  margin-left: 20px;
-}
-.form-background .advertisment .ad-price {
-  font-size: 36px;
-}
-.form-background .advertisment .per-night {
-  font-size: 19px;
-  font-family: "Open Sans", sans-serif;
+  background-color: rgb(213, 12, 12);
+  font-size: 18px;
+  text-align: center;
+  margin: 0px 20px;
+  font-size: 14px;
 }
 
 .input-error-display {
@@ -204,177 +243,6 @@
   color: rgb(213, 12, 12);
   margin: 3px 0px 5px 15px;
   padding: 0;
-}
-
-.modal {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  z-index: 2;
-  background-color: white;
-  min-width: 40%;
-  min-height: 60%;
-  width: 40%;
-  height: 60%;
-}
-
-.active {
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.overlay {
-  position: fixed;
-  opacity: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  pointer-events: none;
-}
-
-.active-overlay {
-  opacity: 1;
-  pointer-events: all;
-}
-
-.account-modal {
-  padding-left: 30px;
-  padding-right: 10px;
-}
-
-.modal-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 15%;
-  width: 100%;
-}
-
-.close-modal-btn {
-  font-size: 30px;
-  background-color: white;
-  border: none;
-}
-
-.log-in-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 30px;
-  width: 100%;
-  height: 100%;
-  min-width: 400px;
-  min-height: 500px;
-}
-.log-in-content h2 {
-  margin-bottom: 20px;
-  border-bottom: 1px solid rgb(213, 12, 12);
-}
-
-.log-in-input-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  margin: 25px, 0px, 10px, 0px;
-}
-.log-in-input-box h3 {
-  margin: 5px;
-}
-.log-in-input-box input {
-  width: 90%;
-  height: 30px;
-  border: solid 1px rgb(204, 204, 204);
-  margin: 0px;
-  text-align: center;
-}
-
-.log-in-btn, .log-out-btn {
-  font-size: 18px;
-  text-align: center;
-  margin-top: 15px;
-}
-
-.agent-box, .trip-details-view {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-items: flex-start;
-  height: 1000px;
-  border: solid 1px rgb(204, 204, 204);
-  color: black;
-  padding: 0px 40px;
-}
-
-.agent-view-header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  border-bottom: solid 1px rgb(204, 204, 204);
-}
-
-.request-view-box {
-  margin: 20px;
-  width: 100%;
-  height: 100%;
-}
-.request-view-box input {
-  width: 90%;
-  height: 30px;
-  text-indent: 15px;
-}
-
-.request-cards-box, .trip-details-view .events-search-box {
-  margin-top: 10px;
-  width: 700px;
-  height: 600px;
-  overflow: scroll;
-  color: black;
-}
-
-.request-card {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  width: 100%;
-  height: 70px;
-  margin-top: 20px;
-  color: black;
-}
-.request-card img {
-  width: 10%;
-  height: 100%;
-  border-radius: 3%;
-}
-.request-card div {
-  width: 40%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-items: flex-start;
-}
-.request-card p {
-  margin: 0px;
-  pad: 0px;
-  font-size: 13px;
-}
-.request-card .request-btn-box {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-  width: 100%;
-}
-.request-card .request-btn-box .denied {
-  background-color: rgb(213, 12, 12);
-  color: white;
 }
 
 .trip-details-view {
@@ -423,6 +291,279 @@
   color: grey;
 }
 
+.ad-background {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 400px;
+  background-position-x: center;
+  background-position-y: center;
+}
+.ad-background .advertisment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: flex-start;
+  justify-content: flex-end;
+  max-height: 250px;
+  max-width: 600px;
+  color: white;
+  margin-left: 150px;
+  padding: 20px;
+  border: solid 2px white;
+  background-color: rgba(208, 208, 208, 0.4);
+}
+.ad-background .advertisment .ad-wander, .ad-background .advertisment .ad-price, .ad-background .advertisment .ad-destination, .ad-background .advertisment .per-night {
+  margin: 0px;
+  color: white;
+  font-family: "Nanum Myeongjo", serif;
+}
+.ad-background .advertisment .ad-destination {
+  font-size: 78px;
+}
+.ad-background .advertisment .ad-wander {
+  font-size: 42px;
+  margin-left: 20px;
+}
+.ad-background .advertisment .ad-price {
+  font-size: 36px;
+}
+.ad-background .advertisment .per-night {
+  font-size: 19px;
+  font-family: "Open Sans", sans-serif;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  z-index: 2;
+  background-color: white;
+  width: 40%;
+  height: 60%;
+}
+
+.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.overlay {
+  position: fixed;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+.active-overlay {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.account-modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  align-items: center;
+  max-height: 350px;
+}
+.account-modal header {
+  width: 450px;
+}
+.account-modal ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0px;
+  margin: 20px 0px;
+}
+.account-modal li {
+  list-style-type: none;
+}
+
+.modal-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 15%;
+  width: 100%;
+}
+
+.close-modal-btn {
+  font-size: 30px;
+  background-color: white;
+  border: none;
+}
+
+.log-in-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  width: 100%;
+  height: 100%;
+  min-width: 400px;
+  min-height: 500px;
+}
+.log-in-content h2 {
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgb(213, 12, 12);
+}
+.log-in-content span {
+  margin-top: 30px;
+  font-size: 18px;
+}
+
+.log-in-input-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin: 25px, 0px, 10px, 0px;
+}
+.log-in-input-box h3 {
+  margin: 5px;
+}
+.log-in-input-box input {
+  width: 90%;
+  height: 30px;
+  border: solid 1px rgb(204, 204, 204);
+  margin: 0px;
+  text-align: center;
+}
+
+.log-in-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 35px;
+  border: none;
+  color: white;
+  background-color: rgb(213, 12, 12);
+  font-size: 18px;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.log-out-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 35px;
+  border: none;
+  color: white;
+  background-color: rgb(213, 12, 12);
+  font-size: 18px;
+  text-align: center;
+  margin-top: 30px;
+  width: 150px;
+}
+
+.agent-box, .trip-details-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-items: flex-start;
+  height: 1000px;
+  border: solid 1px rgb(204, 204, 204);
+  color: black;
+  padding: 0px 40px;
+}
+
+.agent-view-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border-bottom: solid 1px rgb(204, 204, 204);
+}
+
+.request-view-box {
+  margin: 20px;
+  width: 100%;
+  height: 100%;
+}
+.request-view-box input {
+  width: 90%;
+  height: 30px;
+  text-indent: 15px;
+}
+
+.request-cards-box {
+  margin-top: 10px;
+  width: 700px;
+  height: 600px;
+  overflow: scroll;
+  color: black;
+}
+
+.request-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  width: 100%;
+  height: 70px;
+  margin-top: 20px;
+  color: black;
+}
+.request-card img {
+  width: 10%;
+  height: 100%;
+  border-radius: 3%;
+}
+.request-card div {
+  width: 40%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  align-items: flex-start;
+}
+.request-card p {
+  margin: 0px;
+  pad: 0px;
+  font-size: 13px;
+}
+.request-card .status-box {
+  width: 250px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.request-card .approved-status-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.request-card .request-btn-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
+.request-card .request-btn-box .denied {
+  background-color: rgb(213, 12, 12);
+  color: white;
+}
+
 * {
   font-family: "Amatic SC", cursive;
   font-family: "Open Sans", sans-serif;
@@ -449,19 +590,6 @@ main {
   width: 100%;
   height: 800px;
   color: white;
-}
-
-.card-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 60%;
-  height: 700px;
-  color: white;
-  overflow: visible;
-  flex-wrap: wrap;
-  width: 60%;
-  max-height: 300px;
 }
 
 h1 {

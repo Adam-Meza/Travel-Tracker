@@ -1,13 +1,14 @@
 // Imports
 @import './variables';
 @import './mixins';
-@import './trip';
-@import './header';
-@import './form';
+@import '../css/user-view/trip';
+@import '../css/user-view/header';
+@import '../css/user-view/form';
+@import '../css/user-view/trip-details';
+@import '../css/user-view/advertisment';
 @import './modal';
-@import './agent-mode';
-@import './requests';
-@import './trip-details';
+@import '../css/agent-view/agent-mode';
+@import '../css/agent-view/requests';
 
 * {
   font-family: 'Amatic SC', cursive;
@@ -34,17 +35,7 @@ main {
   color: white;
 }
 
-.card-container {
-  @include flex-row;
-  justify-content: space-around;
-  width: 60%;
-  height: 700px;
-  color: white;
-  overflow: visible;
-  flex-wrap: wrap;
-  width: 60%;
-  max-height: 300px;
-}
+
 
 h1 {
   margin: 0px;
