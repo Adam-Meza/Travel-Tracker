@@ -20,7 +20,7 @@ Wander is a web based application that aims to help users plan their next trip. 
 ![alt text](link goes here)
 
 ### Context:
-This application was designed, built, and refined over 55 hours during a 1 week sprint as the final project of the second module of the Turing program. 
+This application was designed, built, and refined over 60 hours during a 1 week sprint as the final project of the second module of the Turing program. 
 
 ### Contributors:
 
