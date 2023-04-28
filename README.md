@@ -1,5 +1,5 @@
 ## Abstract:
-Wander is a web based application that aims to help users plan their next trip. Equipped with destination price estimates and stunning 1080 pictures, Wander allows users to envision their next getaway. Wander also features a travel agent side which displays meta data such as the average profit per uesrs, total users, total profits and more! Designed after similar applications Wander features a sleak modern design and responsive user interface. 
+Wander - an invitation to discover. Designed and executed by myself, Wander is a single-page web application that lets users plan their next getaway. Wander is built using async JavaScript, HTML5 and SCSS. Users are able to log in, see their account data displayed, view details of all their trips, and even submit new trips to be approved by a travel agent. Wander also features a built in Agent Portal which when accessed displays finanical data including the total profits, the average profit per user and more. Agents will also be able to search users by name and approve or deny any pending trip requests. Built over the course of a 1 week sprint during my final week of Turings second module. I am very proud of the work I did here and would encourage anyone interested in well written code to check it out.
 
 ## Installation Instructions:
 
@@ -18,9 +18,6 @@ Wander is a web based application that aims to help users plan their next trip. 
 
 ### Preview of App:
 ![alt text](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjZkNDFlODMyOWM2MGE0ZWI0MGMzNDJjYzc0YzcxNWU4ZDZjMzRmYSZlcD12MV9pbnRlcm5hbF9naWZzX2dpZklkJmN0PWc/aKpVyFr0gTIzKvhib9/giphy.gif)
-
-### Context:
-This application was designed, built, and refined over 60 hours during a 1 week sprint as the final project of the second module of the Turing program. 
 
 ### Contributors:
 
